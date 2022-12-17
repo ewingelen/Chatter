@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Chatter</string>
+
+<!--    On Boarding-->
+    <string name="label_on_boarding_body">Talk to whomever\nwherever and whenever</string>
+    <string name="label_start_messaging">Start messaging</string>
+</resources>
