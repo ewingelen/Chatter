@@ -1,13 +1,10 @@
-package com.ewingelen.chatter.core.ui.theme
+package com.ewingelen.chatter.core.presentation.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import com.ewingelen.chatter.core.ui.LocalDimens
-import com.ewingelen.chatter.core.ui.dimensions
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,
@@ -29,16 +26,10 @@ fun ChatterTheme(
     content: @Composable () -> Unit
 ) {
     val colors = if (darkTheme) DarkColorPalette else LightColorPalette
-
-//    val configuration = LocalConfiguration.current
-//    val dimensions = if(configuration.screenWidthDp <= 360) dimensions else dimensionsLarge
-//    val typography = if (configuration.screenWidthDp <= 360) smallTypography else sw360Typography
-    CompositionLocalProvider(LocalDimens provides dimensions ) {
-        MaterialTheme(
-            colors = colors,
-            typography = Typography,
-            shapes = Shapes,
-            content = content
-        )
-    }
+    MaterialTheme(
+        colors = colors,
+        typography = Typography,
+        shapes = Shapes,
+        content = content
+    )
 }
