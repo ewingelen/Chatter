@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Chatter" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/black_800</item>
-    </style>
-
     <style name="Theme.Chatter.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenBackground">@color/black_800</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/img_on_boarding</item>
         <item name="postSplashScreenTheme">@style/Theme.Chatter</item>
     </style>

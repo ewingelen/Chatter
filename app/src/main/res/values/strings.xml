@@ -4,4 +4,8 @@
 <!--    On Boarding-->
     <string name="label_on_boarding_body">Talk to whomever, wherever\nand whenever</string>
     <string name="btn_start_messaging">Start messaging</string>
+    <string name="label_enter_phone_number">Enter your phone number</string>
+    <string name="label_confirm_region">Please confirm your region and enter your\nphone number</string>
+    <string name="button_continue">Continue</string>
+    <string name="hint_phone_number">Phone number…</string>
 </resources>

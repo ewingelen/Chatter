@@ -9,3 +9,4 @@ val SpacingLarge100 = 32.dp
 val SpacingLarge125 = 48.dp
 val SpacingExtraLarge100 = 64.dp
 
+val ButtonHeightLarge = 62.dp
