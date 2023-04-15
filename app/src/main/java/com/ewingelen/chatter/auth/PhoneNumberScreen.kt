@@ -1,7 +1,14 @@
 package com.ewingelen.chatter.auth
 
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
@@ -9,22 +16,29 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.ewingelen.chatter.R
-import com.ewingelen.chatter.core.presentation.*
+import com.ewingelen.chatter.auth.components.AuthHeader
+import com.ewingelen.chatter.core.presentation.BorderWidthMin
+import com.ewingelen.chatter.core.presentation.ButtonHeightLarge
+import com.ewingelen.chatter.core.presentation.ScreenPreview
+import com.ewingelen.chatter.core.presentation.SpacingExtraLarge100
+import com.ewingelen.chatter.core.presentation.SpacingLarge100
+import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.theme.Gray500
 import com.ewingelen.chatter.core.presentation.theme.ScreenTheme
 
 @Composable
 fun AuthScreen(navigateToCode: () -> Unit) {
-
     var phoneNumber by remember { mutableStateOf("") }
 
     Column(
@@ -36,18 +50,9 @@ fun AuthScreen(navigateToCode: () -> Unit) {
         ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-        Text(
-            text = stringResource(id = R.string.label_enter_phone_number),
-            style = MaterialTheme.typography.headlineMedium
-        )
-
-        Spacer(modifier = Modifier.height(SpacingNormal100))
-
-        Text(
-            text = stringResource(id = R.string.label_confirm_region),
-            style = MaterialTheme.typography.bodyMedium,
-            textAlign = TextAlign.Center
+        AuthHeader(
+            titleResourceId = R.string.label_enter_phone_number,
+            subtitle = stringResource(id = R.string.label_confirm_region)
         )
 
         Spacer(modifier = Modifier.height(SpacingLarge100))
@@ -57,10 +62,10 @@ fun AuthScreen(navigateToCode: () -> Unit) {
             onValueChange = { phoneNumber = it },
             modifier = Modifier
                 .height(ButtonHeightLarge)
-                .border(color = Gray500, shape = CircleShape, width = 1.dp)
+                .border(color = Gray500, shape = CircleShape, width = BorderWidthMin)
                 .padding(horizontal = SpacingNormal100)
                 .fillMaxWidth(),
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
             singleLine = true,
         ) { innerTextField ->
             Row(verticalAlignment = Alignment.CenterVertically) {

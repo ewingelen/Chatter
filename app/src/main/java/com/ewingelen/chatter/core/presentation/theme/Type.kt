@@ -26,7 +26,7 @@ private fun getGoogleFontFamily(
     }
 )
 
-private val PlusJakartaSansFontFamily = getGoogleFontFamily(
+private val LatoFontFamily = getGoogleFontFamily(
     name = "Lato",
     weights = listOf(
         FontWeight.Normal,
@@ -37,28 +37,28 @@ private val PlusJakartaSansFontFamily = getGoogleFontFamily(
 
 val Typography = Typography(
     headlineLarge = TextStyle(
-        fontFamily = PlusJakartaSansFontFamily,
+        fontFamily = LatoFontFamily,
         fontSize = 32.sp,
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
     ),
     headlineMedium = TextStyle(
-        fontFamily = PlusJakartaSansFontFamily,
+        fontFamily = LatoFontFamily,
         fontSize = 24.sp,
         fontWeight = FontWeight.Medium,
         textAlign = TextAlign.Center
     ),
     bodyLarge = TextStyle(
-        fontFamily = PlusJakartaSansFontFamily,
+        fontFamily = LatoFontFamily,
         fontSize = 16.sp,
     ),
     bodyMedium = TextStyle(
-        fontFamily = PlusJakartaSansFontFamily,
+        fontFamily = LatoFontFamily,
         fontSize = 16.sp,
         color = Gray900
     ),
     labelLarge = TextStyle(
-        fontFamily = PlusJakartaSansFontFamily,
+        fontFamily = LatoFontFamily,
         fontSize = 18.sp,
         fontWeight = FontWeight.SemiBold,
         color = Black900
