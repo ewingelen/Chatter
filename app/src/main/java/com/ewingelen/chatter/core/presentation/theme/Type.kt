@@ -10,6 +10,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.ewingelen.chatter.R
 
+/**
+ * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
+ */
 private val googleFontProvider = GoogleFont.Provider(
     providerAuthority = "com.google.android.gms.fonts",
     providerPackage = "com.google.android.gms",

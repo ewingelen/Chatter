@@ -1,4 +1,4 @@
-package com.ewingelen.chatter.auth.components
+package com.ewingelen.chatter.auth.core.presentation.components
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
@@ -17,7 +17,7 @@ import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.theme.ScreenTheme
 
 /**
- * Created by Artem Skorik email(artem.newage@outlook.com) on 05.04.2023.
+ * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
  */
 @Composable
 fun AuthHeader(

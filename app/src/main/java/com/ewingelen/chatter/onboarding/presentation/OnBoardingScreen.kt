@@ -1,7 +1,11 @@
-package com.ewingelen.chatter.onboarding
+package com.ewingelen.chatter.onboarding.presentation
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -18,6 +22,9 @@ import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.theme.ScreenTheme
 
+/**
+ * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
+ */
 @Composable
 fun OnBoardingScreen(navigateToAuth: () -> Unit) {
     Column(
@@ -28,7 +35,7 @@ fun OnBoardingScreen(navigateToAuth: () -> Unit) {
 
         Image(
             painter = painterResource(id = R.drawable.img_logo),
-            contentDescription = null
+            contentDescription = null,
         )
 
         Spacer(modifier = Modifier.height(SpacingLarge100))

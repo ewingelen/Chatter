@@ -10,4 +10,9 @@
     <string name="label_code_sent">We\'ve sent the code via SMS to +%s</string>
     <string name="label_did_not_get_code">Didn\'t get the code?</string>
     <string name="label_clickable_resent_code">Resent code</string>
+    <string name="label_please_wait">Please wait a moment…</string>
+    <string name="label_invalid_phone_number">Phone number you entered is not valid. Please enter a valid phone number</string>
+    <string name="label_something_went_wrong">Something went wrong. Please try again</string>
+    <string name="label_no_internet_connection">Please check your internet connection and try again</string>
+    <string name="label_too_many_requests">Sorry, you have tried too many times. Please, try again in a minute</string>
 </resources>

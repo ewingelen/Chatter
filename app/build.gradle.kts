@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
     kotlin("kapt")
 }
 
@@ -23,13 +24,16 @@ android {
     }
 
     buildTypes {
-        //todo: rename
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+
+        debug {
+            isMinifyEnabled = false
         }
     }
     compileOptions {
@@ -41,6 +45,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -56,12 +61,15 @@ dependencies {
     val coreKtxVersion = "1.10.0"
     val lifecycleKtxVersion = "2.6.1"
     val composeUiVersion = "1.5.0-alpha02"
+    val lifecycleRuntimeComposeVersion = "2.6.1"
     val composeActivityVersion = "1.6.1"
     val composeMaterial3Version = "1.0.1"
     val composeNavigationVersion = "2.5.3"
     val hiltVersion = "2.45"
     val hiltNavigationComposeVersion = "1.0.0"
+    val firebaseBomVersion = "31.5.0"
     val splashScreenVersion = "1.0.0"
+    val timberVersion = "5.0.1"
 
     val jUnitVersion = "4.13.2"
     val jUnitExtVersion = "1.1.5"
@@ -89,14 +97,23 @@ dependencies {
     implementation("androidx.activity:activity-compose:$composeActivityVersion")
     implementation("androidx.compose.material3:material3:$composeMaterial3Version")
     implementation("androidx.navigation:navigation-compose:$composeNavigationVersion")
-
-    //Splash Screen
-    implementation("androidx.core:core-splashscreen:$splashScreenVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleRuntimeComposeVersion")
 
     //Hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-compiler:$hiltVersion")
     implementation("androidx.hilt:hilt-navigation-compose:$hiltNavigationComposeVersion")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:$firebaseBomVersion"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+    //Splash Screen
+    implementation("androidx.core:core-splashscreen:$splashScreenVersion")
+
+    //Timber
+    implementation("com.jakewharton.timber:timber:$timberVersion")
 }
 
 kapt {

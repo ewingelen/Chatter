@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "965982626715",
+    "project_id": "chatter-237a6",
+    "storage_bucket": "chatter-237a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:965982626715:android:83da5511bcb2b88ff4373e",
+        "android_client_info": {
+          "package_name": "com.ewingelen.chatter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "965982626715-0ulml659c0v69cj04giep347585pk9f4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ewingelen.chatter",
+            "certificate_hash": "e3e51149d72cb41eefb3c8f00e04f0ce91a86bc5"
+          }
+        },
+        {
+          "client_id": "965982626715-hti7v14hqoidftdilvnpfhlosi63t48l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDExj2jw0A6nLcmTKdZKktbc2NLzJi4Tn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "965982626715-hti7v14hqoidftdilvnpfhlosi63t48l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

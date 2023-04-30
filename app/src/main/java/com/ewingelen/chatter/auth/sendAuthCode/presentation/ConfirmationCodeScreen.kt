@@ -1,6 +1,7 @@
-package com.ewingelen.chatter.auth
+package com.ewingelen.chatter.auth.sendAuthCode.presentation
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,7 +9,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardOptions
@@ -28,7 +28,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.withStyle
 import com.ewingelen.chatter.R
-import com.ewingelen.chatter.auth.components.AuthHeader
+import com.ewingelen.chatter.auth.core.presentation.components.AuthHeader
 import com.ewingelen.chatter.core.presentation.BorderWidthMin
 import com.ewingelen.chatter.core.presentation.ConfirmationCodeCellSize
 import com.ewingelen.chatter.core.presentation.ScreenPreview
@@ -40,11 +40,11 @@ import com.ewingelen.chatter.core.presentation.theme.Gray900
 import com.ewingelen.chatter.core.presentation.theme.ScreenTheme
 
 /**
- * Created by Artem Skorik email(artem.newage@outlook.com) on 05.04.2023.
+ * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
  */
 @Composable
-fun ConfirmationCodeScreen() {
-    var code by remember { mutableStateOf("1413") }
+fun ConfirmationCodeScreen(navigateToMain: () -> Unit) {
+    var code by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.padding(
@@ -66,8 +66,10 @@ fun ConfirmationCodeScreen() {
             value = code,
             onValueChange = { code = it },
             decorationBox = {
-                Row {
-                    repeat(4) { index ->
+                Row(horizontalArrangement = Arrangement.spacedBy(SpacingNormal100)) {
+                    val smsCodeLength = 6
+                    repeat(smsCodeLength) { index ->
+                        //TODO: check on small width device
                         val char = if (index >= code.length) "" else code[index].toString()
                         Box(
                             modifier = Modifier
@@ -79,10 +81,11 @@ fun ConfirmationCodeScreen() {
                                 ),
                             contentAlignment = Alignment.Center
                         ) {
-                            Text(text = char, style = MaterialTheme.typography.labelLarge)
+                            Text(
+                                text = char,
+                                style = MaterialTheme.typography.labelLarge
+                            )
                         }
-
-                        Spacer(modifier = Modifier.width(SpacingNormal100))
                     }
                 }
             },
@@ -91,9 +94,7 @@ fun ConfirmationCodeScreen() {
 
         Spacer(modifier = Modifier.weight(1f))
 
-        TextButton(
-            onClick = {}
-        ) {
+        TextButton(onClick = {}) {
             Text(
                 text = buildAnnotatedString {
                     withStyle(SpanStyle(color = Gray900)) {
@@ -113,6 +114,6 @@ fun ConfirmationCodeScreen() {
 @Composable
 private fun ConfirmationCodeScreenPreview() {
     ScreenTheme {
-        ConfirmationCodeScreen()
+        ConfirmationCodeScreen(navigateToMain = {})
     }
 }
