@@ -1,6 +1,5 @@
 package com.ewingelen.chatter.auth.verifyPhone.presentation
 
-import android.app.Activity
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,16 +24,15 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.PreviewActivity
 import com.ewingelen.chatter.R
+import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.auth.core.presentation.components.AuthHeader
-import com.ewingelen.chatter.auth.verifyPhone.presentation.components.LoadingFullscreen
+import com.ewingelen.chatter.auth.core.presentation.components.ErrorText
 import com.ewingelen.chatter.core.presentation.BorderWidthMin
 import com.ewingelen.chatter.core.presentation.ButtonHeightLarge
 import com.ewingelen.chatter.core.presentation.Effect
@@ -44,9 +42,8 @@ import com.ewingelen.chatter.core.presentation.SpacingExtraSmall100
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.TextFieldHeightLarge
-import com.ewingelen.chatter.core.presentation.findActivity
+import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithBackground
 import com.ewingelen.chatter.core.presentation.theme.Gray500
-import com.ewingelen.chatter.core.presentation.theme.ScreenTheme
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
@@ -60,30 +57,29 @@ fun PhoneNumberScreen(
     state: PhoneNumberState,
     effect: Flow<Effect<HandlePhoneNumberEffect>>,
     handleAction: (PhoneNumberAction) -> Unit,
-    navigateToCode: (verificationId: String) -> Unit,
-    navigateToMain: () -> Unit,
-    activity: Activity = LocalContext.current.findActivity()
+    verifyPhoneNumber: (VerifyPhoneNumber) -> Unit,
+    navigateToConfirmCode: (verificationId: String, phoneNumber: String) -> Unit,
+    navigateToChats: () -> Unit,
 ) {
     val focusManager = LocalFocusManager.current
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    LaunchedEffect(key1 = effect) {
+    LaunchedEffect(key1 = Unit) {
+        val handleEffect = object : HandlePhoneNumberEffect {
+            override fun startVerification(verify: VerifyPhoneNumber) {
+                verifyPhoneNumber(verify)
+            }
+
+            override fun completeVerification() {
+                navigateToChats()
+            }
+
+            override fun navigateToTheCodeScreen(verificationId: String, phoneNumber: String) {
+                navigateToConfirmCode(verificationId, phoneNumber)
+            }
+        }
         effect.collectLatest { effect ->
-            effect.handle(
-                object : HandlePhoneNumberEffect {
-                    override fun startVerification(verifyPhoneNumber: VerifyPhoneNumber) {
-                        verifyPhoneNumber.verify(activity)
-                    }
-
-                    override fun completeVerification() {
-                        navigateToMain()
-                    }
-
-                    override fun navigateToTheCodeScreen(verificationId: String) {
-                        navigateToCode(verificationId)
-                    }
-                }
-            )
+            effect.handle(handleEffect)
         }
     }
 
@@ -105,17 +101,19 @@ fun PhoneNumberScreen(
 
         BasicTextField(
             value = state.phoneNumber,
-            onValueChange = { newValue ->
-                handleAction(PhoneNumberAction.ChangePhoneNumber(newValue))
+            onValueChange = { newPhoneNumber ->
+                handleAction(PhoneNumberAction.ChangePhoneNumber(newPhoneNumber))
             },
+            enabled = !state.loading,
             modifier = Modifier
                 .height(TextFieldHeightLarge)
                 .border(color = Gray500, shape = CircleShape, width = BorderWidthMin)
                 .padding(horizontal = SpacingNormal100)
                 .fillMaxWidth(),
+            cursorBrush = SolidColor(MaterialTheme.colorScheme.onBackground),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
             singleLine = true,
-            textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colorScheme.onSurface)
+            textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colorScheme.onBackground)
         ) { innerTextField ->
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
@@ -126,7 +124,7 @@ fun PhoneNumberScreen(
                 Spacer(modifier = Modifier.width(SpacingNormal100))
 
                 if (state.phoneNumber.isNotEmpty()) {
-                    Text(text = "+")
+                    Text(text = stringResource(id = R.string.symbol_plus))
 
                     Spacer(modifier = Modifier.width(SpacingExtraSmall100))
                 }
@@ -146,11 +144,7 @@ fun PhoneNumberScreen(
 
         Spacer(modifier = Modifier.height(SpacingNormal100))
 
-        Text(
-            text = state.errorText,
-            textAlign = TextAlign.Center,
-            color = MaterialTheme.colorScheme.error,
-        )
+        ErrorText(text = state.error)
 
         Spacer(modifier = Modifier.weight(1f))
 
@@ -160,6 +154,7 @@ fun PhoneNumberScreen(
                 keyboardController?.hide()
                 focusManager.clearFocus()
             },
+            enabled = !state.loading,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(ButtonHeightLarge)
@@ -167,23 +162,19 @@ fun PhoneNumberScreen(
             Text(text = stringResource(id = R.string.button_continue))
         }
     }
-
-    if (state.isLoading) {
-        LoadingFullscreen()
-    }
 }
 
 @ScreenPreview
 @Composable
 private fun AuthScreenPreview() {
-    ScreenTheme {
+    ChatterThemeWithBackground {
         PhoneNumberScreen(
             state = PhoneNumberState(),
             effect = flow {},
             handleAction = {},
-            navigateToCode = {},
-            navigateToMain = {},
-            activity = PreviewActivity()
+            verifyPhoneNumber = {},
+            navigateToConfirmCode = { _, _ -> },
+            navigateToChats = {},
         )
     }
 }

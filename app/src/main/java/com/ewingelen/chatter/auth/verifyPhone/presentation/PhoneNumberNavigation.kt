@@ -6,6 +6,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
@@ -13,8 +14,9 @@ import androidx.navigation.compose.composable
 private const val ROUTE = "phone_number"
 
 fun NavGraphBuilder.phoneNumberScreen(
-    navigateToCode: (String) -> Unit,
-    navigateToMain: () -> Unit
+    navigateToConfirmCode: (verificationId: String, phoneNumber: String) -> Unit,
+    navigateToChats: () -> Unit,
+    verifyPhoneNumber: (VerifyPhoneNumber) -> Unit
 ) {
     composable(ROUTE) {
         val viewModel: PhoneNumberViewModel = hiltViewModel()
@@ -23,8 +25,9 @@ fun NavGraphBuilder.phoneNumberScreen(
             state = state,
             effect = viewModel.effect,
             handleAction = viewModel::handleAction,
-            navigateToCode = navigateToCode,
-            navigateToMain = navigateToMain
+            verifyPhoneNumber = verifyPhoneNumber,
+            navigateToConfirmCode = navigateToConfirmCode,
+            navigateToChats = navigateToChats,
         )
     }
 }

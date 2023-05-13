@@ -1,18 +1,21 @@
 <resources>
-    <string name="app_name">Chatter</string>
+    <string name="app_name" translatable="false">Chatter</string>
     <string name="label_on_boarding_body">Talk to whomever, wherever\nand whenever</string>
-    <string name="btn_start_messaging">Start messaging</string>
+    <string name="button_start_messaging">Start messaging</string>
     <string name="label_enter_phone_number">Enter your phone number</string>
     <string name="label_confirm_region">Please confirm your region and enter your\nphone number</string>
     <string name="button_continue">Continue</string>
     <string name="hint_phone_number">Phone number…</string>
     <string name="label_enter_code">Enter code</string>
-    <string name="label_code_sent">We\'ve sent the code via SMS to +%s</string>
+    <string name="label_format_code_sent">We\'ve sent the code via SMS to +%s</string>
     <string name="label_did_not_get_code">Didn\'t get the code?</string>
     <string name="label_clickable_resent_code">Resent code</string>
     <string name="label_please_wait">Please wait a moment…</string>
-    <string name="label_invalid_phone_number">Phone number you entered is not valid. Please enter a valid phone number</string>
-    <string name="label_something_went_wrong">Something went wrong. Please try again</string>
-    <string name="label_no_internet_connection">Please check your internet connection and try again</string>
-    <string name="label_too_many_requests">Sorry, you have tried too many times. Please, try again in a minute</string>
+    <string name="error_invalid_phone_number">Phone number you entered is not valid. Please enter a valid phone number</string>
+    <string name="error_something_went_wrong">Something went wrong. Please try again</string>
+    <string name="error_no_internet_connection">Please check your internet connection and try again</string>
+    <string name="error_too_many_requests">Sorry, you have tried too many times. Please, try again in a minute</string>
+    <string name="error_invalid_code">Code you entered is not valid. Please enter a valid code</string>
+    <string name="label_format_try_again">Try again after %d seconds</string>
+    <string name="symbol_plus" translatable="false">+</string>
 </resources>

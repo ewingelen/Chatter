@@ -1,5 +1,6 @@
 package com.ewingelen.chatter.auth.verifyPhone.presentation
 
+import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.core.presentation.HandleEffect
 
 /**
@@ -7,9 +8,9 @@ import com.ewingelen.chatter.core.presentation.HandleEffect
  */
 interface HandlePhoneNumberEffect : HandleEffect {
 
-    fun startVerification(verifyPhoneNumber: VerifyPhoneNumber)
+    fun startVerification(verify: VerifyPhoneNumber)
 
     fun completeVerification()
 
-    fun navigateToTheCodeScreen(verificationId: String)
+    fun navigateToTheCodeScreen(verificationId: String, phoneNumber: String)
 }

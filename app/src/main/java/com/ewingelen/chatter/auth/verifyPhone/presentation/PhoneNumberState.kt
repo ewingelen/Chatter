@@ -7,6 +7,6 @@ import com.ewingelen.chatter.core.presentation.State
  */
 data class PhoneNumberState(
     val phoneNumber: String = "",
-    val isLoading: Boolean = false,
-    var errorText: String = "",
+    val loading: Boolean = false,
+    var error: String = "",
 ): State
