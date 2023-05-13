@@ -18,6 +18,7 @@ private val DarkColorPalette = darkColorScheme(
 
 private val LightColorPalette = lightColorScheme(
     primary = Blue200,
+    onPrimary = Black900,
     secondary = Teal200,
     background = White900,
     onSurfaceVariant = Black900

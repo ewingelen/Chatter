@@ -1,5 +1,6 @@
 package com.ewingelen.chatter.auth.verifyPhone.presentation
 
+import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.core.presentation.Effect
 
 /**
@@ -23,10 +24,13 @@ interface PhoneNumberEffect : Effect<HandlePhoneNumberEffect> {
         }
     }
 
-    class CodeSent(private val verificationId: String) : PhoneNumberEffect {
+    class CodeSent(
+        private val verificationId: String,
+        private val phoneNumber: String
+    ) : PhoneNumberEffect {
 
         override fun handle(handleEffect: HandlePhoneNumberEffect) {
-            handleEffect.navigateToTheCodeScreen(verificationId)
+            handleEffect.navigateToTheCodeScreen(verificationId, phoneNumber)
         }
     }
 }

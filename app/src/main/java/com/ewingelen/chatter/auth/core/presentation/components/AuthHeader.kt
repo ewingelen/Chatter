@@ -11,10 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import com.ewingelen.chatter.R
+import com.ewingelen.chatter.core.presentation.ComponentPreview
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
-import com.ewingelen.chatter.core.presentation.theme.ScreenTheme
+import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithBackground
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
@@ -44,10 +44,10 @@ fun AuthHeader(
     }
 }
 
-@Preview
+@ComponentPreview
 @Composable
-fun AuthHeaderPreview() {
-    ScreenTheme {
+private fun AuthHeaderPreview() {
+    ChatterThemeWithBackground {
         AuthHeader(
             titleResourceId = R.string.label_enter_phone_number,
             subtitle = stringResource(id = R.string.label_confirm_region)

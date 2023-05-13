@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
  */
 @Preview(name = "Light theme")
 @Preview(name = "Dark theme", uiMode = UI_MODE_NIGHT_YES)
-annotation class ElementPreview
+annotation class ComponentPreview
 
 @Preview(name = "Light theme, normal device")
 @Preview(name = "Light theme, tablet landscape", device = Devices.TABLET)

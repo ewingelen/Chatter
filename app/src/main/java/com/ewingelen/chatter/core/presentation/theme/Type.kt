@@ -64,7 +64,6 @@ val Typography = Typography(
         fontFamily = LatoFontFamily,
         fontSize = 18.sp,
         fontWeight = FontWeight.SemiBold,
-        color = Black900
     ),
     labelMedium = TextStyle(
         fontSize = 14.sp,

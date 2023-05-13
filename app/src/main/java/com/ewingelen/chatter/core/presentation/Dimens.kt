@@ -17,4 +17,4 @@ val ButtonHeightLarge = 62.dp
 
 val BorderWidthMin = 1.dp
 
-val ConfirmationCodeCellSize = 40.dp
+val ConfirmCodeCellSize = 40.dp

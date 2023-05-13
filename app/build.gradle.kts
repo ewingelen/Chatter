@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     kotlin("kapt")
 }
 
@@ -21,15 +22,23 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        manifestPlaceholders["crashlyticsCollectionEnabled"] = false
+        manifestPlaceholders["analyticsCollectionEnabled"] = false
     }
 
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            manifestPlaceholders["crashlyticsCollectionEnabled"] = true
+            manifestPlaceholders["analyticsCollectionEnabled"] = true
         }
 
         debug {
@@ -40,8 +49,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions {
-        jvmTarget = "17"
+    kotlin {
+        jvmToolchain(17)
     }
     buildFeatures {
         compose = true
@@ -68,6 +77,7 @@ dependencies {
     val hiltVersion = "2.45"
     val hiltNavigationComposeVersion = "1.0.0"
     val firebaseBomVersion = "31.5.0"
+    val preferencesDataStoreVersion = "1.0.0"
     val splashScreenVersion = "1.0.0"
     val timberVersion = "5.0.1"
 
@@ -107,6 +117,7 @@ dependencies {
     //Firebase
     implementation(platform("com.google.firebase:firebase-bom:$firebaseBomVersion"))
     implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
 
     //Splash Screen
@@ -114,6 +125,9 @@ dependencies {
 
     //Timber
     implementation("com.jakewharton.timber:timber:$timberVersion")
+
+    //Data store
+    implementation("androidx.datastore:datastore-preferences:$preferencesDataStoreVersion")
 }
 
 kapt {
