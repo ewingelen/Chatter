@@ -41,7 +41,7 @@ import com.ewingelen.chatter.core.presentation.ScreenPreview
 import com.ewingelen.chatter.core.presentation.SpacingExtraLarge100
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
-import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithBackground
+import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 import com.ewingelen.chatter.core.presentation.theme.Gray500
 import com.ewingelen.chatter.core.presentation.theme.Gray900
 import kotlinx.coroutines.flow.Flow
@@ -159,7 +159,7 @@ fun ConfirmCodeScreen(
 @ScreenPreview
 @Composable
 private fun ConfirmCodeScreenPreview() {
-    ChatterThemeWithBackground {
+    ChatterThemeWithSurface {
         ConfirmCodeScreen(
             state = ConfirmCodeState(),
             effect = flow {},

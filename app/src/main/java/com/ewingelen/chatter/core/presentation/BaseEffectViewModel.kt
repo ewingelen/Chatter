@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 30.04.2023.
  */
-abstract class BaseEffectViewModel<S : State, A : HandleAction, E : HandleEffect>(defaultState: S) :
+abstract class BaseEffectViewModel<S : Any, A : Any, E : HandleEffect>(defaultState: S) :
     BaseActionViewModel<S, A>(defaultState) {
 
     private val mutableEffect = Channel<Effect<E>>()

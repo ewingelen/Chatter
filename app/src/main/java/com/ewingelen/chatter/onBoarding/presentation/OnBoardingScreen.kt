@@ -23,7 +23,7 @@ import com.ewingelen.chatter.core.presentation.ButtonHeightLarge
 import com.ewingelen.chatter.core.presentation.ScreenPreview
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
-import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithBackground
+import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
@@ -75,7 +75,7 @@ fun OnBoardingScreen(navigateToPhoneNumber: () -> Unit) {
 @ScreenPreview
 @Composable
 private fun OnBoardingScreenPreview() {
-    ChatterThemeWithBackground {
+    ChatterThemeWithSurface {
         OnBoardingScreen(navigateToPhoneNumber = {})
     }
 }

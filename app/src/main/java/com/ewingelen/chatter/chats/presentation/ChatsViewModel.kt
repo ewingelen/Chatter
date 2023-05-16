@@ -2,7 +2,6 @@ package com.ewingelen.chatter.chats.presentation
 
 import com.ewingelen.chatter.core.presentation.Action
 import com.ewingelen.chatter.core.presentation.BaseActionViewModel
-import com.ewingelen.chatter.core.presentation.HandleAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -28,7 +27,7 @@ interface ChatsAction : Action<HandleChatsAction> {
 
 }
 
-interface HandleChatsAction : HandleAction {
+interface HandleChatsAction {
 
     class OpenChat
 

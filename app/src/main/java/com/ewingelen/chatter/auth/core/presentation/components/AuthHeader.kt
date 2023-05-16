@@ -14,7 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.core.presentation.ComponentPreview
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
-import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithBackground
+import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
@@ -47,7 +47,7 @@ fun AuthHeader(
 @ComponentPreview
 @Composable
 private fun AuthHeaderPreview() {
-    ChatterThemeWithBackground {
+    ChatterThemeWithSurface {
         AuthHeader(
             titleResourceId = R.string.label_enter_phone_number,
             subtitle = stringResource(id = R.string.label_confirm_region)

@@ -11,7 +11,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.ewingelen.chatter.core.presentation.navigation.AppNavHost
-import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithBackground
+import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
         }
         setContent {
             val state by viewModel.state.collectAsStateWithLifecycle()
-            ChatterThemeWithBackground(modifier = Modifier.fillMaxSize()) {
+            ChatterThemeWithSurface(modifier = Modifier.fillMaxSize()) {
                 AppNavHost(
                     verifyPhoneNumber = { verify ->
                         verify.verify(this@MainActivity)

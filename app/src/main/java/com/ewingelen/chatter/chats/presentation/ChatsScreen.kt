@@ -24,104 +24,109 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.core.presentation.ChatUserPhotoImageSize
-import com.ewingelen.chatter.core.presentation.ElevationMedium
+import com.ewingelen.chatter.core.presentation.ChatterTopAppBar
 import com.ewingelen.chatter.core.presentation.ScreenPreview
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.SpacingSmall100
 import com.ewingelen.chatter.core.presentation.SpacingSmall150
-import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithBackground
+import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ChatsScreen(state: ChatsState) {
+fun ChatsScreen(
+    state: ChatsState,
+    navigateToCreateChat: () -> Unit,
+    navigateToChat: () -> Unit
+) {
     Column {
-        TopAppBar(
+        ChatterTopAppBar(
             title = {
                 Text(
                     text = stringResource(id = R.string.app_name),
-                    fontWeight = FontWeight.Bold
+                    style = MaterialTheme.typography.titleLarge
                 )
             },
-            modifier = Modifier.shadow(
-                elevation = ElevationMedium,
-                ambientColor = MaterialTheme.colorScheme.primary,
-                spotColor = MaterialTheme.colorScheme.primary
-            ),
-            colors = TopAppBarDefaults.mediumTopAppBarColors(
-                containerColor = MaterialTheme.colorScheme.background
-            )
         )
 
         Box(modifier = Modifier.fillMaxSize()) {
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(SpacingSmall100),
-                contentPadding = PaddingValues(SpacingNormal100)
-            ) {
-                items(items = state.chats) { chat ->
-                    Card(onClick = {}) {
-                        Row(
-                            modifier = Modifier.padding(SpacingNormal100),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Image(
-                                painter = painterResource(id = R.drawable.img_logo),
-                                contentDescription = stringResource(id = R.string.accessibility_user_photo),
-                                modifier = Modifier.size(ChatUserPhotoImageSize)
-                            )
-
-                            Spacer(modifier = Modifier.width(SpacingNormal100))
-
-                            Column(modifier = Modifier.weight(1f)) {
-                                Text(
-                                    text = chat.userName,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis,
-                                    fontWeight = FontWeight.SemiBold
+            if (state.chats.isNotEmpty()) {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(SpacingSmall100),
+                    contentPadding = PaddingValues(SpacingNormal100)
+                ) {
+                    items(items = state.chats) { chat ->
+                        Card(onClick = navigateToChat) {
+                            Row(
+                                modifier = Modifier.padding(SpacingNormal100),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.img_logo),
+                                    contentDescription = stringResource(id = R.string.accessibility_user_photo),
+                                    modifier = Modifier.size(ChatUserPhotoImageSize)
                                 )
 
-                                Spacer(modifier = Modifier.height(SpacingSmall150))
+                                Spacer(modifier = Modifier.width(SpacingNormal100))
 
-                                Text(
-                                    text = chat.lastMessage,
-                                    maxLines = 1,
-                                    overflow = TextOverflow.Ellipsis
-                                )
-                            }
+                                Column(modifier = Modifier.weight(1f)) {
+                                    Text(
+                                        text = chat.userName,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis,
+                                        fontWeight = FontWeight.Medium
+                                    )
 
-                            Spacer(modifier = Modifier.width(SpacingNormal100))
+                                    Spacer(modifier = Modifier.height(SpacingSmall150))
 
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(text = chat.time, maxLines = 1)
+                                    Text(
+                                        text = chat.lastMessage,
+                                        maxLines = 1,
+                                        overflow = TextOverflow.Ellipsis
+                                    )
+                                }
 
-                                Spacer(modifier = Modifier.height(SpacingNormal100))
+                                Spacer(modifier = Modifier.width(SpacingNormal100))
 
-                                Badge(containerColor = MaterialTheme.colorScheme.primary) {
-                                    Text(text = chat.unreadMessagesCount.toString())
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text(text = chat.time, maxLines = 1)
+
+                                    Spacer(modifier = Modifier.height(SpacingNormal100))
+
+                                    Badge(containerColor = MaterialTheme.colorScheme.primary) {
+                                        Text(text = chat.unreadMessagesCount.toString())
+                                    }
                                 }
                             }
                         }
                     }
                 }
+            } else {
+                Text(
+                    text = stringResource(id = R.string.label_empty_chats),
+                    style = MaterialTheme.typography.headlineMedium,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .padding(SpacingNormal100)
+                        .align(Alignment.Center)
+                )
             }
 
             FloatingActionButton(
-                onClick = { /*TODO*/ },
+                onClick = navigateToCreateChat,
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(SpacingNormal100),
@@ -142,7 +147,11 @@ fun ChatsScreen(state: ChatsState) {
 private fun ChatsScreenPreview(
     @PreviewParameter(ChatsPreviewParameterProvider::class) state: ChatsState
 ) {
-    ChatterThemeWithBackground(modifier = Modifier.fillMaxSize()) {
-        ChatsScreen(state = state)
+    ChatterThemeWithSurface(modifier = Modifier.fillMaxSize()) {
+        ChatsScreen(
+            state = state,
+            navigateToCreateChat = {},
+            navigateToChat = {}
+        )
     }
 }

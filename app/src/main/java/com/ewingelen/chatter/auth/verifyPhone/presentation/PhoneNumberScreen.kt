@@ -42,7 +42,7 @@ import com.ewingelen.chatter.core.presentation.SpacingExtraSmall100
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.TextFieldHeightLarge
-import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithBackground
+import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 import com.ewingelen.chatter.core.presentation.theme.Gray500
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -167,7 +167,7 @@ fun PhoneNumberScreen(
 @ScreenPreview
 @Composable
 private fun AuthScreenPreview() {
-    ChatterThemeWithBackground {
+    ChatterThemeWithSurface {
         PhoneNumberScreen(
             state = PhoneNumberState(),
             effect = flow {},

@@ -9,15 +9,15 @@ interface ConfirmCodeAction : Action<HandleConfirmCodeAction> {
 
     class ChangeCode(private val newCode: String): ConfirmCodeAction {
 
-        override fun handle(handleAction: HandleConfirmCodeAction) {
-            handleAction.changeCode(newCode)
+        override fun handle(handle: HandleConfirmCodeAction) {
+            handle.changeCode(newCode)
         }
     }
 
     class ResentCode : ConfirmCodeAction {
 
-        override fun handle(handleAction: HandleConfirmCodeAction) {
-            handleAction.resentCode()
+        override fun handle(handle: HandleConfirmCodeAction) {
+            handle.resentCode()
         }
     }
 }

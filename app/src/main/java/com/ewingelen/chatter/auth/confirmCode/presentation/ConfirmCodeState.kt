@@ -1,7 +1,5 @@
 package com.ewingelen.chatter.auth.confirmCode.presentation
 
-import com.ewingelen.chatter.core.presentation.State
-
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 30.04.2023.
  */
@@ -13,4 +11,4 @@ data class ConfirmCodeState(
     val loading: Boolean = false,
     val resentCodeEnabled: Boolean = false,
     val error: String = ""
-) : State
+)

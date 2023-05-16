@@ -35,6 +35,7 @@ class ChatsPreviewParameterProvider : PreviewParameterProvider<ChatsState> {
                     unreadMessagesCount = 2
                 )
             )
-        )
+        ),
+        ChatsState(chats = emptyList())
     )
 }

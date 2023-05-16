@@ -10,7 +10,7 @@ import com.ewingelen.chatter.core.presentation.ComponentPreview
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
  */
 @Composable
-fun ChatterThemeWithBackground(
+fun ChatterThemeWithSurface(
     modifier: Modifier = Modifier,
     content: @Composable () -> Unit,
 ) {
@@ -27,5 +27,5 @@ fun ChatterThemeWithBackground(
 @ComponentPreview
 @Composable
 private fun ChatterThemeWithBackgroundPreview() {
-    ChatterThemeWithBackground {}
+    ChatterThemeWithSurface {}
 }

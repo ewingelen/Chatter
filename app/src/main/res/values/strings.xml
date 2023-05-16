@@ -20,4 +20,8 @@
     <string name="symbol_plus" translatable="false">+</string>
     <string name="accessibility_user_photo">User photo</string>
     <string name="accessibility_add_contact">Add contact</string>
+    <string name="label_empty_chats">You don\'t have any chats yet. Сreate your first one!</string>
+    <string name="label_create_chat">Create chat</string>
+    <string name="top_bar_title_new_chat">New chat</string>
+    <string name="accessibility_previous_page">Return to the previous page</string>
 </resources>
