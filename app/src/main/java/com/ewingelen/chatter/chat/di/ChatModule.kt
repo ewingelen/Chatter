@@ -1,6 +1,6 @@
 package com.ewingelen.chatter.chat.di
 
-import com.ewingelen.chatter.chat.presentation.ChatInteractor
+import com.ewingelen.chatter.chat.domain.ChatInteractor
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

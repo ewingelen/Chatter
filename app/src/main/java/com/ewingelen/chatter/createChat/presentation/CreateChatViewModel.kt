@@ -1,6 +1,7 @@
 package com.ewingelen.chatter.createChat.presentation
 
 import com.ewingelen.chatter.core.presentation.BaseActionViewModel
+import com.ewingelen.chatter.createChat.domain.CreateChatInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

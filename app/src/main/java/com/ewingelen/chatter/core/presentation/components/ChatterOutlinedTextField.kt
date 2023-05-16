@@ -29,6 +29,7 @@ fun ChatterOutlinedTextField(
     @StringRes placeholderResourceId: Int,
     modifier: Modifier = Modifier,
     supportingText: String = "",
+    singleLine: Boolean = false,
     isError: Boolean = false,
     enabled: Boolean = true,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
@@ -49,6 +50,7 @@ fun ChatterOutlinedTextField(
         supportingText = {
             Text(text = supportingText)
         },
+        singleLine = true,
         enabled = enabled,
         keyboardOptions = keyboardOptions,
         modifier = modifier

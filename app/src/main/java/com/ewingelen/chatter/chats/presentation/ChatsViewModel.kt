@@ -1,5 +1,6 @@
 package com.ewingelen.chatter.chats.presentation
 
+import com.ewingelen.chatter.chats.domain.ChatsInteractor
 import com.ewingelen.chatter.core.presentation.Action
 import com.ewingelen.chatter.core.presentation.BaseActionViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

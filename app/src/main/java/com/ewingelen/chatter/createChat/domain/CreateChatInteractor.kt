@@ -1,4 +1,4 @@
-package com.ewingelen.chatter.createChat.presentation
+package com.ewingelen.chatter.createChat.domain
 
 import javax.inject.Inject
 

@@ -18,13 +18,20 @@ import com.ewingelen.chatter.createChat.presentation.navigateToCreateChat
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 07.05.2023.
  */
-fun NavGraphBuilder.mainGraph(navController: NavController, route: String) {
+fun NavGraphBuilder.mainGraph(
+    navController: NavController,
+    route: String,
+    showSnackbar: (String) -> Unit
+) {
     navigation(startDestination = CHATS_SCREEN_ROUTE, route = route) {
         chatsScreen(
             navigateToCreateChat = navController::navigateToCreateChat,
             navigateToChat = navController::navigateToChat
         )
-        createChatScreen(navigateUp = navController::navigateUp)
+        createChatScreen(
+            navigateUp = navController::navigateUp,
+            showSnackbar = showSnackbar
+        )
         chatScreen(navigateUp = navController::navigateUp)
     }
 }

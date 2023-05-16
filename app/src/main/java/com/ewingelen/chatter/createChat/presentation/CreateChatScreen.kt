@@ -35,8 +35,11 @@ import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 fun CreateChatScreen(
     state: CreateChatState,
     handleAction: (CreateChatAction) -> Unit,
-    navigateUp: () -> Unit
+    showSnackbar: (String) -> Unit,
+    navigateUp: () -> Unit,
 ) {
+    val chatCreatedMessage = stringResource(id = R.string.snackbar_chat_created)
+
     Column {
         ChatterTopAppBar(
             title = {
@@ -70,11 +73,12 @@ fun CreateChatScreen(
                 leadingIcon = Icons.Rounded.Person,
                 labelResourceId = R.string.label_name,
                 placeholderResourceId = R.string.placeholder_enter_contact_name,
+                singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
 
             ChatterOutlinedTextField(
-                value = state.name,
+                value = state.phoneNumber,
                 onValueChange = { handleAction(CreateChatAction.ChangePhoneNumber(it)) },
                 leadingIcon = Icons.Rounded.Phone,
                 labelResourceId = R.string.label_phone_number,
@@ -86,7 +90,11 @@ fun CreateChatScreen(
             Spacer(modifier = Modifier.weight(1f))
 
             Button(
-                onClick = { handleAction(CreateChatAction.CreateChat()) },
+                onClick = {
+                    handleAction(CreateChatAction.CreateChat())
+                    showSnackbar(chatCreatedMessage)
+                    navigateUp()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(ButtonHeightLarge)
@@ -104,6 +112,7 @@ private fun CreateChatScreenPreview() {
         CreateChatScreen(
             state = CreateChatState(),
             handleAction = {},
+            showSnackbar = {},
             navigateUp = {}
         )
     }

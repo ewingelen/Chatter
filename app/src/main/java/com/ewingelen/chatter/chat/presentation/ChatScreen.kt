@@ -1,5 +1,6 @@
 package com.ewingelen.chatter.chat.presentation
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -131,11 +132,13 @@ fun ChatScreen(
 
                 Spacer(modifier = Modifier.width(SpacingNormal100))
 
-                FilledIconButton(onClick = { handleAction(ChatAction.SendMessage()) }) {
-                    Icon(
-                        imageVector = Icons.Rounded.Send,
-                        contentDescription = stringResource(id = R.string.accessibility_send_message),
-                    )
+                AnimatedVisibility(visible = state.enteredMessage.isNotEmpty()) {
+                    FilledIconButton(onClick = { handleAction(ChatAction.SendMessage()) }) {
+                        Icon(
+                            imageVector = Icons.Rounded.Send,
+                            contentDescription = stringResource(id = R.string.accessibility_send_message),
+                        )
+                    }
                 }
             }
         }

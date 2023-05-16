@@ -31,4 +31,5 @@
     <string name="accessibility_contact_photo">Contact photo</string>
     <string name="placeholder_write_message">Write a message…</string>
     <string name="accessibility_send_message">Send message</string>
+    <string name="snackbar_chat_created">The chat is created</string>
 </resources>

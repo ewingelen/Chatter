@@ -1,5 +1,6 @@
 package com.ewingelen.chatter.chat.presentation
 
+import com.ewingelen.chatter.chat.domain.ChatInteractor
 import com.ewingelen.chatter.core.presentation.BaseActionViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -22,7 +23,7 @@ class ChatViewModel @Inject constructor(
     }
 
     override fun changeMessage(newMessage: String) {
-        updateState(ChatState(enteredMessage = newMessage))
+        updateState(state.value.copy(enteredMessage = newMessage))
     }
 
     override fun sendMessage() {

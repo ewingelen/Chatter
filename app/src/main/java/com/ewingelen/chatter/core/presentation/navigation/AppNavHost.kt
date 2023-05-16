@@ -11,14 +11,15 @@ import com.ewingelen.chatter.auth.core.presentation.authGraph
  */
 @Composable
 fun AppNavHost(
+    isUserAuthorized: Boolean,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit,
-    isUserAuthorized: Boolean
+    showSnackbar: (String) -> Unit
 ) {
     val navController = rememberNavController()
     val startDestination = if (isUserAuthorized) MAIN_NAV_GRAPH_ROUTE else AUTH_NAV_GRAPH_ROUTE
     NavHost(navController = navController, startDestination = startDestination) {
         authGraph(navController, AUTH_NAV_GRAPH_ROUTE, verifyPhoneNumber)
-        mainGraph(navController, MAIN_NAV_GRAPH_ROUTE)
+        mainGraph(navController, MAIN_NAV_GRAPH_ROUTE, showSnackbar)
     }
 }
 

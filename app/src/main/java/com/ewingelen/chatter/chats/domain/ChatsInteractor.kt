@@ -1,5 +1,6 @@
-package com.ewingelen.chatter.chats.presentation
+package com.ewingelen.chatter.chats.domain
 
+import com.ewingelen.chatter.chats.presentation.ChatUi
 import javax.inject.Inject
 
 /**

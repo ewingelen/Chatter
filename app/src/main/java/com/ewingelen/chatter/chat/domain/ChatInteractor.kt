@@ -1,4 +1,4 @@
-package com.ewingelen.chatter.chat.presentation
+package com.ewingelen.chatter.chat.domain
 
 import com.ewingelen.chatter.chat.presentation.model.ChatInfoUi
 import com.ewingelen.chatter.chat.presentation.model.MessageUi

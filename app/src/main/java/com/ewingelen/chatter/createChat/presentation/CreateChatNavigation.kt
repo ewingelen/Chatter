@@ -12,13 +12,17 @@ import androidx.navigation.compose.composable
  */
 private const val ROUTE = "create_chat"
 
-fun NavGraphBuilder.createChatScreen(navigateUp: () -> Unit) {
+fun NavGraphBuilder.createChatScreen(
+    navigateUp: () -> Unit,
+    showSnackbar: (String) -> Unit
+) {
     composable(ROUTE) {
         val viewModel: CreateChatViewModel = hiltViewModel()
         val state by viewModel.state.collectAsStateWithLifecycle()
         CreateChatScreen(
             state = state,
             handleAction = viewModel::handleAction,
+            showSnackbar = showSnackbar,
             navigateUp = navigateUp
         )
     }

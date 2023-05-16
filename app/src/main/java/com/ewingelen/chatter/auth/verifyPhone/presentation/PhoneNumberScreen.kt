@@ -22,13 +22,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.auth.core.presentation.components.ErrorText
-import com.ewingelen.chatter.core.presentation.ButtonHeightLarge
-import com.ewingelen.chatter.core.presentation.components.ChatterOutlinedTextField
 import com.ewingelen.chatter.core.presentation.AuthScreenHeader
+import com.ewingelen.chatter.core.presentation.ButtonHeightLarge
 import com.ewingelen.chatter.core.presentation.ScreenPreview
 import com.ewingelen.chatter.core.presentation.SpacingExtraLarge100
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
+import com.ewingelen.chatter.core.presentation.components.ChatterOutlinedTextField
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest

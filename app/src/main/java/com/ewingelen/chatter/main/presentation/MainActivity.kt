@@ -5,11 +5,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.ewingelen.chatter.core.presentation.components.ChatterScaffold
 import com.ewingelen.chatter.core.presentation.navigation.AppNavHost
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,20 +38,36 @@ class MainActivity : ComponentActivity() {
             setOnExitAnimationListener { splash ->
                 lifecycleScope.launch {
                     //TODO: fix and remove delay
-                    delay(300L)
+                    delay(500L)
                     splash.remove()
                 }
             }
         }
         setContent {
             val state by viewModel.state.collectAsStateWithLifecycle()
+            val coroutineScope = rememberCoroutineScope()
+            val snackbarHostState = remember { SnackbarHostState() }
             ChatterThemeWithSurface(modifier = Modifier.fillMaxSize()) {
-                AppNavHost(
-                    verifyPhoneNumber = { verify ->
-                        verify.verify(this@MainActivity)
-                    },
-                    isUserAuthorized = state.userAuthorized
-                )
+                ChatterScaffold(snackbarHostState = snackbarHostState) {
+                    AppNavHost(
+                        verifyPhoneNumber = { verify ->
+                            verify.verify(this@MainActivity)
+                        },
+                        isUserAuthorized = state.userAuthorized,
+                        showSnackbar = { message ->
+                            coroutineScope.launch {
+                                val job = coroutineScope.launch {
+                                    snackbarHostState.showSnackbar(
+                                        message = message,
+                                        duration = SnackbarDuration.Indefinite
+                                    )
+                                }
+                                delay(1000L)
+                                job.cancel()
+                            }
+                        }
+                    )
+                }
             }
         }
     }
