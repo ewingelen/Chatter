@@ -69,10 +69,9 @@ android {
 dependencies {
     val coreKtxVersion = "1.10.0"
     val lifecycleKtxVersion = "2.6.1"
-    val composeUiVersion = "1.5.0-alpha02"
     val lifecycleRuntimeComposeVersion = "2.6.1"
+    val composeBom = "androidx.compose:compose-bom:2023.05.01"
     val composeActivityVersion = "1.6.1"
-    val composeMaterial3Version = "1.0.1"
     val composeNavigationVersion = "2.5.3"
     val hiltVersion = "2.45"
     val hiltNavigationComposeVersion = "1.0.0"
@@ -89,7 +88,8 @@ dependencies {
     //JUnit
     testImplementation("junit:junit:$jUnitVersion")
     androidTestImplementation("androidx.test.ext:junit:$jUnitExtVersion")
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$composeUiVersion")
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+
     //Espresso
     androidTestImplementation("androidx.test.espresso:espresso-core:$espressoVersion")
 
@@ -100,14 +100,16 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleKtxVersion")
 
     //Compose
-    implementation("androidx.compose.ui:ui:$composeUiVersion")
-    implementation("androidx.compose.ui:ui-tooling-preview:$composeUiVersion")
-    debugImplementation("androidx.compose.ui:ui-tooling:$composeUiVersion")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:$composeUiVersion")
+    implementation(platform(composeBom))
+    implementation("androidx.compose.ui:ui")
+    implementation("androidx.compose.ui:ui-tooling-preview")
+    implementation("androidx.compose.material3:material3")
     implementation("androidx.activity:activity-compose:$composeActivityVersion")
-    implementation("androidx.compose.material3:material3:$composeMaterial3Version")
     implementation("androidx.navigation:navigation-compose:$composeNavigationVersion")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:$lifecycleRuntimeComposeVersion")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    testImplementation(platform(composeBom))
 
     //Hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
@@ -119,6 +121,7 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics-ktx")
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
 
     //Splash Screen
     implementation("androidx.core:core-splashscreen:$splashScreenVersion")
