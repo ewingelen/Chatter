@@ -5,7 +5,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -14,9 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.core.presentation.ButtonHeightLarge
+import com.ewingelen.chatter.core.presentation.ChatterOutlinedTextField
 import com.ewingelen.chatter.core.presentation.ChatterTopAppBar
 import com.ewingelen.chatter.core.presentation.IconButtonBack
+import com.ewingelen.chatter.core.presentation.ScreenHeader
 import com.ewingelen.chatter.core.presentation.ScreenPreview
+import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 
@@ -40,20 +45,36 @@ fun CreateChatScreen(
             navigationIcon = { IconButtonBack(navigateUp = navigateUp) }
         )
 
-        Column(modifier = Modifier.padding(SpacingNormal100)) {
-            BasicTextField(
+        Column(
+            modifier = Modifier.padding(
+                start = SpacingNormal100,
+                top = SpacingNormal100,
+                end = SpacingNormal100,
+                bottom = SpacingLarge100
+            )
+        ) {
+            ScreenHeader(
+                titleResourceId = R.string.title_start_chat,
+                subtitle = stringResource(id = R.string.subtitle_add_chat)
+            )
+
+            Spacer(modifier = Modifier.height(SpacingNormal100))
+
+            ChatterOutlinedTextField(
                 value = state.name,
-                onValueChange = { newName ->
-                    handleAction(CreateChatAction.ChangeName(newName))
-                },
+                onValueChange = { handleAction(CreateChatAction.ChangeName(it)) },
+                leadingIcon = Icons.Rounded.Person,
+                labelResourceId = R.string.label_name,
+                placeholderResourceId = R.string.placeholder_enter_contact_name,
                 modifier = Modifier.fillMaxWidth()
             )
 
-            BasicTextField(
-                value = state.phoneNumber,
-                onValueChange = { newNumber ->
-                    handleAction(CreateChatAction.ChangePhoneNumber(newNumber))
-                },
+            ChatterOutlinedTextField(
+                value = state.name,
+                onValueChange = { handleAction(CreateChatAction.ChangePhoneNumber(it)) },
+                leadingIcon = Icons.Rounded.Phone,
+                labelResourceId = R.string.label_phone_number,
+                placeholderResourceId = R.string.placeholder_enter_contact_phone_number,
                 modifier = Modifier.fillMaxWidth()
             )
 

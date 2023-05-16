@@ -32,11 +32,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
-import com.ewingelen.chatter.auth.core.presentation.components.AuthHeader
 import com.ewingelen.chatter.auth.core.presentation.components.ErrorText
 import com.ewingelen.chatter.core.presentation.BorderWidthMin
 import com.ewingelen.chatter.core.presentation.ConfirmCodeCellSize
 import com.ewingelen.chatter.core.presentation.Effect
+import com.ewingelen.chatter.core.presentation.ScreenHeader
 import com.ewingelen.chatter.core.presentation.ScreenPreview
 import com.ewingelen.chatter.core.presentation.SpacingExtraLarge100
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
@@ -91,18 +91,16 @@ fun ConfirmCodeScreen(
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        AuthHeader(
-            titleResourceId = R.string.label_enter_code,
-            subtitle = stringResource(id = R.string.label_format_code_sent, state.phoneNumber)
+        ScreenHeader(
+            titleResourceId = R.string.title_enter_code,
+            subtitle = stringResource(id = R.string.subtitle_format_enter_code, state.phoneNumber)
         )
 
         Spacer(modifier = Modifier.height(SpacingNormal100))
 
         BasicTextField(
             value = state.code,
-            onValueChange = { newCode ->
-                handleAction(ConfirmCodeAction.ChangeCode(newCode))
-            },
+            onValueChange = { handleAction(ConfirmCodeAction.ChangeCode(it)) },
             decorationBox = {
                 Row(horizontalArrangement = Arrangement.spacedBy(SpacingNormal100)) {
                     val smsCodeLength = 6

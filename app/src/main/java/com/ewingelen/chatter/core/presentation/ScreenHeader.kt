@@ -1,4 +1,4 @@
-package com.ewingelen.chatter.auth.core.presentation.components
+package com.ewingelen.chatter.core.presentation
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
@@ -12,15 +12,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.ewingelen.chatter.R
-import com.ewingelen.chatter.core.presentation.ComponentPreview
-import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
  */
 @Composable
-fun AuthHeader(
+fun ScreenHeader(
     @StringRes titleResourceId: Int,
     subtitle: String,
     modifier: Modifier = Modifier,
@@ -46,11 +44,11 @@ fun AuthHeader(
 
 @ComponentPreview
 @Composable
-private fun AuthHeaderPreview() {
+private fun ScreenHeaderPreview() {
     ChatterThemeWithSurface {
-        AuthHeader(
-            titleResourceId = R.string.label_enter_phone_number,
-            subtitle = stringResource(id = R.string.label_confirm_region)
+        ScreenHeader(
+            titleResourceId = R.string.title_enter_phone_number,
+            subtitle = stringResource(id = R.string.subtitle_enter_phone_number)
         )
     }
 }

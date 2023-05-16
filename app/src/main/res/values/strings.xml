@@ -2,12 +2,11 @@
     <string name="app_name" translatable="false">Chatter</string>
     <string name="label_on_boarding_body">Talk to whomever, wherever\nand whenever</string>
     <string name="button_start_messaging">Start messaging</string>
-    <string name="label_enter_phone_number">Enter your phone number</string>
-    <string name="label_confirm_region">Please confirm your region and enter your\nphone number</string>
+    <string name="title_enter_phone_number">Enter your phone number</string>
+    <string name="subtitle_enter_phone_number">Please confirm your region and enter your phone number</string>
     <string name="button_continue">Continue</string>
-    <string name="hint_phone_number">Phone number…</string>
-    <string name="label_enter_code">Enter code</string>
-    <string name="label_format_code_sent">We\'ve sent the code via SMS to +%s</string>
+    <string name="title_enter_code">Enter code</string>
+    <string name="subtitle_format_enter_code">We\'ve sent the code via SMS to +%s</string>
     <string name="label_did_not_get_code">Didn\'t get the code?</string>
     <string name="label_clickable_resent_code">Resent code</string>
     <string name="label_please_wait">Please wait a moment…</string>
@@ -24,4 +23,10 @@
     <string name="label_create_chat">Create chat</string>
     <string name="top_bar_title_new_chat">New chat</string>
     <string name="accessibility_previous_page">Return to the previous page</string>
+    <string name="label_name">Name</string>
+    <string name="placeholder_enter_contact_name">Enter contact name…</string>
+    <string name="label_phone_number">Phone number</string>
+    <string name="placeholder_enter_contact_phone_number">Enter contact phone number…</string>
+    <string name="title_start_chat">Start chat</string>
+    <string name="subtitle_add_chat">Enter a contact phone number and start chatting!</string>
 </resources>
