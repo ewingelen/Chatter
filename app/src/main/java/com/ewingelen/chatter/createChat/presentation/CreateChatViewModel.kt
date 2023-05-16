@@ -1,6 +1,5 @@
 package com.ewingelen.chatter.createChat.presentation
 
-import com.ewingelen.chatter.core.presentation.Action
 import com.ewingelen.chatter.core.presentation.BaseActionViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -11,10 +10,10 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateChatViewModel @Inject constructor(
     private val interactor: CreateChatInteractor
-) : BaseActionViewModel<CreateChatState, HandleCreateChatAction>(CreateChatState()),
+) : BaseActionViewModel<CreateChatState, CreateChatAction>(CreateChatState()),
     HandleCreateChatAction {
 
-    override fun handleAction(action: Action<HandleCreateChatAction>) {
+    override fun handleAction(action: CreateChatAction) {
         action.handle(this)
     }
 

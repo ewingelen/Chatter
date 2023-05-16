@@ -2,7 +2,6 @@ package com.ewingelen.chatter.auth.verifyPhone.presentation
 
 import com.ewingelen.chatter.auth.core.presentation.OnVerificationStateChanged
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
-import com.ewingelen.chatter.core.presentation.Action
 import com.ewingelen.chatter.core.presentation.BaseEffectViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -13,11 +12,11 @@ import javax.inject.Inject
 @HiltViewModel
 class PhoneNumberViewModel @Inject constructor(
     private val verificationErrorMapper: VerificationErrorMapper
-) : BaseEffectViewModel<PhoneNumberState, HandlePhoneNumberAction, HandlePhoneNumberEffect>(
+) : BaseEffectViewModel<PhoneNumberState, PhoneNumberAction, PhoneNumberEffect>(
     defaultState = PhoneNumberState()
 ), OnVerificationStateChanged, HandlePhoneNumberAction {
 
-    override fun handleAction(action: Action<HandlePhoneNumberAction>) {
+    override fun handleAction(action: PhoneNumberAction) {
         action.handle(this)
     }
 

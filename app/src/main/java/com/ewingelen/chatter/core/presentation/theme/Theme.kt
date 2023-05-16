@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
@@ -22,7 +23,7 @@ private val LightColorPalette = lightColorScheme(
     secondary = Teal200,
     background = White900,
     onSurfaceVariant = Black900,
-    surfaceVariant = Gray200
+    surfaceVariant = Gray200,
 )
 
 @Composable

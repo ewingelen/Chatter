@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.asStateFlow
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 13.05.2023.
  */
-abstract class BaseViewModel<S : Any>(defaultState: S) : ViewModel() {
+abstract class BaseViewModel<S>(defaultState: S) : ViewModel() {
 
     private val _state = MutableStateFlow(defaultState)
     val state = _state.asStateFlow()

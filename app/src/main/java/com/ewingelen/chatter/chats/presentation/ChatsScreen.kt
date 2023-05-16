@@ -1,6 +1,7 @@
 package com.ewingelen.chatter.chats.presentation
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.Badge
 import androidx.compose.material3.Card
@@ -27,19 +29,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.ewingelen.chatter.R
-import com.ewingelen.chatter.core.presentation.ChatUserPhotoImageSize
-import com.ewingelen.chatter.core.presentation.ChatterTopAppBar
+import com.ewingelen.chatter.core.presentation.ContactPhotoImageSize
 import com.ewingelen.chatter.core.presentation.ScreenPreview
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.SpacingSmall100
 import com.ewingelen.chatter.core.presentation.SpacingSmall150
+import com.ewingelen.chatter.core.presentation.components.ChatterTopAppBar
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 
 /**
@@ -75,9 +76,14 @@ fun ChatsScreen(
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.img_logo),
-                                    contentDescription = stringResource(id = R.string.accessibility_user_photo),
-                                    modifier = Modifier.size(ChatUserPhotoImageSize)
+                                    imageVector = Icons.Default.Person,
+                                    contentDescription = stringResource(id = R.string.accessibility_contact_photo),
+                                    modifier = Modifier
+                                        .size(ContactPhotoImageSize)
+                                        .background(
+                                            color = MaterialTheme.colorScheme.primary,
+                                            shape = MaterialTheme.shapes.small
+                                        ),
                                 )
 
                                 Spacer(modifier = Modifier.width(SpacingNormal100))

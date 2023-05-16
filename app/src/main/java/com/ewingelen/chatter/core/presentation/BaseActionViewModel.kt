@@ -3,13 +3,13 @@ package com.ewingelen.chatter.core.presentation
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 29.04.2023.
  */
-abstract class BaseActionViewModel<S : Any, A : Any>(defaultState: S) :
+abstract class BaseActionViewModel<S, A>(defaultState: S) :
     BaseViewModel<S>(defaultState) {
 
-    abstract fun handleAction(action: Action<A>)
+    abstract fun handleAction(action: A)
 }
 
-interface Action<T : Any> {
+interface Action<T> {
 
     fun handle(handle: T)
 }

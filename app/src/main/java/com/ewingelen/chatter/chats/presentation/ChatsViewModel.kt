@@ -10,15 +10,15 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class ChatsViewModel @Inject constructor(
-    private val interactor: ChatsInteractor
-) : BaseActionViewModel<ChatsState, HandleChatsAction>(defaultState = ChatsState()),
+    interactor: ChatsInteractor
+) : BaseActionViewModel<ChatsState, ChatsAction>(defaultState = ChatsState()),
     HandleChatsAction {
 
     init {
         updateState(state.value.copy(chats = interactor.fetchChats()))
     }
 
-    override fun handleAction(action: Action<HandleChatsAction>) {
+    override fun handleAction(action: ChatsAction) {
         action.handle(this)
     }
 }

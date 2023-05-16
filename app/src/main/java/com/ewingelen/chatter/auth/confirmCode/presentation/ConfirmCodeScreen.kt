@@ -36,7 +36,7 @@ import com.ewingelen.chatter.auth.core.presentation.components.ErrorText
 import com.ewingelen.chatter.core.presentation.BorderWidthMin
 import com.ewingelen.chatter.core.presentation.ConfirmCodeCellSize
 import com.ewingelen.chatter.core.presentation.Effect
-import com.ewingelen.chatter.core.presentation.ScreenHeader
+import com.ewingelen.chatter.core.presentation.AuthScreenHeader
 import com.ewingelen.chatter.core.presentation.ScreenPreview
 import com.ewingelen.chatter.core.presentation.SpacingExtraLarge100
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
@@ -91,7 +91,7 @@ fun ConfirmCodeScreen(
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ScreenHeader(
+        AuthScreenHeader(
             titleResourceId = R.string.title_enter_code,
             subtitle = stringResource(id = R.string.subtitle_format_enter_code, state.phoneNumber)
         )

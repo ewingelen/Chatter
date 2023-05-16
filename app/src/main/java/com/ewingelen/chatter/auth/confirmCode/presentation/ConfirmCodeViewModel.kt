@@ -8,7 +8,6 @@ import com.ewingelen.chatter.auth.core.presentation.OnVerificationStateChanged
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.auth.verifyPhone.presentation.VerificationErrorMapper
 import com.ewingelen.chatter.core.domain.ProvideResources
-import com.ewingelen.chatter.core.presentation.Action
 import com.ewingelen.chatter.core.presentation.BaseEffectViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -25,7 +24,7 @@ class ConfirmCodeViewModel @Inject constructor(
     private val verificationErrorMapper: VerificationErrorMapper,
     private val interactor: ConfirmCodeInteractor,
     savedStateHandle: SavedStateHandle,
-) : BaseEffectViewModel<ConfirmCodeState, HandleConfirmCodeAction, HandleConfirmCodeEffect>
+) : BaseEffectViewModel<ConfirmCodeState, ConfirmCodeAction, ConfirmCodeEffect>
     (defaultState = ConfirmCodeState()),
     HandleConfirmCodeAction,
     HandleResentCodeTimerEvent,
@@ -43,7 +42,7 @@ class ConfirmCodeViewModel @Inject constructor(
         timer.start(viewModelScope, handleTimerEvent = this)
     }
 
-    override fun handleAction(action: Action<HandleConfirmCodeAction>) {
+    override fun handleAction(action: ConfirmCodeAction) {
         action.handle(this)
     }
 

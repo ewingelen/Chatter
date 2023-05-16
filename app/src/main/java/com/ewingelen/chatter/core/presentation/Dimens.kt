@@ -21,4 +21,4 @@ val BorderWidthMin = 1.dp
 val ElevationMedium = 8.dp
 
 val ConfirmCodeCellSize = 40.dp
-val ChatUserPhotoImageSize = 52.dp
+val ContactPhotoImageSize = 48.dp

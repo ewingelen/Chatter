@@ -21,11 +21,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
-import com.ewingelen.chatter.core.presentation.ScreenHeader
 import com.ewingelen.chatter.auth.core.presentation.components.ErrorText
 import com.ewingelen.chatter.core.presentation.ButtonHeightLarge
-import com.ewingelen.chatter.core.presentation.ChatterOutlinedTextField
-import com.ewingelen.chatter.core.presentation.Effect
+import com.ewingelen.chatter.core.presentation.components.ChatterOutlinedTextField
+import com.ewingelen.chatter.core.presentation.AuthScreenHeader
 import com.ewingelen.chatter.core.presentation.ScreenPreview
 import com.ewingelen.chatter.core.presentation.SpacingExtraLarge100
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
@@ -42,7 +41,7 @@ import kotlinx.coroutines.flow.flow
 @Composable
 fun PhoneNumberScreen(
     state: PhoneNumberState,
-    effect: Flow<Effect<HandlePhoneNumberEffect>>,
+    effect: Flow<PhoneNumberEffect>,
     handleAction: (PhoneNumberAction) -> Unit,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit,
     navigateToConfirmCode: (verificationId: String, phoneNumber: String) -> Unit,
@@ -79,7 +78,7 @@ fun PhoneNumberScreen(
         ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        ScreenHeader(
+        AuthScreenHeader(
             titleResourceId = R.string.title_enter_phone_number,
             subtitle = stringResource(id = R.string.subtitle_enter_phone_number)
         )

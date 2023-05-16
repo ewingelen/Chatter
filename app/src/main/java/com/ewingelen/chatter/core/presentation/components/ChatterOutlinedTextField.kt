@@ -1,4 +1,4 @@
-package com.ewingelen.chatter.core.presentation
+package com.ewingelen.chatter.core.presentation.components
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.text.KeyboardOptions
@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.ewingelen.chatter.R
+import com.ewingelen.chatter.core.presentation.ComponentPreview
 import com.ewingelen.chatter.core.presentation.theme.ChatterTheme
 
 /**
@@ -26,11 +27,11 @@ fun ChatterOutlinedTextField(
     leadingIcon: ImageVector,
     @StringRes labelResourceId: Int,
     @StringRes placeholderResourceId: Int,
-    supportingText: String = "",
     modifier: Modifier = Modifier,
+    supportingText: String = "",
     isError: Boolean = false,
     enabled: Boolean = true,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
 ) {
     OutlinedTextField(
         value = value,
@@ -49,6 +50,7 @@ fun ChatterOutlinedTextField(
             Text(text = supportingText)
         },
         enabled = enabled,
+        keyboardOptions = keyboardOptions,
         modifier = modifier
     )
 }

@@ -27,6 +27,8 @@
     <string name="placeholder_enter_contact_name">Enter contact name…</string>
     <string name="label_phone_number">Phone number</string>
     <string name="placeholder_enter_contact_phone_number">Enter contact phone number…</string>
-    <string name="title_start_chat">Start chat</string>
     <string name="subtitle_add_chat">Enter a contact phone number and start chatting!</string>
+    <string name="accessibility_contact_photo">Contact photo</string>
+    <string name="placeholder_write_message">Write a message…</string>
+    <string name="accessibility_send_message">Send message</string>
 </resources>

@@ -18,7 +18,7 @@ import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
  */
 @Composable
-fun ScreenHeader(
+fun AuthScreenHeader(
     @StringRes titleResourceId: Int,
     subtitle: String,
     modifier: Modifier = Modifier,
@@ -44,9 +44,9 @@ fun ScreenHeader(
 
 @ComponentPreview
 @Composable
-private fun ScreenHeaderPreview() {
+private fun AuthScreenHeaderPreview() {
     ChatterThemeWithSurface {
-        ScreenHeader(
+        AuthScreenHeader(
             titleResourceId = R.string.title_enter_phone_number,
             subtitle = stringResource(id = R.string.subtitle_enter_phone_number)
         )
