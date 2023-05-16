@@ -21,7 +21,8 @@ private val LightColorPalette = lightColorScheme(
     onPrimary = Black900,
     secondary = Teal200,
     background = White900,
-    onSurfaceVariant = Black900
+    onSurfaceVariant = Black900,
+    surfaceVariant = Gray200
 )
 
 @Composable

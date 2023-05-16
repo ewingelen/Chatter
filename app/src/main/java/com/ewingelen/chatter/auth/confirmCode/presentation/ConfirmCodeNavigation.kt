@@ -9,8 +9,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
-import com.ewingelen.chatter.core.presentation.makeDestinationRoute
-import com.ewingelen.chatter.core.presentation.makeNavigationRoute
+import com.ewingelen.chatter.core.presentation.navigation.makeDestinationRoute
+import com.ewingelen.chatter.core.presentation.navigation.makeNavigationRoute
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.

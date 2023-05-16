@@ -80,6 +80,7 @@ dependencies {
     val preferencesDataStoreVersion = "1.0.0"
     val splashScreenVersion = "1.0.0"
     val timberVersion = "5.0.1"
+    val coilComposeVersion = "2.3.0"
 
     val jUnitVersion = "4.13.2"
     val jUnitExtVersion = "1.1.5"
@@ -128,6 +129,9 @@ dependencies {
 
     //Data store
     implementation("androidx.datastore:datastore-preferences:$preferencesDataStoreVersion")
+
+    //Coil
+    implementation("io.coil-kt:coil-compose:$coilComposeVersion")
 }
 
 kapt {

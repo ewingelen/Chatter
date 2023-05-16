@@ -18,4 +18,6 @@
     <string name="error_invalid_code">Code you entered is not valid. Please enter a valid code</string>
     <string name="label_format_try_again">Try again after %d seconds</string>
     <string name="symbol_plus" translatable="false">+</string>
+    <string name="accessibility_user_photo">User photo</string>
+    <string name="accessibility_add_contact">Add contact</string>
 </resources>

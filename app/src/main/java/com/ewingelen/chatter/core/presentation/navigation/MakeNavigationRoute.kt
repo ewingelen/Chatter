@@ -1,4 +1,4 @@
-package com.ewingelen.chatter.core.presentation
+package com.ewingelen.chatter.core.presentation.navigation
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 06.05.2023.

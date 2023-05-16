@@ -10,7 +10,7 @@ import com.ewingelen.chatter.auth.confirmCode.presentation.confirmCodeScreen
 import com.ewingelen.chatter.auth.confirmCode.presentation.navigateToConfirmCode
 import com.ewingelen.chatter.auth.verifyPhone.presentation.navigateToPhoneNumber
 import com.ewingelen.chatter.auth.verifyPhone.presentation.phoneNumberScreen
-import com.ewingelen.chatter.chats.presentation.navigateToChats
+import com.ewingelen.chatter.core.presentation.navigation.navigateToChats
 import com.ewingelen.chatter.onBoarding.presentation.OnBoardingScreen
 
 /**
