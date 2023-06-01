@@ -16,7 +16,6 @@ class ChatsViewModel @Inject constructor(
     HandleChatsAction {
 
     init {
-        updateState(state.value.copy(chats = interactor.fetchChats()))
     }
 
     override fun handleAction(action: ChatsAction) {

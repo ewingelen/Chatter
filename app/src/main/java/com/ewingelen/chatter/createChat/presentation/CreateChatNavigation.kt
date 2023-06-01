@@ -22,6 +22,7 @@ fun NavGraphBuilder.createChatScreen(
         CreateChatScreen(
             state = state,
             handleAction = viewModel::handleAction,
+            effect = viewModel.effect,
             showSnackbar = showSnackbar,
             navigateUp = navigateUp
         )

@@ -7,28 +7,24 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Phone
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
-import com.ewingelen.chatter.auth.core.presentation.components.ErrorText
-import com.ewingelen.chatter.core.presentation.AuthScreenHeader
 import com.ewingelen.chatter.core.presentation.ButtonHeightLarge
+import com.ewingelen.chatter.core.presentation.ScreenHeader
 import com.ewingelen.chatter.core.presentation.ScreenPreview
-import com.ewingelen.chatter.core.presentation.SpacingExtraLarge100
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.components.ChatterOutlinedTextField
+import com.ewingelen.chatter.core.presentation.components.ErrorText
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
@@ -37,7 +33,6 @@ import kotlinx.coroutines.flow.flow
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
  */
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PhoneNumberScreen(
     state: PhoneNumberState,
@@ -47,21 +42,18 @@ fun PhoneNumberScreen(
     navigateToConfirmCode: (verificationId: String, phoneNumber: String) -> Unit,
     navigateToChats: () -> Unit,
 ) {
-    val focusManager = LocalFocusManager.current
-    val keyboardController = LocalSoftwareKeyboardController.current
-
     LaunchedEffect(key1 = Unit) {
         val handleEffect = object : HandlePhoneNumberEffect {
             override fun startVerification(verify: VerifyPhoneNumber) {
                 verifyPhoneNumber(verify)
             }
 
-            override fun completeVerification() {
-                navigateToChats()
+            override fun continueVerification(verificationId: String, phoneNumber: String) {
+                navigateToConfirmCode(verificationId, phoneNumber)
             }
 
-            override fun navigateToTheCodeScreen(verificationId: String, phoneNumber: String) {
-                navigateToConfirmCode(verificationId, phoneNumber)
+            override fun completeVerification() {
+                navigateToChats()
             }
         }
         effect.collectLatest { effect ->
@@ -70,15 +62,10 @@ fun PhoneNumberScreen(
     }
 
     Column(
-        modifier = Modifier.padding(
-            start = SpacingNormal100,
-            top = SpacingExtraLarge100,
-            end = SpacingNormal100,
-            bottom = SpacingLarge100
-        ),
+        modifier = Modifier.padding(horizontal = SpacingNormal100, vertical = SpacingLarge100),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        AuthScreenHeader(
+        ScreenHeader(
             titleResourceId = R.string.title_enter_phone_number,
             subtitle = stringResource(id = R.string.subtitle_enter_phone_number)
         )
@@ -88,9 +75,12 @@ fun PhoneNumberScreen(
         ChatterOutlinedTextField(
             value = state.phoneNumber,
             onValueChange = { handleAction(PhoneNumberAction.ChangePhoneNumber(it)) },
-            leadingIcon = Icons.Rounded.Add,
+            leadingIcon = Icons.Rounded.Phone,
             labelResourceId = R.string.label_phone_number,
             placeholderResourceId = R.string.placeholder_enter_contact_phone_number,
+            prefix = {
+                Text(text = stringResource(id = R.string.symbol_plus))
+            },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
             enabled = !state.loading,
             modifier = Modifier.fillMaxWidth()
@@ -101,15 +91,11 @@ fun PhoneNumberScreen(
         Spacer(modifier = Modifier.weight(1f))
 
         Button(
-            onClick = {
-                handleAction(PhoneNumberAction.SignUp())
-                keyboardController?.hide()
-                focusManager.clearFocus()
-            },
+            onClick = { handleAction(PhoneNumberAction.SignUp()) },
             enabled = !state.loading,
             modifier = Modifier
-                .fillMaxWidth()
                 .height(ButtonHeightLarge)
+                .fillMaxWidth()
         ) {
             Text(text = stringResource(id = R.string.button_continue))
         }

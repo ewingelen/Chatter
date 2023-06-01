@@ -3,6 +3,8 @@ package com.ewingelen.chatter.auth.verifyPhone.presentation
 import com.ewingelen.chatter.auth.core.presentation.OnVerificationStateChanged
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.core.presentation.BaseEffectViewModel
+import com.ewingelen.chatter.core.presentation.ChangePhoneNumber
+import com.ewingelen.chatter.core.presentation.NormalizePhoneNumber
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -11,7 +13,9 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class PhoneNumberViewModel @Inject constructor(
-    private val verificationErrorMapper: VerificationErrorMapper
+    private val verificationErrorMapper: VerificationErrorMapper,
+    private val changePhoneNumber: ChangePhoneNumber,
+    private val normalizePhoneNumber: NormalizePhoneNumber
 ) : BaseEffectViewModel<PhoneNumberState, PhoneNumberAction, PhoneNumberEffect>(
     defaultState = PhoneNumberState()
 ), OnVerificationStateChanged, HandlePhoneNumberAction {
@@ -21,11 +25,10 @@ class PhoneNumberViewModel @Inject constructor(
     }
 
     override fun changePhoneNumber(newNumber: String) {
-        if (newNumber.length <= MAX_PHONE_NUMBER_LENGTH) {
-            updateState(state.value.copy(phoneNumber = newNumber))
-            if(state.value.error.isNotEmpty()) {
-                updateState(state.value.copy(error = ""))
-            }
+        val phoneNumber = changePhoneNumber.change(state.value.phoneNumber, newNumber)
+        updateState(state.value.copy(phoneNumber = phoneNumber))
+        if (state.value.error.isNotEmpty()) {
+            updateState(state.value.copy(error = ""))
         }
     }
 
@@ -33,7 +36,10 @@ class PhoneNumberViewModel @Inject constructor(
         updateState(state.value.copy(loading = true))
         sendEffect(
             PhoneNumberEffect.VerificationStarted(
-                VerifyPhoneNumber.Base(state.value.phoneNumber, onVerificationStateChanged = this)
+                VerifyPhoneNumber.Base(
+                    phoneNumber = normalizePhoneNumber.normalize(state.value.phoneNumber),
+                    onVerificationStateChanged = this
+                )
             )
         )
     }
@@ -50,9 +56,5 @@ class PhoneNumberViewModel @Inject constructor(
     override fun onCodeSent(verificationId: String) {
         updateState(state.value.copy(loading = false))
         sendEffect(PhoneNumberEffect.CodeSent(verificationId, state.value.phoneNumber))
-    }
-
-    private companion object {
-        const val MAX_PHONE_NUMBER_LENGTH = 15
     }
 }

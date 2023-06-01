@@ -19,10 +19,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -32,15 +29,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
-import com.ewingelen.chatter.auth.core.presentation.components.ErrorText
 import com.ewingelen.chatter.core.presentation.BorderWidthMin
 import com.ewingelen.chatter.core.presentation.ConfirmCodeCellSize
 import com.ewingelen.chatter.core.presentation.Effect
-import com.ewingelen.chatter.core.presentation.AuthScreenHeader
+import com.ewingelen.chatter.core.presentation.ScreenHeader
 import com.ewingelen.chatter.core.presentation.ScreenPreview
-import com.ewingelen.chatter.core.presentation.SpacingExtraLarge100
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
+import com.ewingelen.chatter.core.presentation.components.ErrorText
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 import com.ewingelen.chatter.core.presentation.theme.Gray500
 import com.ewingelen.chatter.core.presentation.theme.Gray900
@@ -51,47 +47,41 @@ import kotlinx.coroutines.flow.flow
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
  */
-@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun ConfirmCodeScreen(
     state: ConfirmCodeState,
     effect: Flow<Effect<HandleConfirmCodeEffect>>,
     handleAction: (ConfirmCodeAction) -> Unit,
+    navigateToCreateProfile: () -> Unit,
+    navigateToChats: () -> Unit,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit,
-    navigateToChats: () -> Unit
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
-    val focusManager = LocalFocusManager.current
-
     LaunchedEffect(key1 = Unit) {
-        effect.collectLatest { effect ->
-            val handleEffect = object : HandleConfirmCodeEffect {
-                override fun authSuccess() {
-                    navigateToChats()
-                    keyboardController?.hide()
-                    focusManager.clearFocus()
-                }
-
-                override fun resentCode(verify: VerifyPhoneNumber) {
-                    verifyPhoneNumber(verify)
-                }
+        val handleEffect = object : HandleConfirmCodeEffect {
+            override fun successSignUp() {
+                navigateToCreateProfile()
             }
+
+            override fun successLogIn() {
+                navigateToChats()
+            }
+
+            override fun codeResent(verify: VerifyPhoneNumber) {
+                verifyPhoneNumber(verify)
+            }
+        }
+        effect.collectLatest { effect ->
             effect.handle(handleEffect)
         }
     }
 
     Column(
         modifier = Modifier
-            .padding(
-                start = SpacingNormal100,
-                top = SpacingExtraLarge100,
-                end = SpacingNormal100,
-                bottom = SpacingLarge100
-            )
+            .padding(horizontal = SpacingNormal100, vertical = SpacingLarge100)
             .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        AuthScreenHeader(
+        ScreenHeader(
             titleResourceId = R.string.title_enter_code,
             subtitle = stringResource(id = R.string.subtitle_format_enter_code, state.phoneNumber)
         )
@@ -163,6 +153,7 @@ private fun ConfirmCodeScreenPreview() {
             effect = flow {},
             handleAction = {},
             verifyPhoneNumber = {},
+            navigateToCreateProfile = {},
             navigateToChats = {}
         )
     }

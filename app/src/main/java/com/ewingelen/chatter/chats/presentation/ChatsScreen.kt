@@ -35,7 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.ewingelen.chatter.R
-import com.ewingelen.chatter.core.presentation.ContactPhotoImageSize
+import com.ewingelen.chatter.core.presentation.ContactPhotoSize
 import com.ewingelen.chatter.core.presentation.ScreenPreview
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.SpacingSmall100
@@ -79,7 +79,7 @@ fun ChatsScreen(
                                     imageVector = Icons.Default.Person,
                                     contentDescription = stringResource(id = R.string.accessibility_contact_photo),
                                     modifier = Modifier
-                                        .size(ContactPhotoImageSize)
+                                        .size(ContactPhotoSize)
                                         .background(
                                             color = MaterialTheme.colorScheme.primary,
                                             shape = MaterialTheme.shapes.small
@@ -153,7 +153,7 @@ fun ChatsScreen(
 private fun ChatsScreenPreview(
     @PreviewParameter(ChatsPreviewParameterProvider::class) state: ChatsState
 ) {
-    ChatterThemeWithSurface(modifier = Modifier.fillMaxSize()) {
+    ChatterThemeWithSurface {
         ChatsScreen(
             state = state,
             navigateToCreateChat = {},

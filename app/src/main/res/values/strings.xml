@@ -19,7 +19,7 @@
     <string name="symbol_plus" translatable="false">+</string>
     <string name="accessibility_user_photo">User photo</string>
     <string name="accessibility_add_contact">Add contact</string>
-    <string name="label_empty_chats">You don\'t have any chats yet. Сreate your first one!</string>
+    <string name="label_empty_chats">You don\'t have any chats yet. Create your first one!</string>
     <string name="label_create_chat">Create chat</string>
     <string name="top_bar_title_new_chat">New chat</string>
     <string name="accessibility_previous_page">Return to the previous page</string>
@@ -32,4 +32,13 @@
     <string name="placeholder_write_message">Write a message…</string>
     <string name="accessibility_send_message">Send message</string>
     <string name="snackbar_chat_created">The chat is created</string>
+    <string name="error_user_not_found">User not found. It looks like they are not yet using this application</string>
+    <string name="error_empty_contact_name">Please, enter the contact name</string>
+    <string name="error_empty_contact_number">Please, enter the contact phone number</string>
+    <string name="placeholder_enter_your_name">Enter your name…</string>
+    <string name="accessibility_profile_photo">Profile photo</string>
+    <string name="title_create_profile">Start your communication</string>
+    <string name="subtitle_create_profile">Enter your name and optionally add a photo to let you be recognized</string>
+    <string name="button_create_profile">Create profile</string>
+    <string name="error_empty_name">Please, enter the name</string>
 </resources>

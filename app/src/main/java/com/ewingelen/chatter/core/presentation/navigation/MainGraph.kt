@@ -14,6 +14,7 @@ import com.ewingelen.chatter.chats.presentation.ChatsScreen
 import com.ewingelen.chatter.chats.presentation.ChatsViewModel
 import com.ewingelen.chatter.createChat.presentation.createChatScreen
 import com.ewingelen.chatter.createChat.presentation.navigateToCreateChat
+import com.ewingelen.chatter.createProfile.presentation.createProfileScreen
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 07.05.2023.
@@ -24,6 +25,7 @@ fun NavGraphBuilder.mainGraph(
     showSnackbar: (String) -> Unit
 ) {
     navigation(startDestination = CHATS_SCREEN_ROUTE, route = route) {
+        createProfileScreen()
         chatsScreen(
             navigateToCreateChat = navController::navigateToCreateChat,
             navigateToChat = navController::navigateToChat

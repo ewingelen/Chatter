@@ -13,7 +13,7 @@ import com.ewingelen.chatter.auth.core.presentation.authGraph
 fun AppNavHost(
     isUserAuthorized: Boolean,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit,
-    showSnackbar: (String) -> Unit
+    showSnackbar: (String) -> Unit,
 ) {
     val navController = rememberNavController()
     val startDestination = if (isUserAuthorized) MAIN_NAV_GRAPH_ROUTE else AUTH_NAV_GRAPH_ROUTE

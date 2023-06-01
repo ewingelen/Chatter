@@ -5,6 +5,7 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     kotlin("kapt")
+    id("com.google.devtools.ksp") version "1.8.20-1.0.11"
 }
 
 android {
@@ -57,7 +58,7 @@ android {
         buildConfig = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.4.7"
     }
     packaging {
         resources {
@@ -76,6 +77,8 @@ dependencies {
     val hiltVersion = "2.45"
     val hiltNavigationComposeVersion = "1.0.0"
     val firebaseBomVersion = "31.5.0"
+    val kspVersion = "1.8.20-1.0.11"
+    val roomVersion = "2.5.1"
     val preferencesDataStoreVersion = "1.0.0"
     val splashScreenVersion = "1.0.0"
     val timberVersion = "5.0.1"
@@ -122,6 +125,20 @@ dependencies {
     implementation("com.google.firebase:firebase-crashlytics-ktx")
     implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
+
+    //KSP
+    implementation("com.google.devtools.ksp:symbol-processing-api:$kspVersion")
+
+    //Room
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    ksp("androidx.room:room-compiler:$roomVersion")
+    //Paging 3 Integration
+    //implementation "androidx.room:room-paging:$room_version"
+    //Test helpers
+    //testImplementation "androidx.room:room-testing:$room_version"
 
     //Splash Screen
     implementation("androidx.core:core-splashscreen:$splashScreenVersion")

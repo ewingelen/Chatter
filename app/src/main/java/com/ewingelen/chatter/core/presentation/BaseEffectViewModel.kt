@@ -28,9 +28,7 @@ abstract class BaseEffectViewModel<S, A, E>(defaultState: S) :
     }
 }
 
-interface Effect<T : HandleEffect> {
+interface Effect<T> {
 
-    fun handle(handleEffect: T)
+    fun handle(handle: T)
 }
-
-interface HandleEffect

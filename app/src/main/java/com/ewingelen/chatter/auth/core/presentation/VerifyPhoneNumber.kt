@@ -41,13 +41,12 @@ interface VerifyPhoneNumber {
                 }
             }
 
-            val fullPhoneNumber = "+$phoneNumber"
             val auth = Firebase.auth.apply {
                 useAppLanguage()
                 firebaseAuthSettings.setAppVerificationDisabledForTesting(BuildConfig.DEBUG)
             }
             val phoneAuthOptions = PhoneAuthOptions.newBuilder(auth)
-                .setPhoneNumber(fullPhoneNumber)
+                .setPhoneNumber(phoneNumber)
                 .setTimeout(60L, TimeUnit.SECONDS)
                 .setActivity(activity)
                 .setCallbacks(callbacks)

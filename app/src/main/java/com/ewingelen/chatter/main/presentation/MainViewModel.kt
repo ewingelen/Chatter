@@ -19,7 +19,7 @@ class MainViewModel @Inject constructor(
         viewModelScope.launch {
             updateState(
                 state.value.copy(
-                    userAuthorized = interactor.userAuthorized(),
+                    userAuthorized = interactor.checkUserAuthorized(),
                     loading = false
                 )
             )

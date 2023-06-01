@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeInteractor
+import com.ewingelen.chatter.auth.confirmCode.domain.HandleAuth
 import com.ewingelen.chatter.auth.core.presentation.OnVerificationStateChanged
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.auth.verifyPhone.presentation.VerificationErrorMapper
@@ -58,14 +59,22 @@ class ConfirmCodeViewModel @Inject constructor(
             updateState(state.value.copy(loading = true))
             viewModelScope.launch {
                 interactor.auth(
-                    block = {
-                        confirmCode.confirm(state.value.verificationId, state.value.code)
-                    },
-                    onSuccess = {
-                        sendEffect(this, ConfirmCodeEffect.AuthSuccess())
-                    },
-                    onFailure = { error ->
-                        updateState(state.value.copy(loading = false, error = error))
+                    object : HandleAuth {
+                        override suspend fun auth() =
+                            confirmCode.confirm(state.value.verificationId, state.value.code)
+
+                        override fun success(userExists: Boolean) {
+                            val effect = if (userExists) {
+                                ConfirmCodeEffect.SuccessLogIn()
+                            } else {
+                                ConfirmCodeEffect.SuccessSignUp()
+                            }
+                            sendEffect(this@launch, effect)
+                        }
+
+                        override fun failure(error: String) {
+                            updateState(state.value.copy(loading = false, error = error))
+                        }
                     }
                 )
             }
@@ -75,7 +84,7 @@ class ConfirmCodeViewModel @Inject constructor(
     override fun resentCode() {
         updateState(state.value.copy(resentCodeEnabled = false))
         sendEffect(
-            ConfirmCodeEffect.ResentCode(
+            ConfirmCodeEffect.CodeResent(
                 VerifyPhoneNumber.Base(arguments.phoneNumber, onVerificationStateChanged = this)
             )
         )
@@ -96,7 +105,7 @@ class ConfirmCodeViewModel @Inject constructor(
     }
 
     override fun onVerificationCompleted() {
-        sendEffect(ConfirmCodeEffect.AuthSuccess())
+        sendEffect(ConfirmCodeEffect.SuccessSignUp())
     }
 
     override fun onVerificationFailed(e: Exception) {

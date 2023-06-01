@@ -22,7 +22,6 @@ import androidx.compose.material.icons.rounded.Send
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -34,7 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.ewingelen.chatter.R
-import com.ewingelen.chatter.core.presentation.ContactPhotoImageSize
+import com.ewingelen.chatter.core.presentation.ContactPhotoSize
 import com.ewingelen.chatter.core.presentation.ScreenPreview
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.SpacingSmall100
@@ -46,7 +45,6 @@ import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatScreen(
     state: ChatState,
@@ -61,7 +59,7 @@ fun ChatScreen(
                         imageVector = Icons.Default.Person,
                         contentDescription = stringResource(id = R.string.accessibility_contact_photo),
                         modifier = Modifier
-                            .size(ContactPhotoImageSize)
+                            .size(ContactPhotoSize)
                             .background(
                                 color = MaterialTheme.colorScheme.primary,
                                 shape = MaterialTheme.shapes.small
@@ -130,9 +128,9 @@ fun ChatScreen(
                     modifier = Modifier.weight(1f)
                 )
 
-                Spacer(modifier = Modifier.width(SpacingNormal100))
-
                 AnimatedVisibility(visible = state.enteredMessage.isNotEmpty()) {
+                    Spacer(modifier = Modifier.width(SpacingNormal100))
+
                     FilledIconButton(onClick = { handleAction(ChatAction.SendMessage()) }) {
                         Icon(
                             imageVector = Icons.Rounded.Send,

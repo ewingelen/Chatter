@@ -1,6 +1,8 @@
 package com.ewingelen.chatter.chat.presentation
 
 import com.ewingelen.chatter.chat.domain.ChatInteractor
+import com.ewingelen.chatter.chat.presentation.model.ChatInfoUi
+import com.ewingelen.chatter.chat.presentation.model.MessageUi
 import com.ewingelen.chatter.core.presentation.BaseActionViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -27,6 +29,11 @@ class ChatViewModel @Inject constructor(
     }
 
     override fun sendMessage() {
+        val messages = state.value.chatInfo.messages.toMutableList()
+        messages.add(MessageUi(state.value.enteredMessage, true))
+        updateState(
+            ChatState(chatInfo = ChatInfoUi(messages = messages))
+        )
         interactor.sendMessage()
     }
 }

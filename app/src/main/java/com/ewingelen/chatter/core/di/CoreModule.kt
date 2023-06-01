@@ -1,8 +1,10 @@
 package com.ewingelen.chatter.core.di
 
-import com.ewingelen.chatter.core.data.AppPreferences
-import com.ewingelen.chatter.core.data.BaseProvideResources
+import com.ewingelen.chatter.core.data.cloud.ProvideUserReference
+import com.ewingelen.chatter.core.data.cloud.SavePhoto
+import com.ewingelen.chatter.core.data.local.AppPreferences
 import com.ewingelen.chatter.core.domain.ProvideResources
+import com.ewingelen.chatter.core.presentation.BaseProvideResources
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -23,4 +25,12 @@ interface CoreModule {
     @Binds
     @ViewModelScoped
     fun bindsAppPreferences(preferences: AppPreferences.Base): AppPreferences
+
+    @Binds
+    @ViewModelScoped
+    fun bindMakeUsersCollection(provideUserReference: ProvideUserReference.Base): ProvideUserReference
+
+    @Binds
+    @ViewModelScoped
+    fun bindSavePhoto(savePhoto: SavePhoto.Base): SavePhoto
 }

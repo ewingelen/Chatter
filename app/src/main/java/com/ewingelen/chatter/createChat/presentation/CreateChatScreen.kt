@@ -13,6 +13,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -22,10 +23,16 @@ import com.ewingelen.chatter.core.presentation.ButtonHeightLarge
 import com.ewingelen.chatter.core.presentation.ScreenPreview
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
+import com.ewingelen.chatter.core.presentation.SpacingNormal150
+import com.ewingelen.chatter.core.presentation.SpacingSmall100
 import com.ewingelen.chatter.core.presentation.components.ChatterOutlinedTextField
 import com.ewingelen.chatter.core.presentation.components.ChatterTopAppBar
+import com.ewingelen.chatter.core.presentation.components.ErrorText
 import com.ewingelen.chatter.core.presentation.components.IconButtonBack
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flow
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
@@ -35,10 +42,23 @@ import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 fun CreateChatScreen(
     state: CreateChatState,
     handleAction: (CreateChatAction) -> Unit,
+    effect: Flow<CreateChatEffect>,
     showSnackbar: (String) -> Unit,
     navigateUp: () -> Unit,
 ) {
-    val chatCreatedMessage = stringResource(id = R.string.snackbar_chat_created)
+    val chatCreatedSnackbarMessage = stringResource(id = R.string.snackbar_chat_created)
+
+    LaunchedEffect(key1 = Unit) {
+        val handleEffect = object : HandleCreateChatEffect {
+            override fun chatCreated() {
+                showSnackbar(chatCreatedSnackbarMessage)
+                navigateUp()
+            }
+        }
+        effect.collectLatest { effect ->
+            effect.handle(handleEffect)
+        }
+    }
 
     Column {
         ChatterTopAppBar(
@@ -52,12 +72,7 @@ fun CreateChatScreen(
         )
 
         Column(
-            modifier = Modifier.padding(
-                start = SpacingNormal100,
-                top = SpacingNormal100,
-                end = SpacingNormal100,
-                bottom = SpacingLarge100
-            )
+            modifier = Modifier.padding(horizontal = SpacingNormal100, vertical = SpacingLarge100)
         ) {
             Text(
                 text = stringResource(id = R.string.subtitle_add_chat),
@@ -65,7 +80,7 @@ fun CreateChatScreen(
                 textAlign = TextAlign.Center
             )
 
-            Spacer(modifier = Modifier.height(SpacingNormal100))
+            Spacer(modifier = Modifier.height(SpacingNormal150))
 
             ChatterOutlinedTextField(
                 value = state.name,
@@ -74,8 +89,14 @@ fun CreateChatScreen(
                 labelResourceId = R.string.label_name,
                 placeholderResourceId = R.string.placeholder_enter_contact_name,
                 singleLine = true,
+                isError = state.errorEmptyNameShowing,
+                supportingText = {
+                    Text(text = state.errorEmptyName)
+                },
                 modifier = Modifier.fillMaxWidth()
             )
+
+            Spacer(modifier = Modifier.height(SpacingSmall100))
 
             ChatterOutlinedTextField(
                 value = state.phoneNumber,
@@ -83,18 +104,26 @@ fun CreateChatScreen(
                 leadingIcon = Icons.Rounded.Phone,
                 labelResourceId = R.string.label_phone_number,
                 placeholderResourceId = R.string.placeholder_enter_contact_phone_number,
+                isError = state.errorEmptyPhoneNumberShowing,
+                prefix = {
+                    Text(text = stringResource(id = R.string.symbol_plus))
+                },
+                supportingText = {
+                    Text(text = state.errorEmptyPhoneNumber)
+                },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
                 modifier = Modifier.fillMaxWidth()
             )
 
+            Spacer(modifier = Modifier.height(SpacingNormal100))
+
+            ErrorText(text = state.error)
+
             Spacer(modifier = Modifier.weight(1f))
 
             Button(
-                onClick = {
-                    handleAction(CreateChatAction.CreateChat())
-                    showSnackbar(chatCreatedMessage)
-                    navigateUp()
-                },
+                onClick = { handleAction(CreateChatAction.CreateChat()) },
+                enabled = !state.errorEmptyNameShowing && !state.errorEmptyPhoneNumberShowing,
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(ButtonHeightLarge)
@@ -111,6 +140,7 @@ private fun CreateChatScreenPreview() {
     ChatterThemeWithSurface {
         CreateChatScreen(
             state = CreateChatState(),
+            effect = flow {},
             handleAction = {},
             showSnackbar = {},
             navigateUp = {}

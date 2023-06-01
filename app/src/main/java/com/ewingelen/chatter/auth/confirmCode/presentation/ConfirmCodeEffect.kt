@@ -8,17 +8,24 @@ import com.ewingelen.chatter.core.presentation.Effect
  */
 interface ConfirmCodeEffect : Effect<HandleConfirmCodeEffect> {
 
-    class AuthSuccess : ConfirmCodeEffect {
+    class SuccessSignUp : ConfirmCodeEffect {
 
-        override fun handle(handleEffect: HandleConfirmCodeEffect) {
-            handleEffect.authSuccess()
+        override fun handle(handle: HandleConfirmCodeEffect) {
+            handle.successSignUp()
         }
     }
 
-    class ResentCode(private val verifyPhoneNumber: VerifyPhoneNumber) : ConfirmCodeEffect {
+    class SuccessLogIn : ConfirmCodeEffect {
 
-        override fun handle(handleEffect: HandleConfirmCodeEffect) {
-            handleEffect.resentCode(verifyPhoneNumber)
+        override fun handle(handle: HandleConfirmCodeEffect) {
+            handle.successLogIn()
+        }
+    }
+
+    class CodeResent(private val verifyPhoneNumber: VerifyPhoneNumber) : ConfirmCodeEffect {
+
+        override fun handle(handle: HandleConfirmCodeEffect) {
+            handle.codeResent(verifyPhoneNumber)
         }
     }
 }

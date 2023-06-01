@@ -1,7 +1,8 @@
 package com.ewingelen.chatter.auth.confirmCode.di
 
 import com.ewingelen.chatter.auth.confirmCode.data.BaseConfirmCodeRepository
-import com.ewingelen.chatter.auth.confirmCode.data.ConfirmCodeCacheDataSource
+import com.ewingelen.chatter.auth.confirmCode.data.cache.ConfirmCodeCacheDataSource
+import com.ewingelen.chatter.auth.confirmCode.data.cloud.ConfirmCodeCloudDataSource
 import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeErrorMapper
 import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeInteractor
 import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeRepository
@@ -23,12 +24,8 @@ interface ConfirmCodeModule {
 
     @Binds
     @ViewModelScoped
-    fun bindConfirmCode(confirmCode: ConfirmCode.Base): ConfirmCode
-
-    @Binds
-    @ViewModelScoped
-    fun bindResentCodeTimer(resentCodeTimer: ResentCodeTimer.Base):
-            ResentCodeTimer
+    fun bindCloudDataSource(cloudDataSource: ConfirmCodeCloudDataSource.Base):
+            ConfirmCodeCloudDataSource
 
     @Binds
     @ViewModelScoped
@@ -37,13 +34,7 @@ interface ConfirmCodeModule {
 
     @Binds
     @ViewModelScoped
-    fun bindSaveRepository(repository: BaseConfirmCodeRepository):
-            ConfirmCodeRepository.Save
-
-    @Binds
-    @ViewModelScoped
-    fun bindReadRepository(repository: BaseConfirmCodeRepository):
-            ConfirmCodeRepository.Read
+    fun bindRepository(repository: BaseConfirmCodeRepository): ConfirmCodeRepository
 
     @Binds
     @ViewModelScoped
@@ -52,4 +43,13 @@ interface ConfirmCodeModule {
     @Binds
     @ViewModelScoped
     fun bindErrorMapper(mapper: BaseConfirmCodeErrorMapper): ConfirmCodeErrorMapper
+
+    @Binds
+    @ViewModelScoped
+    fun bindResentCodeTimer(resentCodeTimer: ResentCodeTimer.Base):
+            ResentCodeTimer
+
+    @Binds
+    @ViewModelScoped
+    fun bindConfirmCode(confirmCode: ConfirmCode.Base): ConfirmCode
 }

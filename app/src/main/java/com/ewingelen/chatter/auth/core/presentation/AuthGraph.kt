@@ -11,6 +11,7 @@ import com.ewingelen.chatter.auth.confirmCode.presentation.navigateToConfirmCode
 import com.ewingelen.chatter.auth.verifyPhone.presentation.navigateToPhoneNumber
 import com.ewingelen.chatter.auth.verifyPhone.presentation.phoneNumberScreen
 import com.ewingelen.chatter.core.presentation.navigation.navigateToChats
+import com.ewingelen.chatter.createProfile.presentation.navigateToCreateProfile
 import com.ewingelen.chatter.onBoarding.presentation.OnBoardingScreen
 
 /**
@@ -42,6 +43,7 @@ fun NavGraphBuilder.authGraph(
             verifyPhoneNumber = verifyPhoneNumber
         )
         confirmCodeScreen(
+            navigateToCreateProfile = navController::navigateToCreateProfile,
             navigateToChats = navigateToChats,
             verifyPhoneNumber = verifyPhoneNumber
         )

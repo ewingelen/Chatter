@@ -9,8 +9,8 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
-import com.ewingelen.chatter.core.presentation.navigation.makeDestinationRoute
-import com.ewingelen.chatter.core.presentation.navigation.makeNavigationRoute
+import com.ewingelen.chatter.core.presentation.navigation.makeDestinationRouteWithArgs
+import com.ewingelen.chatter.core.presentation.navigation.makeNavigationRouteWithArgs
 
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
@@ -27,10 +27,11 @@ class ConfirmCodeArgs(val verificationId: String, val phoneNumber: String) {
 }
 
 fun NavGraphBuilder.confirmCodeScreen(
+    navigateToCreateProfile: () -> Unit,
     navigateToChats: () -> Unit,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit
 ) {
-    val route = makeDestinationRoute(ROUTE, VERIFICATION_ID_ARG, PHONE_NUMBER_ARG)
+    val route = makeDestinationRouteWithArgs(ROUTE, VERIFICATION_ID_ARG, PHONE_NUMBER_ARG)
     composable(route) {
         val viewModel: ConfirmCodeViewModel = hiltViewModel()
         val state by viewModel.state.collectAsStateWithLifecycle()
@@ -38,13 +39,14 @@ fun NavGraphBuilder.confirmCodeScreen(
             state = state,
             effect = viewModel.effect,
             handleAction = viewModel::handleAction,
+            navigateToCreateProfile = navigateToCreateProfile,
+            navigateToChats = navigateToChats,
             verifyPhoneNumber = verifyPhoneNumber,
-            navigateToChats = navigateToChats
         )
     }
 }
 
-fun NavController.navigateToConfirmCode(arguments: ConfirmCodeArgs, navOptions: NavOptions) {
-    val route = makeNavigationRoute(ROUTE, arguments.verificationId, arguments.phoneNumber)
+fun NavController.navigateToConfirmCode(args: ConfirmCodeArgs, navOptions: NavOptions) {
+    val route = makeNavigationRouteWithArgs(ROUTE, args.verificationId, args.phoneNumber)
     navigate(route, navOptions)
 }

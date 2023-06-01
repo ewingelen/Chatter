@@ -1,6 +1,5 @@
 package com.ewingelen.chatter.main.domain
 
-import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeRepository
 import javax.inject.Inject
 
 /**
@@ -8,12 +7,12 @@ import javax.inject.Inject
  */
 interface MainInteractor {
 
-    suspend fun userAuthorized(): Boolean
+    suspend fun checkUserAuthorized(): Boolean
 
     class Base @Inject constructor(
-        private val repository: ConfirmCodeRepository.Read
+        private val repository: MainRepository
     ) : MainInteractor {
 
-        override suspend fun userAuthorized() = repository.fetchUserId().isNotEmpty()
+        override suspend fun checkUserAuthorized() = repository.checkUserAuthorized()
     }
 }

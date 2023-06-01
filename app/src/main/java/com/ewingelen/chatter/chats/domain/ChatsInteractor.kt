@@ -22,22 +22,6 @@ interface ChatsInteractor {
                     time = "16:04",
                     unreadMessagesCount = 2
                 ),
-                ChatUi(
-                    userId = "r134314fqrqe",
-                    userAvatar = 0,
-                    userName = "Rebeca Donelli",
-                    lastMessage = "Pls take a look at the image I sent",
-                    time = "16:04",
-                    unreadMessagesCount = 2
-                ),
-                ChatUi(
-                    userId = "r134314fqrqe",
-                    userAvatar = 0,
-                    userName = "Rebeca Donelli",
-                    lastMessage = "Pls take a look at the image I sent",
-                    time = "16:04",
-                    unreadMessagesCount = 2
-                )
             )
         }
     }

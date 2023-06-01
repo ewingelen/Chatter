@@ -12,15 +12,15 @@ interface PhoneNumberEffect : Effect<HandlePhoneNumberEffect> {
         private val verifyPhoneNumber: VerifyPhoneNumber
     ) : PhoneNumberEffect {
 
-        override fun handle(handleEffect: HandlePhoneNumberEffect) {
-            handleEffect.startVerification(verifyPhoneNumber)
+        override fun handle(handle: HandlePhoneNumberEffect) {
+            handle.startVerification(verifyPhoneNumber)
         }
     }
 
     class VerificationCompleted : PhoneNumberEffect {
 
-        override fun handle(handleEffect: HandlePhoneNumberEffect) {
-            handleEffect.completeVerification()
+        override fun handle(handle: HandlePhoneNumberEffect) {
+            handle.completeVerification()
         }
     }
 
@@ -29,8 +29,8 @@ interface PhoneNumberEffect : Effect<HandlePhoneNumberEffect> {
         private val phoneNumber: String
     ) : PhoneNumberEffect {
 
-        override fun handle(handleEffect: HandlePhoneNumberEffect) {
-            handleEffect.navigateToTheCodeScreen(verificationId, phoneNumber)
+        override fun handle(handle: HandlePhoneNumberEffect) {
+            handle.continueVerification(verificationId, phoneNumber)
         }
     }
 }

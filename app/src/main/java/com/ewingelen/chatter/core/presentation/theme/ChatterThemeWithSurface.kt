@@ -1,5 +1,6 @@
 package com.ewingelen.chatter.core.presentation.theme
 
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -16,7 +17,7 @@ fun ChatterThemeWithSurface(
 ) {
     ChatterTheme {
         Surface(
-            modifier = modifier,
+            modifier = modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
             content()

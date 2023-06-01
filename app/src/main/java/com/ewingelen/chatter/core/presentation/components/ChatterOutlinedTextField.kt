@@ -4,7 +4,6 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Phone
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -19,7 +18,6 @@ import com.ewingelen.chatter.core.presentation.theme.ChatterTheme
 /**
  * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatterOutlinedTextField(
     value: String,
@@ -28,7 +26,8 @@ fun ChatterOutlinedTextField(
     @StringRes labelResourceId: Int,
     @StringRes placeholderResourceId: Int,
     modifier: Modifier = Modifier,
-    supportingText: String = "",
+    prefix: @Composable () -> Unit = {},
+    supportingText: @Composable () -> Unit = {},
     singleLine: Boolean = false,
     isError: Boolean = false,
     enabled: Boolean = true,
@@ -46,11 +45,10 @@ fun ChatterOutlinedTextField(
         placeholder = {
             Text(text = stringResource(id = placeholderResourceId))
         },
+        prefix = prefix,
         isError = isError,
-        supportingText = {
-            Text(text = supportingText)
-        },
-        singleLine = true,
+        supportingText = supportingText,
+        singleLine = singleLine,
         enabled = enabled,
         keyboardOptions = keyboardOptions,
         modifier = modifier

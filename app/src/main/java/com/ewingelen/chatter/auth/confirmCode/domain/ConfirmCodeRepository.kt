@@ -5,15 +5,7 @@ package com.ewingelen.chatter.auth.confirmCode.domain
  */
 interface ConfirmCodeRepository {
 
-    interface Save {
+    suspend fun saveUser()
 
-        suspend fun saveUser(id: String)
-    }
-
-    interface Read {
-
-        suspend fun fetchUserId(): String
-    }
-
-    interface Mutable: Save, Read
+    suspend fun checkUserExists(): Boolean
 }

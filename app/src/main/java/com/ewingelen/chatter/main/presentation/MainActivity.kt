@@ -4,13 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
@@ -47,7 +45,7 @@ class MainActivity : ComponentActivity() {
             val state by viewModel.state.collectAsStateWithLifecycle()
             val coroutineScope = rememberCoroutineScope()
             val snackbarHostState = remember { SnackbarHostState() }
-            ChatterThemeWithSurface(modifier = Modifier.fillMaxSize()) {
+            ChatterThemeWithSurface {
                 ChatterScaffold(snackbarHostState = snackbarHostState) {
                     AppNavHost(
                         verifyPhoneNumber = { verify ->
@@ -62,7 +60,7 @@ class MainActivity : ComponentActivity() {
                                         duration = SnackbarDuration.Indefinite
                                     )
                                 }
-                                delay(1000L)
+                                delay(2000L)
                                 job.cancel()
                             }
                         }
