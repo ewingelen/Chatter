@@ -9,7 +9,7 @@ interface ConfirmCodeCloudDataSource {
     suspend fun checkUserExists(): Boolean
 
     class Base @Inject constructor(
-        private val provideUserReference: ProvideUserReference
+        private val provideUserReference: ProvideUserReference.Document
     ) : ConfirmCodeCloudDataSource {
 
         override suspend fun checkUserExists(): Boolean {

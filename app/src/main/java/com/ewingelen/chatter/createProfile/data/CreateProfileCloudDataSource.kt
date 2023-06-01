@@ -18,7 +18,7 @@ interface CreateProfileCloudDataSource {
 
     class Base @Inject constructor(
         private val savePhoto: SavePhoto,
-        provideUserReference: ProvideUserReference,
+        provideUserReference: ProvideUserReference.Document ,
     ) : CreateProfileCloudDataSource {
 
         private val userDocument = provideUserReference.document()

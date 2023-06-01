@@ -2,6 +2,7 @@ package com.ewingelen.chatter.core.di
 
 import com.ewingelen.chatter.core.data.cloud.ProvideUserReference
 import com.ewingelen.chatter.core.data.cloud.SavePhoto
+import com.ewingelen.chatter.core.data.cloud.model.ProvideUserId
 import com.ewingelen.chatter.core.data.local.AppPreferences
 import com.ewingelen.chatter.core.domain.ProvideResources
 import com.ewingelen.chatter.core.presentation.BaseProvideResources
@@ -28,7 +29,17 @@ interface CoreModule {
 
     @Binds
     @ViewModelScoped
-    fun bindMakeUsersCollection(provideUserReference: ProvideUserReference.Base): ProvideUserReference
+    fun bindProvideUserCollection(provideUserReference: ProvideUserReference.Base):
+            ProvideUserReference.Collection
+
+    @Binds
+    @ViewModelScoped
+    fun bindProvideUserDocument(provideUserReference: ProvideUserReference.Base):
+            ProvideUserReference.Document
+
+    @Binds
+    @ViewModelScoped
+    fun bindProvideUserId(provideUserId: ProvideUserId.Base): ProvideUserId
 
     @Binds
     @ViewModelScoped
