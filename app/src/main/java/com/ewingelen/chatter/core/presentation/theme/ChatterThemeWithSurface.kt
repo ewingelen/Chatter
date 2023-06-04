@@ -7,9 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.ewingelen.chatter.core.presentation.ComponentPreview
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
+
 @Composable
 fun ChatterThemeWithSurface(
     modifier: Modifier = Modifier,

@@ -12,9 +12,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 06.05.2023.
- */
+
 @Module
 @InstallIn(ViewModelComponent::class)
 interface CoreModule {

@@ -16,9 +16,7 @@ import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 17.05.2023.
- */
+
 @Entity
 data class ChatLocal(
     @PrimaryKey val contactId: String,

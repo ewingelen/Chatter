@@ -42,9 +42,7 @@ import com.ewingelen.chatter.core.presentation.components.ChatterTopAppBar
 import com.ewingelen.chatter.core.presentation.components.IconButtonBack
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
- */
+
 @Composable
 fun ChatScreen(
     state: ChatState,

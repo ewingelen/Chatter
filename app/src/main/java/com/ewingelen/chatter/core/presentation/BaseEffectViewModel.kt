@@ -6,9 +6,6 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 30.04.2023.
- */
 abstract class BaseEffectViewModel<S, A, E>(defaultState: S) :
     BaseActionViewModel<S, A>(defaultState) {
 

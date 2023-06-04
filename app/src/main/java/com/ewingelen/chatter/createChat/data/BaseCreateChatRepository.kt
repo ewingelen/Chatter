@@ -8,9 +8,7 @@ import com.ewingelen.chatter.createChat.data.local.CreateChatCacheDataSource
 import com.ewingelen.chatter.createChat.domain.CreateChatRepository
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 17.05.2023.
- */
+
 class BaseCreateChatRepository @Inject constructor(
     private val cloudDataSource: CreateChatCloudDataSource,
     private val cacheDataSource: CreateChatCacheDataSource,

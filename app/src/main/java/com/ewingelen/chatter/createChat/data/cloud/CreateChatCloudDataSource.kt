@@ -8,9 +8,7 @@ import javax.inject.Inject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
- */
+
 interface CreateChatCloudDataSource {
 
     suspend fun createChat(chat: ChatCloud): String

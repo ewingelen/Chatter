@@ -2,9 +2,7 @@ package com.ewingelen.chatter.core.presentation
 
 import androidx.compose.ui.unit.dp
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
+
 //TODO: Check
 val SpacingExtraSmall100 = 4.dp
 val SpacingSmall100 = 8.dp

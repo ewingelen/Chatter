@@ -1,12 +1,9 @@
 package com.ewingelen.chatter.createChat.domain
 
-import com.ewingelen.chatter.core.domain.HandleError
 import com.ewingelen.chatter.core.domain.model.Chat
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
- */
+
 interface CreateChatInteractor {
 
     suspend fun createChat(
@@ -19,7 +16,7 @@ interface CreateChatInteractor {
     //TODO: onSuccess and onResult to interface
     class Base @Inject constructor(
         private val repository: CreateChatRepository,
-        private val handleError: HandleError,
+//        private val handleError: HandleError<String>,
     ) : CreateChatInteractor {
 
         override suspend fun createChat(
@@ -31,8 +28,8 @@ interface CreateChatInteractor {
                 repository.createChat(chat)
                 onSuccess()
             } catch (e: Exception) {
-                val error = handleError.handle(e)
-                onFail(error)
+//                val error = handleError.handle(e)
+//                onFail(error)
             }
         }
     }

@@ -9,9 +9,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.ewingelen.chatter.R
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
 private val PlusJakartaSansFontFamily = FontFamily(
     Font(R.font.plus_jakarta_sans_bold, FontWeight.Bold),
     Font(R.font.plus_jakarta_sans_semi_bold, FontWeight.SemiBold),

@@ -3,9 +3,6 @@ package com.ewingelen.chatter.chats.domain
 import com.ewingelen.chatter.chats.presentation.ChatUi
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 14.05.2023.
- */
 interface ChatsInteractor {
 
     fun fetchChats(): List<ChatUi>

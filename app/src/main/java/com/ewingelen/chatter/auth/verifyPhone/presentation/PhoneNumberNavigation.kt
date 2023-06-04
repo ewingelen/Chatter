@@ -8,9 +8,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
+
 private const val ROUTE = "phone_number"
 
 fun NavGraphBuilder.phoneNumberScreen(

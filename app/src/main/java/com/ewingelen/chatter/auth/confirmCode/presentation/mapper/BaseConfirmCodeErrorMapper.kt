@@ -1,4 +1,4 @@
-package com.ewingelen.chatter.auth.confirmCode.presentation
+package com.ewingelen.chatter.auth.confirmCode.presentation.mapper
 
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeErrorMapper
@@ -7,9 +7,6 @@ import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 08.05.2023.
- */
 class BaseConfirmCodeErrorMapper @Inject constructor(
     private val provideResources: ProvideResources
 ) : ConfirmCodeErrorMapper {

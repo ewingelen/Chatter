@@ -9,7 +9,10 @@ class BaseCreateProfileRepository @Inject constructor(
 ) : CreateProfileRepository {
 
     override suspend fun createProfile(name: String) {
-        createProfileCloudDataSource.createProfile(name)
+        try {
+            createProfileCloudDataSource.createProfile(name)
+        } catch (e: Exception) {
+        }
     }
 
     override suspend fun addPhoto(photo: Uri) {

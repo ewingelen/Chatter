@@ -6,11 +6,10 @@ import androidx.navigation.compose.rememberNavController
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.auth.core.presentation.authGraph
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
+
 @Composable
 fun AppNavHost(
+    authorizationStarted: Boolean,
     isUserAuthorized: Boolean,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit,
     showSnackbar: (String) -> Unit,
@@ -18,7 +17,7 @@ fun AppNavHost(
     val navController = rememberNavController()
     val startDestination = if (isUserAuthorized) MAIN_NAV_GRAPH_ROUTE else AUTH_NAV_GRAPH_ROUTE
     NavHost(navController = navController, startDestination = startDestination) {
-        authGraph(navController, AUTH_NAV_GRAPH_ROUTE, verifyPhoneNumber)
+        authGraph(navController, AUTH_NAV_GRAPH_ROUTE, authorizationStarted, verifyPhoneNumber)
         mainGraph(navController, MAIN_NAV_GRAPH_ROUTE, showSnackbar)
     }
 }

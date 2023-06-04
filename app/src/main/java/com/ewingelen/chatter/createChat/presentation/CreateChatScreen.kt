@@ -34,9 +34,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
- */
+
 //TODO: select from contacts
 @Composable
 fun CreateChatScreen(

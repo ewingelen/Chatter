@@ -15,9 +15,7 @@ import com.ewingelen.chatter.R
 import com.ewingelen.chatter.core.presentation.ComponentPreview
 import com.ewingelen.chatter.core.presentation.theme.ChatterTheme
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
- */
+
 @Composable
 fun ChatterOutlinedTextField(
     value: String,

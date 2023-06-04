@@ -26,4 +26,9 @@ interface CreateProfileModule {
     @Binds
     @ViewModelScoped
     fun bindInteractor(interactor: CreateProfileInteractor.Base): CreateProfileInteractor
+
+//    @Binds
+//    @ViewModelScoped
+//    fun bindHandleCreateProfileError(handleError: HandleCreateProfileResult):
+//            HandleError<CreateProfileResult>
 }

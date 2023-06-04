@@ -10,9 +10,7 @@ import com.ewingelen.chatter.R
 import com.ewingelen.chatter.core.presentation.ComponentPreview
 import com.ewingelen.chatter.core.presentation.theme.ChatterTheme
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 06.05.2023.
- */
+
 @Composable
 fun ErrorText(text: String, modifier: Modifier = Modifier) {
     Text(

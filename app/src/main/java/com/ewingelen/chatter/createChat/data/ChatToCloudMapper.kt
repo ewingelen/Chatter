@@ -6,9 +6,7 @@ import com.ewingelen.chatter.core.domain.model.Chat
 import com.ewingelen.chatter.core.domain.model.Message
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 17.05.2023.
- */
+
 class ChatToCloudMapper @Inject constructor(
     private val messagesMapper: Message.Mapper<MessageCloud>
 ) : Chat.Mapper<ChatCloud> {

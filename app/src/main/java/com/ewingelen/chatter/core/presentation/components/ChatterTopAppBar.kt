@@ -15,9 +15,7 @@ import com.ewingelen.chatter.core.presentation.ComponentPreview
 import com.ewingelen.chatter.core.presentation.ElevationMedium
 import com.ewingelen.chatter.core.presentation.theme.ChatterTheme
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
- */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatterTopAppBar(

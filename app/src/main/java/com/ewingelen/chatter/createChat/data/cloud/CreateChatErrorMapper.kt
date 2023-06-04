@@ -7,9 +7,7 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseNetworkException
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 17.05.2023.
- */
+
 interface CreateChatErrorMapper {
 
     fun map(e: FirebaseException): Exception

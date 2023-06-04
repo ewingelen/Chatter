@@ -7,9 +7,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
+
 private val DarkColorPalette = darkColorScheme(
     primary = Purple200,
     secondary = Teal200,

@@ -2,45 +2,37 @@ package com.ewingelen.chatter.auth.confirmCode.presentation
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
-import com.ewingelen.chatter.R
+import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCode
 import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeInteractor
-import com.ewingelen.chatter.auth.confirmCode.domain.HandleAuth
-import com.ewingelen.chatter.auth.core.presentation.OnVerificationStateChanged
+import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeResult
+import com.ewingelen.chatter.auth.confirmCode.domain.ResentCodeTimer
+import com.ewingelen.chatter.auth.confirmCode.presentation.communication.ConfirmCodeCommunication
+import com.ewingelen.chatter.auth.confirmCode.presentation.contract.ConfirmCodeAction
+import com.ewingelen.chatter.auth.confirmCode.presentation.contract.ConfirmCodeEffect
+import com.ewingelen.chatter.auth.confirmCode.presentation.contract.ConfirmCodeState
+import com.ewingelen.chatter.auth.confirmCode.presentation.contract.HandleConfirmCodeAction
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
-import com.ewingelen.chatter.auth.verifyPhone.presentation.VerificationErrorMapper
-import com.ewingelen.chatter.core.domain.ProvideResources
-import com.ewingelen.chatter.core.presentation.BaseEffectViewModel
+import com.ewingelen.chatter.core.presentation.BaseNewViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 30.04.2023.
- */
 @HiltViewModel
 class ConfirmCodeViewModel @Inject constructor(
     private val confirmCode: ConfirmCode,
-    private val provideResources: ProvideResources,
     private val timer: ResentCodeTimer,
-    private val verificationErrorMapper: VerificationErrorMapper,
     private val interactor: ConfirmCodeInteractor,
+    private val communication: ConfirmCodeCommunication,
+    private val mapper: ConfirmCodeResult.Mapper<Unit>,
     savedStateHandle: SavedStateHandle,
-) : BaseEffectViewModel<ConfirmCodeState, ConfirmCodeAction, ConfirmCodeEffect>
-    (defaultState = ConfirmCodeState()),
-    HandleConfirmCodeAction,
-    HandleResentCodeTimerEvent,
-    OnVerificationStateChanged {
+) : BaseNewViewModel<ConfirmCodeState, ConfirmCodeAction, ConfirmCodeEffect>(),
+    HandleConfirmCodeAction {
 
     private val arguments = ConfirmCodeArgs(savedStateHandle)
 
     init {
-        updateState(
-            state.value.copy(
-                verificationId = arguments.verificationId,
-                phoneNumber = arguments.phoneNumber
-            )
-        )
-        timer.start(viewModelScope, handleTimerEvent = this)
+        communication.showPhoneNumber(arguments.phoneNumber)
+        timer.start()
     }
 
     override fun handleAction(action: ConfirmCodeAction) {
@@ -49,69 +41,28 @@ class ConfirmCodeViewModel @Inject constructor(
 
     override fun changeCode(newCode: String) {
         if (newCode.length <= CODE_LENGTH) {
-            updateState(state.value.copy(code = newCode))
-            if (state.value.error.isNotEmpty()) {
-                updateState(state.value.copy(error = ""))
-            }
+            communication.changeCode(newCode)
         }
 
         if (newCode.length == CODE_LENGTH) {
-            updateState(state.value.copy(loading = true))
+            communication.stopLoading()
             viewModelScope.launch {
-                interactor.auth(
-                    object : HandleAuth {
-                        override suspend fun auth() =
-                            confirmCode.confirm(state.value.verificationId, state.value.code)
-
-                        override fun success(userExists: Boolean) {
-                            val effect = if (userExists) {
-                                ConfirmCodeEffect.SuccessLogIn()
-                            } else {
-                                ConfirmCodeEffect.SuccessSignUp()
-                            }
-                            sendEffect(this@launch, effect)
-                        }
-
-                        override fun failure(error: String) {
-                            updateState(state.value.copy(loading = false, error = error))
-                        }
-                    }
-                )
+                interactor.confirmCode {
+                    confirmCode.confirm(arguments.verificationId, newCode)
+                }.map(mapper)
             }
         }
     }
 
     override fun resentCode() {
-        updateState(state.value.copy(resentCodeEnabled = false))
-        sendEffect(
-            ConfirmCodeEffect.CodeResent(
-                VerifyPhoneNumber.Base(arguments.phoneNumber, onVerificationStateChanged = this)
-            )
-        )
-        timer.start(viewModelScope, handleTimerEvent = this)
+        val verifyPhoneNumber = VerifyPhoneNumber.Base(arguments.phoneNumber)
+        communication.resentCode(verifyPhoneNumber)
+        timer.start()
     }
 
-    override fun onResentCodeTimerTick(secondsUntilFinished: Long) {
-        val timeToResentLabel = provideResources.string(
-            R.string.label_format_try_again,
-            secondsUntilFinished
-        )
-        updateState(state.value.copy(timeToResentLabel = timeToResentLabel))
-    }
+    override fun state() = communication.state()
 
-    override fun onResentCodeTimerFinish() {
-        val labelResentCode = provideResources.string(R.string.label_clickable_resent_code)
-        updateState(state.value.copy(timeToResentLabel = labelResentCode, resentCodeEnabled = true))
-    }
-
-    override fun onVerificationCompleted() {
-        sendEffect(ConfirmCodeEffect.SuccessSignUp())
-    }
-
-    override fun onVerificationFailed(e: Exception) {
-        val error = verificationErrorMapper.map(e)
-        updateState(state.value.copy(error = error))
-    }
+    override fun effect() = communication.effect()
 
     private companion object {
         const val CODE_LENGTH = 6

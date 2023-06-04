@@ -1,8 +1,6 @@
 package com.ewingelen.chatter.core.presentation.navigation
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 06.05.2023.
- */
+
 fun makeDestinationRouteWithArgs(route: String, vararg args: Any) =
     route + args.joinToString { arg -> "/{$arg}" }
 

@@ -2,7 +2,7 @@ package com.ewingelen.chatter.createProfile.presentation
 
 import android.net.Uri
 import androidx.lifecycle.viewModelScope
-import com.ewingelen.chatter.core.presentation.BaseActionViewModel
+import com.ewingelen.chatter.core.presentation.BaseEffectViewModel
 import com.ewingelen.chatter.createProfile.domain.CreateProfileInteractor
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateProfileViewModel @Inject constructor(
     private val interactor: CreateProfileInteractor
-) : BaseActionViewModel<CreateProfileState, CreateProfileAction>(CreateProfileState()),
+) : BaseEffectViewModel<CreateProfileState, CreateProfileAction, CreateProfileEffect>(CreateProfileState()),
     HandleCreateProfileAction {
 
     override fun handleAction(action: CreateProfileAction) {

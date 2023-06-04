@@ -1,10 +1,8 @@
-package com.ewingelen.chatter.auth.confirmCode.presentation
+package com.ewingelen.chatter.auth.confirmCode.presentation.contract
 
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 06.05.2023.
- */
+
 interface HandleConfirmCodeEffect {
 
     fun successSignUp()

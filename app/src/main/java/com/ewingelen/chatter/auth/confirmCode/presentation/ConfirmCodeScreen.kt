@@ -1,36 +1,22 @@
 package com.ewingelen.chatter.auth.confirmCode.presentation
 
-import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.ParagraphStyle
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import com.ewingelen.chatter.R
+import com.ewingelen.chatter.auth.confirmCode.presentation.components.CodeTextField
+import com.ewingelen.chatter.auth.confirmCode.presentation.components.ResentCodeTimerTextButton
+import com.ewingelen.chatter.auth.confirmCode.presentation.contract.ConfirmCodeAction
+import com.ewingelen.chatter.auth.confirmCode.presentation.contract.ConfirmCodeState
+import com.ewingelen.chatter.auth.confirmCode.presentation.contract.HandleConfirmCodeEffect
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
-import com.ewingelen.chatter.core.presentation.BorderWidthMin
-import com.ewingelen.chatter.core.presentation.ConfirmCodeCellSize
 import com.ewingelen.chatter.core.presentation.Effect
 import com.ewingelen.chatter.core.presentation.ScreenHeader
 import com.ewingelen.chatter.core.presentation.ScreenPreview
@@ -38,15 +24,11 @@ import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.components.ErrorText
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
-import com.ewingelen.chatter.core.presentation.theme.Gray500
-import com.ewingelen.chatter.core.presentation.theme.Gray900
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
+
 @Composable
 fun ConfirmCodeScreen(
     state: ConfirmCodeState,
@@ -88,34 +70,9 @@ fun ConfirmCodeScreen(
 
         Spacer(modifier = Modifier.height(SpacingNormal100))
 
-        BasicTextField(
+        CodeTextField(
             value = state.code,
             onValueChange = { handleAction(ConfirmCodeAction.ChangeCode(it)) },
-            decorationBox = {
-                Row(horizontalArrangement = Arrangement.spacedBy(SpacingNormal100)) {
-                    val smsCodeLength = 6
-                    repeat(smsCodeLength) { index ->
-                        val char =
-                            if (index >= state.code.length) "" else state.code[index].toString()
-                        Box(
-                            modifier = Modifier
-                                .size(ConfirmCodeCellSize)
-                                .border(
-                                    width = BorderWidthMin,
-                                    color = Gray500,
-                                    shape = CircleShape
-                                ),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(
-                                text = char,
-                                style = MaterialTheme.typography.labelLarge
-                            )
-                        }
-                    }
-                }
-            },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
             enabled = !state.loading
         )
 
@@ -125,22 +82,11 @@ fun ConfirmCodeScreen(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        TextButton(
+        ResentCodeTimerTextButton(
             onClick = { handleAction(ConfirmCodeAction.ResentCode()) },
-            enabled = state.resentCodeEnabled
-        ) {
-            Text(
-                text = buildAnnotatedString {
-                    withStyle(SpanStyle(color = Gray900)) {
-                        append(text = stringResource(id = R.string.label_did_not_get_code))
-                    }
-                    pushStyle(ParagraphStyle())
-                    pushStyle(SpanStyle(color = MaterialTheme.colorScheme.onSurface))
-                    append(text = state.timeToResentLabel)
-                },
-                textAlign = TextAlign.Center
-            )
-        }
+            enabled = state.resentCodeEnabled,
+            timeToResentLabel = state.timeToResent
+        )
     }
 }
 

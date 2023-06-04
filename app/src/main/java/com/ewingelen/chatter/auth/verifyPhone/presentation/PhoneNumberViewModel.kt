@@ -8,9 +8,7 @@ import com.ewingelen.chatter.core.presentation.NormalizePhoneNumber
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
+
 @HiltViewModel
 class PhoneNumberViewModel @Inject constructor(
     private val verificationErrorMapper: VerificationErrorMapper,
@@ -34,14 +32,9 @@ class PhoneNumberViewModel @Inject constructor(
 
     override fun verifyPhoneNumber() {
         updateState(state.value.copy(loading = true))
-        sendEffect(
-            PhoneNumberEffect.VerificationStarted(
-                VerifyPhoneNumber.Base(
-                    phoneNumber = normalizePhoneNumber.normalize(state.value.phoneNumber),
-                    onVerificationStateChanged = this
-                )
-            )
-        )
+        val verifyPhoneNumber =
+            VerifyPhoneNumber.Base(normalizePhoneNumber.normalize(state.value.phoneNumber))
+        sendEffect(PhoneNumberEffect.VerificationStarted(verifyPhoneNumber))
     }
 
     override fun onVerificationCompleted() {

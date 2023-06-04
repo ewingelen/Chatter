@@ -2,28 +2,22 @@ package com.ewingelen.chatter.auth.confirmCode.domain
 
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 07.05.2023.
- */
 interface ConfirmCodeInteractor {
 
-    suspend fun auth(handleAuth: HandleAuth)
+    suspend fun confirmCode(block: suspend () -> Auth): ConfirmCodeResult
 
     class Base @Inject constructor(
         private val repository: ConfirmCodeRepository,
         private val errorMapper: ConfirmCodeErrorMapper
     ) : ConfirmCodeInteractor {
 
-        override suspend fun auth(handleAuth: HandleAuth) = try {
-            val authResult = handleAuth.auth()
-            val usersExists = authResult.checkUserExists(repository)
-            if (usersExists) {
-                authResult.save(repository)
-            }
-            handleAuth.success(usersExists)
+        override suspend fun confirmCode(block: suspend () -> Auth) = try {
+            val auth = block.invoke()
+            auth.perform(repository)
+            ConfirmCodeResult.Success(newUser = true)
         } catch (e: Exception) {
             val error = errorMapper.map(e)
-            handleAuth.failure(error)
+            ConfirmCodeResult.Fail(error)
         }
     }
 }

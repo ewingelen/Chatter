@@ -13,9 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.ewingelen.chatter.core.presentation.SpacingLarge100
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
- */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatterScaffold(

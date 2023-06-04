@@ -4,9 +4,7 @@ import com.ewingelen.chatter.chat.presentation.model.ChatInfoUi
 import com.ewingelen.chatter.chat.presentation.model.MessageUi
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
- */
+
 interface ChatInteractor {
 
     fun chatInfo(contactId: String): ChatInfoUi

@@ -25,9 +25,7 @@ import com.ewingelen.chatter.core.presentation.SpacingLarge100
 import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
+
 @Composable
 fun OnBoardingScreen(navigateToPhoneNumber: () -> Unit) {
     Column(

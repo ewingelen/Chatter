@@ -43,9 +43,7 @@ import com.ewingelen.chatter.core.presentation.SpacingSmall150
 import com.ewingelen.chatter.core.presentation.components.ChatterTopAppBar
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChatsScreen(

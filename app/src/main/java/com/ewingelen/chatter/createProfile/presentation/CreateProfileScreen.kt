@@ -63,14 +63,15 @@ fun CreateProfileScreen(
             contentDescription = stringResource(id = R.string.accessibility_profile_photo),
             fallback = addPhotoPlaceholderPainter,
             placeholder = addPhotoPlaceholderPainter,
+            error = addPhotoPlaceholderPainter,
             contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(CreateProfilePhotoSize)
                 .clip(MaterialTheme.shapes.small)
                 .clickable {
-                    photoPickerLauncher.launch(
+                    val pickVisualMediaRequest =
                         PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                    )
+                    photoPickerLauncher.launch(pickVisualMediaRequest)
                 }
         )
 

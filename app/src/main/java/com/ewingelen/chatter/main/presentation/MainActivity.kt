@@ -19,9 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
@@ -48,10 +46,13 @@ class MainActivity : ComponentActivity() {
             ChatterThemeWithSurface {
                 ChatterScaffold(snackbarHostState = snackbarHostState) {
                     AppNavHost(
-                        verifyPhoneNumber = { verify ->
-                            verify.verify(this@MainActivity)
-                        },
+                        authorizationStarted = state.authorizationStarted,
                         isUserAuthorized = state.userAuthorized,
+                        verifyPhoneNumber = { verify ->
+                            lifecycleScope.launch {
+                                verify.verify(this@MainActivity)
+                            }
+                        },
                         showSnackbar = { message ->
                             coroutineScope.launch {
                                 val job = coroutineScope.launch {

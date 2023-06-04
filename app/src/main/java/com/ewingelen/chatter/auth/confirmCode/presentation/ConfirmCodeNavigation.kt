@@ -12,9 +12,7 @@ import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.core.presentation.navigation.makeDestinationRouteWithArgs
 import com.ewingelen.chatter.core.presentation.navigation.makeNavigationRouteWithArgs
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 28.04.2023.
- */
+
 private const val ROUTE = "code"
 private const val VERIFICATION_ID_ARG = "verificationId"
 private const val PHONE_NUMBER_ARG = "phoneNumber"
@@ -34,10 +32,10 @@ fun NavGraphBuilder.confirmCodeScreen(
     val route = makeDestinationRouteWithArgs(ROUTE, VERIFICATION_ID_ARG, PHONE_NUMBER_ARG)
     composable(route) {
         val viewModel: ConfirmCodeViewModel = hiltViewModel()
-        val state by viewModel.state.collectAsStateWithLifecycle()
+        val state by viewModel.state().collectAsStateWithLifecycle()
         ConfirmCodeScreen(
             state = state,
-            effect = viewModel.effect,
+            effect = viewModel.effect(),
             handleAction = viewModel::handleAction,
             navigateToCreateProfile = navigateToCreateProfile,
             navigateToChats = navigateToChats,

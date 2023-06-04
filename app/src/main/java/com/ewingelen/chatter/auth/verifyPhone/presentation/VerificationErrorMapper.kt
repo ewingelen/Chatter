@@ -7,9 +7,6 @@ import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 30.04.2023.
- */
 interface VerificationErrorMapper {
 
     fun map(e: Exception): String

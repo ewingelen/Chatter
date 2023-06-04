@@ -2,9 +2,7 @@ package com.ewingelen.chatter.core.presentation
 
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 17.05.2023.
- */
+
 interface ChangePhoneNumber {
 
     fun change(currentNumber: String, newNumber: String): String

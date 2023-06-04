@@ -11,18 +11,19 @@ import com.ewingelen.chatter.auth.confirmCode.presentation.navigateToConfirmCode
 import com.ewingelen.chatter.auth.verifyPhone.presentation.navigateToPhoneNumber
 import com.ewingelen.chatter.auth.verifyPhone.presentation.phoneNumberScreen
 import com.ewingelen.chatter.core.presentation.navigation.navigateToChats
+import com.ewingelen.chatter.createProfile.presentation.createProfileScreen
 import com.ewingelen.chatter.createProfile.presentation.navigateToCreateProfile
 import com.ewingelen.chatter.onBoarding.presentation.OnBoardingScreen
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 06.05.2023.
- */
+
 fun NavGraphBuilder.authGraph(
     navController: NavController,
     route: String,
+    authorizationStarted: Boolean,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit
 ) {
-    navigation(startDestination = ON_BOARDING_SCREEN_ROUTE, route = route) {
+    val startDestination = if (authorizationStarted) ON_BOARDING_ROUTE else CREATE_PROFILE_ROUTE
+    navigation(startDestination = startDestination, route = route) {
         val popUpToTopNavOptions by lazy {
             navOptions {
                 popUpTo(navController.graph.startDestinationId) {
@@ -47,13 +48,15 @@ fun NavGraphBuilder.authGraph(
             navigateToChats = navigateToChats,
             verifyPhoneNumber = verifyPhoneNumber
         )
+        createProfileScreen()
     }
 }
 
-private const val ON_BOARDING_SCREEN_ROUTE = "on_boarding"
+private const val ON_BOARDING_ROUTE = "on_boarding"
+private const val CREATE_PROFILE_ROUTE = "create_profile"
 
 private fun NavGraphBuilder.onBoardingScreen(navigateToPhoneNumber: () -> Unit) {
-    composable(ON_BOARDING_SCREEN_ROUTE) {
+    composable(ON_BOARDING_ROUTE) {
         OnBoardingScreen(navigateToPhoneNumber = navigateToPhoneNumber)
     }
 }

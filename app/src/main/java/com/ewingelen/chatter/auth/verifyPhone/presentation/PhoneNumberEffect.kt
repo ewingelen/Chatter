@@ -3,9 +3,6 @@ package com.ewingelen.chatter.auth.verifyPhone.presentation
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.core.presentation.Effect
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 30.04.2023.
- */
 interface PhoneNumberEffect : Effect<HandlePhoneNumberEffect> {
 
     class VerificationStarted(

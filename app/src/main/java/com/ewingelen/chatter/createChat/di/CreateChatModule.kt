@@ -14,9 +14,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
- */
+
 @Module
 @InstallIn(ViewModelComponent::class)
 interface CreateChatModule {
@@ -44,5 +42,5 @@ interface CreateChatModule {
     fun bindInteractor(interactor: CreateChatInteractor.Base): CreateChatInteractor
 
     @Binds
-    fun bindHandleError(handleError: HandleCreateChatError): HandleError
+    fun bindHandleError(handleError: HandleCreateChatError): HandleError<String>
 }

@@ -6,6 +6,7 @@ plugins {
     id("com.google.firebase.crashlytics")
     kotlin("kapt")
     id("com.google.devtools.ksp") version "1.8.20-1.0.11"
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -83,6 +84,7 @@ dependencies {
     val splashScreenVersion = "1.0.0"
     val timberVersion = "5.0.1"
     val coilComposeVersion = "2.3.0"
+    val oneSignalVersion = "[4.0.0, 4.99.99]"
 
     val jUnitVersion = "4.13.2"
     val jUnitExtVersion = "1.1.5"
@@ -151,6 +153,9 @@ dependencies {
 
     //Coil
     implementation("io.coil-kt:coil-compose:$coilComposeVersion")
+
+    //OneSignal
+    implementation("com.onesignal:OneSignal:$oneSignalVersion")
 }
 
 kapt {

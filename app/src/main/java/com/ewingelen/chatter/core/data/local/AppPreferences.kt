@@ -2,29 +2,26 @@ package com.ewingelen.chatter.core.data.local
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
-import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 07.05.2023.
- */
 interface AppPreferences {
 
-    suspend fun save(key: String, value: String)
+    suspend fun save(key: String, value: Boolean)
 
-    fun read(key: String): Flow<String>
+    fun read(key: String): Flow<Boolean>
 
     class Base @Inject constructor(private val dataStore: DataStore<Preferences>) : AppPreferences {
 
-        override suspend fun save(key: String, value: String) {
+        override suspend fun save(key: String, value: Boolean) {
             dataStore.edit { preferences ->
-                val preferencesKey = stringPreferencesKey(key)
+                val preferencesKey = booleanPreferencesKey(key)
                 preferences[preferencesKey] = value
             }
         }
@@ -36,8 +33,8 @@ interface AppPreferences {
                 }
             }
             .map { preferences ->
-                val preferencesKey = stringPreferencesKey(key)
-                preferences[preferencesKey] ?: ""
+                val preferencesKey = booleanPreferencesKey(key)
+                preferences[preferencesKey] ?: false
             }
     }
 }

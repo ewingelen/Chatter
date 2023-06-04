@@ -7,9 +7,7 @@ import com.ewingelen.chatter.core.presentation.BaseActionViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-/**
- * Created by Artem Skorik email(skorikartem.work@gmail.com) on 16.05.2023.
- */
+
 @HiltViewModel
 class ChatViewModel @Inject constructor(
     private val interactor: ChatInteractor,
