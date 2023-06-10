@@ -41,7 +41,7 @@ private fun NavGraphBuilder.chatsScreen(
 ) {
     composable(CHATS_SCREEN_ROUTE) {
         val viewModel: ChatsViewModel = hiltViewModel()
-        val state by viewModel.state.collectAsStateWithLifecycle()
+        val state by viewModel.state().collectAsStateWithLifecycle()
         ChatsScreen(
             state = state,
             navigateToCreateChat = navigateToCreateChat,
