@@ -6,5 +6,6 @@ data class ConfirmCodeState(
     val timeToResent: String = "",
     val loading: Boolean = false,
     val resentCodeEnabled: Boolean = false,
-    val error: String = ""
+    val error: String = "",
+    val errorVisible: Boolean = false
 )

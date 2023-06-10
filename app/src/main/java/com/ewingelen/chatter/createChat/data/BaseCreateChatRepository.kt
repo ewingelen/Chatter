@@ -1,13 +1,12 @@
 package com.ewingelen.chatter.createChat.data
 
 import com.ewingelen.chatter.core.data.cloud.model.ChatCloud
-import com.ewingelen.chatter.core.data.local.model.ChatLocal
+import com.ewingelen.chatter.core.data.cache.model.ChatLocal
 import com.ewingelen.chatter.core.domain.model.Chat
 import com.ewingelen.chatter.createChat.data.cloud.CreateChatCloudDataSource
-import com.ewingelen.chatter.createChat.data.local.CreateChatCacheDataSource
+import com.ewingelen.chatter.createChat.data.cache.CreateChatCacheDataSource
 import com.ewingelen.chatter.createChat.domain.CreateChatRepository
 import javax.inject.Inject
-
 
 class BaseCreateChatRepository @Inject constructor(
     private val cloudDataSource: CreateChatCloudDataSource,

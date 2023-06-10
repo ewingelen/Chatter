@@ -33,11 +33,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.ewingelen.chatter.R
-import com.ewingelen.chatter.core.presentation.ContactPhotoSize
+import com.ewingelen.chatter.chat.presentation.contract.ChatAction
+import com.ewingelen.chatter.chat.presentation.contract.ChatState
+import com.ewingelen.chatter.core.presentation.theme.ContactPhotoSize
 import com.ewingelen.chatter.core.presentation.ScreenPreview
-import com.ewingelen.chatter.core.presentation.SpacingNormal100
-import com.ewingelen.chatter.core.presentation.SpacingSmall100
-import com.ewingelen.chatter.core.presentation.SpacingSmall150
+import com.ewingelen.chatter.core.presentation.theme.SpacingNormal100
+import com.ewingelen.chatter.core.presentation.theme.SpacingSmall100
+import com.ewingelen.chatter.core.presentation.theme.SpacingSmall150
 import com.ewingelen.chatter.core.presentation.components.ChatterTopAppBar
 import com.ewingelen.chatter.core.presentation.components.IconButtonBack
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface

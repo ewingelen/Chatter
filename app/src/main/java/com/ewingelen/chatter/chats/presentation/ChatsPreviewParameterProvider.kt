@@ -1,6 +1,7 @@
 package com.ewingelen.chatter.chats.presentation
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.ewingelen.chatter.chats.presentation.contract.ChatsState
 
 class ChatsPreviewParameterProvider : PreviewParameterProvider<ChatsState> {
 

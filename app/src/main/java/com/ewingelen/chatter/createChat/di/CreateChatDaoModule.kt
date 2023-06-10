@@ -1,6 +1,6 @@
 package com.ewingelen.chatter.createChat.di
 
-import com.ewingelen.chatter.core.data.local.ChatterDatabase
+import com.ewingelen.chatter.core.data.cache.ChatterDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

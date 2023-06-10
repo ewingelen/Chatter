@@ -46,12 +46,9 @@ class MainActivity : ComponentActivity() {
             ChatterThemeWithSurface {
                 ChatterScaffold(snackbarHostState = snackbarHostState) {
                     AppNavHost(
-                        authorizationStarted = state.authorizationStarted,
-                        isUserAuthorized = state.userAuthorized,
+                        userAuthorized = state.userAuthorized,
                         verifyPhoneNumber = { verify ->
-                            lifecycleScope.launch {
-                                verify.verify(this@MainActivity)
-                            }
+                            verify.verify(this@MainActivity)
                         },
                         showSnackbar = { message ->
                             coroutineScope.launch {

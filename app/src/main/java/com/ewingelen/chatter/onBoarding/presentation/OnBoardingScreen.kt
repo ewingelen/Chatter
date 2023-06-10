@@ -19,10 +19,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.ewingelen.chatter.R
-import com.ewingelen.chatter.core.presentation.ButtonHeightLarge
+import com.ewingelen.chatter.core.presentation.theme.ButtonHeightLarge
 import com.ewingelen.chatter.core.presentation.ScreenPreview
-import com.ewingelen.chatter.core.presentation.SpacingLarge100
-import com.ewingelen.chatter.core.presentation.SpacingNormal100
+import com.ewingelen.chatter.core.presentation.theme.SpacingLarge100
+import com.ewingelen.chatter.core.presentation.theme.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 
 

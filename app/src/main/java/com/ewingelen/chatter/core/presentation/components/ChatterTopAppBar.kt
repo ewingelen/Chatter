@@ -12,7 +12,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.core.presentation.ComponentPreview
-import com.ewingelen.chatter.core.presentation.ElevationMedium
+import com.ewingelen.chatter.core.presentation.theme.ElevationMedium
 import com.ewingelen.chatter.core.presentation.theme.ChatterTheme
 
 

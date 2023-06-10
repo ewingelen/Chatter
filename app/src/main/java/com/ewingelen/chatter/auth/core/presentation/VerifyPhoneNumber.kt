@@ -9,26 +9,25 @@ import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.util.concurrent.TimeUnit
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 
 interface VerifyPhoneNumber {
 
-    suspend fun verify(activity: Activity): VerifyPhoneNumberResult
+    fun verify(activity: Activity)
 
-    class Base(private val phoneNumber: String) : VerifyPhoneNumber {
+    class Base(
+        private val onVerificationStateChanged: OnVerificationStateChanged,
+        private val phoneNumber: String
+    ) : VerifyPhoneNumber {
 
-        override suspend fun verify(activity: Activity) = suspendCoroutine { continuation ->
+        override fun verify(activity: Activity) {
             val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 override fun onVerificationCompleted(credential: PhoneAuthCredential) {
-                    continuation.resume(VerifyPhoneNumberResult.Completed())
-//                    onVerificationStateChanged.onVerificationCompleted()
+                    onVerificationStateChanged.onVerificationCompleted()
                 }
 
                 override fun onVerificationFailed(e: FirebaseException) {
-                    continuation.resume(VerifyPhoneNumberResult.Failed(e))
-//                    onVerificationStateChanged.onVerificationFailed(e)
+                    onVerificationStateChanged.onVerificationFailed(e)
                 }
 
                 override fun onCodeSent(
@@ -36,8 +35,7 @@ interface VerifyPhoneNumber {
                     token: PhoneAuthProvider.ForceResendingToken
                 ) {
                     super.onCodeSent(verificationId, token)
-                    continuation.resume(VerifyPhoneNumberResult.CodeSent(verificationId))
-//                    onVerificationStateChanged.onCodeSent(verificationId)
+                    onVerificationStateChanged.onCodeSent(verificationId)
                 }
             }
 
@@ -53,34 +51,5 @@ interface VerifyPhoneNumber {
                 .build()
             PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions)
         }
-    }
-}
-
-interface VerifyPhoneNumberResult {
-
-    interface Mapper {
-
-        fun mapCompleted()
-
-        fun mapFailed(error: Exception)
-
-        fun mapCodeSent(verificationId: String)
-    }
-
-    fun map(mapper: Mapper)
-
-    class Completed : VerifyPhoneNumberResult {
-
-        override fun map(mapper: Mapper) = mapper.mapCompleted()
-    }
-
-    class Failed(private val error: Exception) : VerifyPhoneNumberResult {
-
-        override fun map(mapper: Mapper) = mapper.mapFailed(error)
-    }
-
-    class CodeSent(private val verificationId: String) : VerifyPhoneNumberResult {
-
-        override fun map(mapper: Mapper) = mapper.mapCodeSent(verificationId)
     }
 }

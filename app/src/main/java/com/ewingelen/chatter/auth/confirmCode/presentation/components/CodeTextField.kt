@@ -15,11 +15,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
-import com.ewingelen.chatter.core.presentation.BorderWidthMin
-import com.ewingelen.chatter.core.presentation.ConfirmCodeCellSize
-import com.ewingelen.chatter.core.presentation.SpacingNormal100
+import com.ewingelen.chatter.core.presentation.theme.BorderWidthMin
 import com.ewingelen.chatter.core.presentation.theme.ChatterTheme
+import com.ewingelen.chatter.core.presentation.theme.ConfirmCodeCellSize
 import com.ewingelen.chatter.core.presentation.theme.Gray500
+import com.ewingelen.chatter.core.presentation.theme.SpacingNormal100
 
 @Composable
 fun CodeTextField(
@@ -55,7 +55,7 @@ fun CodeTextField(
             }
         },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
-        enabled = !enabled,
+        enabled = enabled,
         modifier = modifier
     )
 }

@@ -1,13 +1,11 @@
 package com.ewingelen.chatter.createChat.di
 
-import com.ewingelen.chatter.core.domain.HandleError
 import com.ewingelen.chatter.createChat.data.BaseCreateChatRepository
+import com.ewingelen.chatter.createChat.data.cache.CreateChatCacheDataSource
 import com.ewingelen.chatter.createChat.data.cloud.CreateChatCloudDataSource
 import com.ewingelen.chatter.createChat.data.cloud.CreateChatErrorMapper
-import com.ewingelen.chatter.createChat.data.local.CreateChatCacheDataSource
 import com.ewingelen.chatter.createChat.domain.CreateChatInteractor
 import com.ewingelen.chatter.createChat.domain.CreateChatRepository
-import com.ewingelen.chatter.createChat.domain.HandleCreateChatError
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -41,6 +39,7 @@ interface CreateChatModule {
     @ViewModelScoped
     fun bindInteractor(interactor: CreateChatInteractor.Base): CreateChatInteractor
 
-    @Binds
-    fun bindHandleError(handleError: HandleCreateChatError): HandleError<String>
+//    @Binds
+//    @ViewModelScoped
+//    fun bindHandleError(handleError: HandleCreateChatError): HandleDataError
 }

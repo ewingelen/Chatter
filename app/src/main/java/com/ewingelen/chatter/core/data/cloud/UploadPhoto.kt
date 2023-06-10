@@ -6,13 +6,13 @@ import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-interface SavePhoto {
+interface UploadPhoto {
 
-    suspend fun save(vararg paths: String, uri: Uri): Uri
+    suspend fun uload(vararg paths: String, uri: Uri): Uri
 
-    class Base @Inject constructor() : SavePhoto {
+    class Base @Inject constructor() : UploadPhoto {
 
-        override suspend fun save(vararg paths: String, uri: Uri): Uri {
+        override suspend fun uload(vararg paths: String, uri: Uri): Uri {
             val location = paths.joinToString("/")
             val uploadTask = Firebase.storage.getReference(location).putFile(uri).await()
             return uploadTask.metadata!!.reference!!.downloadUrl.await()

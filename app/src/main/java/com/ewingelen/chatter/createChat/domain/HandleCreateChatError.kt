@@ -1,13 +1,12 @@
 package com.ewingelen.chatter.createChat.domain
 
-import com.ewingelen.chatter.core.domain.HandleError
+import com.ewingelen.chatter.core.data.HandleDataError
 import com.ewingelen.chatter.core.domain.ProvideResources
 import javax.inject.Inject
 
-
 class HandleCreateChatError @Inject constructor(
     private val provideResources: ProvideResources
-) : HandleError<String> {
+) : HandleDataError {
 
 //    override fun handle(e: Exception): String {
 //        val errorResourceId = when (e) {
@@ -18,7 +17,7 @@ class HandleCreateChatError @Inject constructor(
 //        return provideResources.string(errorResourceId)
 //    }
 
-    override suspend fun handle(block: suspend () -> Unit): String {
+    override suspend fun <T> handle(block: suspend () -> T): T {
         TODO("Not yet implemented")
     }
 }

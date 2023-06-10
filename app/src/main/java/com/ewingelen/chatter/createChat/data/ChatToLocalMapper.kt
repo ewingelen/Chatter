@@ -1,7 +1,7 @@
 package com.ewingelen.chatter.createChat.data
 
-import com.ewingelen.chatter.core.data.local.model.ChatLocal
-import com.ewingelen.chatter.core.data.local.model.MessageLocal
+import com.ewingelen.chatter.core.data.cache.model.ChatLocal
+import com.ewingelen.chatter.core.data.cache.model.MessageLocal
 import com.ewingelen.chatter.core.domain.model.Chat
 import com.ewingelen.chatter.core.domain.model.Message
 import javax.inject.Inject

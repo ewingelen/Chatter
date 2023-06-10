@@ -6,18 +6,16 @@ import androidx.navigation.compose.rememberNavController
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.auth.core.presentation.authGraph
 
-
 @Composable
 fun AppNavHost(
-    authorizationStarted: Boolean,
-    isUserAuthorized: Boolean,
+    userAuthorized: Boolean,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit,
     showSnackbar: (String) -> Unit,
 ) {
     val navController = rememberNavController()
-    val startDestination = if (isUserAuthorized) MAIN_NAV_GRAPH_ROUTE else AUTH_NAV_GRAPH_ROUTE
+    val startDestination = if (userAuthorized) MAIN_NAV_GRAPH_ROUTE else AUTH_NAV_GRAPH_ROUTE
     NavHost(navController = navController, startDestination = startDestination) {
-        authGraph(navController, AUTH_NAV_GRAPH_ROUTE, authorizationStarted, verifyPhoneNumber)
+        authGraph(navController, AUTH_NAV_GRAPH_ROUTE, verifyPhoneNumber)
         mainGraph(navController, MAIN_NAV_GRAPH_ROUTE, showSnackbar)
     }
 }

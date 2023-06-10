@@ -1,12 +1,14 @@
 package com.ewingelen.chatter.chat.presentation
 
 import com.ewingelen.chatter.chat.domain.ChatInteractor
+import com.ewingelen.chatter.chat.presentation.contract.ChatAction
+import com.ewingelen.chatter.chat.presentation.contract.ChatState
+import com.ewingelen.chatter.chat.presentation.contract.HandleChatAction
 import com.ewingelen.chatter.chat.presentation.model.ChatInfoUi
 import com.ewingelen.chatter.chat.presentation.model.MessageUi
 import com.ewingelen.chatter.core.presentation.BaseActionViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(

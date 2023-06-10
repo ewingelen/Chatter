@@ -8,11 +8,14 @@ import com.ewingelen.chatter.core.presentation.BaseEffectViewModel
 import com.ewingelen.chatter.core.presentation.ChangePhoneNumber
 import com.ewingelen.chatter.core.presentation.NormalizePhoneNumber
 import com.ewingelen.chatter.createChat.domain.CreateChatInteractor
+import com.ewingelen.chatter.createChat.presentation.contract.CreateChatAction
+import com.ewingelen.chatter.createChat.presentation.contract.CreateChatEffect
+import com.ewingelen.chatter.createChat.presentation.contract.CreateChatState
+import com.ewingelen.chatter.createChat.presentation.contract.HandleCreateChatAction
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @HiltViewModel
 class CreateChatViewModel @Inject constructor(
@@ -37,7 +40,7 @@ class CreateChatViewModel @Inject constructor(
 
     override fun changePhoneNumber(newNumber: String) {
         val phoneNumber = changePhoneNumber.change(state.value.phoneNumber, newNumber)
-        updateState(state.value.copy(phoneNumber = phoneNumber))
+        updateState(state.value.copy(phoneNumber = phoneNumber, errorVisible = false))
         if (state.value.errorEmptyPhoneNumberShowing) {
             updateState(
                 state.value.copy(
@@ -45,9 +48,6 @@ class CreateChatViewModel @Inject constructor(
                     errorEmptyPhoneNumber = ""
                 )
             )
-        }
-        if (state.value.error.isNotEmpty()) {
-            updateState(state.value.copy(error = ""))
         }
     }
 
@@ -78,7 +78,7 @@ class CreateChatViewModel @Inject constructor(
                         contactPhoneNumber = normalizePhoneNumber.normalize(state.value.phoneNumber)
                     ),
                     onSuccess = { sendEffect(CreateChatEffect.ChatCreated()) },
-                    onFail = { updateState(state.value.copy(error = it)) }
+                    onFail = { updateState(state.value.copy(error = it, errorVisible = true)) }
                 )
             }
         }

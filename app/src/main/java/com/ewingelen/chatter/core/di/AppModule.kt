@@ -3,7 +3,7 @@ package com.ewingelen.chatter.core.di
 import android.content.Context
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.room.Room
-import com.ewingelen.chatter.core.data.local.ChatterDatabase
+import com.ewingelen.chatter.core.data.cache.ChatterDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

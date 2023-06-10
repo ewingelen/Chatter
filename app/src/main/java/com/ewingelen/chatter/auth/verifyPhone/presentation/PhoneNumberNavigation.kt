@@ -6,13 +6,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.ewingelen.chatter.auth.confirmCode.presentation.ConfirmCodeArgs
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 
 
 private const val ROUTE = "phone_number"
 
 fun NavGraphBuilder.phoneNumberScreen(
-    navigateToConfirmCode: (verificationId: String, phoneNumber: String) -> Unit,
+    navigateToConfirmCode: (ConfirmCodeArgs) -> Unit,
     navigateToChats: () -> Unit,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit
 ) {

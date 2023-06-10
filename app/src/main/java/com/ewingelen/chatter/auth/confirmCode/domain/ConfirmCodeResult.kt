@@ -2,22 +2,22 @@ package com.ewingelen.chatter.auth.confirmCode.domain
 
 interface ConfirmCodeResult {
 
-    interface Mapper<T> {
+    interface Mapper {
 
-        fun map(newUser: Boolean): T
+        fun map(isNewUser: Boolean)
 
-        fun map(error: String): T
+        fun map(error: String)
     }
 
-    fun <T> map(mapper: Mapper<T>): T
+    fun map(mapper: Mapper)
 
-    class Success(private val newUser: Boolean) : ConfirmCodeResult {
+    class Success(private val userExists: Boolean) : ConfirmCodeResult {
 
-        override fun <T> map(mapper: Mapper<T>) = mapper.map(newUser)
+        override fun map(mapper: Mapper) = mapper.map(userExists)
     }
 
     class Fail(private val error: String) : ConfirmCodeResult {
 
-        override fun <T> map(mapper: Mapper<T>) = mapper.map(error)
+        override fun map(mapper: Mapper) = mapper.map(error)
     }
 }

@@ -2,9 +2,7 @@ package com.ewingelen.chatter.auth.confirmCode.presentation.communication
 
 interface ConfirmCodeResultCommunication {
 
-    fun successSignUp()
-
-    fun successLogIn()
+    fun successAuth(isNewUser: Boolean)
 
     fun showError(error: String)
 }

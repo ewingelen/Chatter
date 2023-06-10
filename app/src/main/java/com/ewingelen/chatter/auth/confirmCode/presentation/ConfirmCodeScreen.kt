@@ -18,12 +18,12 @@ import com.ewingelen.chatter.auth.confirmCode.presentation.contract.ConfirmCodeS
 import com.ewingelen.chatter.auth.confirmCode.presentation.contract.HandleConfirmCodeEffect
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 import com.ewingelen.chatter.core.presentation.Effect
-import com.ewingelen.chatter.core.presentation.ScreenHeader
 import com.ewingelen.chatter.core.presentation.ScreenPreview
-import com.ewingelen.chatter.core.presentation.SpacingLarge100
-import com.ewingelen.chatter.core.presentation.SpacingNormal100
 import com.ewingelen.chatter.core.presentation.components.ErrorText
+import com.ewingelen.chatter.core.presentation.components.ScreenHeader
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
+import com.ewingelen.chatter.core.presentation.theme.SpacingLarge100
+import com.ewingelen.chatter.core.presentation.theme.SpacingNormal100
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
@@ -78,7 +78,7 @@ fun ConfirmCodeScreen(
 
         Spacer(modifier = Modifier.height(SpacingNormal100))
 
-        ErrorText(text = state.error)
+        ErrorText(text = state.error, visible = state.errorVisible)
 
         Spacer(modifier = Modifier.weight(1f))
 

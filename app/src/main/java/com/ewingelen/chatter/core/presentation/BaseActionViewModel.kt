@@ -4,8 +4,3 @@ abstract class BaseActionViewModel<S, A>(defaultState: S) : BaseViewModel<S>(def
 
     abstract fun handleAction(action: A)
 }
-
-interface Action<T> {
-
-    fun handle(handle: T)
-}

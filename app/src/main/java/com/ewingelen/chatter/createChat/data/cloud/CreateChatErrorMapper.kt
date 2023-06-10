@@ -7,7 +7,6 @@ import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseNetworkException
 import javax.inject.Inject
 
-
 interface CreateChatErrorMapper {
 
     fun map(e: FirebaseException): Exception

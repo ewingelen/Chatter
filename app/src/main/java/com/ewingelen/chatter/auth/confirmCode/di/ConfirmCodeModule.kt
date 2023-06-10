@@ -3,17 +3,17 @@ package com.ewingelen.chatter.auth.confirmCode.di
 import android.os.CountDownTimer
 import com.ewingelen.chatter.auth.confirmCode.data.BaseConfirmCodeRepository
 import com.ewingelen.chatter.auth.confirmCode.data.ConfirmCodeCloudDataSource
-import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCode
 import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeErrorMapper
 import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeInteractor
 import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeRepository
 import com.ewingelen.chatter.auth.confirmCode.domain.ConfirmCodeResult
-import com.ewingelen.chatter.auth.confirmCode.domain.ResentCodeTimer
-import com.ewingelen.chatter.auth.confirmCode.presentation.mapper.BaseConfirmCodeErrorMapper
+import com.ewingelen.chatter.auth.confirmCode.presentation.ConfirmCode
+import com.ewingelen.chatter.auth.confirmCode.presentation.ResentCodeTimer
 import com.ewingelen.chatter.auth.confirmCode.presentation.communication.ConfirmCodeCommunication
 import com.ewingelen.chatter.auth.confirmCode.presentation.communication.ConfirmCodeResultCommunication
-import com.ewingelen.chatter.auth.confirmCode.presentation.mapper.ConfirmCodeResultMapper
 import com.ewingelen.chatter.auth.confirmCode.presentation.communication.ResentCodeTimerCommunication
+import com.ewingelen.chatter.auth.confirmCode.presentation.mapper.BaseConfirmCodeErrorMapper
+import com.ewingelen.chatter.auth.confirmCode.presentation.mapper.ConfirmCodeResultMapper
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -26,8 +26,7 @@ interface ConfirmCodeModule {
 
     @Binds
     @ViewModelScoped
-    fun bindCloudDataSource(cloudDataSource: ConfirmCodeCloudDataSource.Base):
-            ConfirmCodeCloudDataSource
+    fun bindCloudDataSource(repository: ConfirmCodeCloudDataSource.Base): ConfirmCodeCloudDataSource
 
     @Binds
     @ViewModelScoped
@@ -60,10 +59,10 @@ interface ConfirmCodeModule {
 
     @Binds
     @ViewModelScoped
-    fun bindResentCodeTimerCommunication(ommunication: ConfirmCodeCommunication.Base):
+    fun bindResentCodeTimerCommunication(communication: ConfirmCodeCommunication.Base):
             ResentCodeTimerCommunication
 
     @Binds
     @ViewModelScoped
-    fun bindConfirmCodeResultMapper(mapper: ConfirmCodeResultMapper): ConfirmCodeResult.Mapper<Unit>
+    fun bindConfirmCodeResultMapper(mapper: ConfirmCodeResultMapper): ConfirmCodeResult.Mapper
 }

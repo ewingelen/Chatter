@@ -5,11 +5,11 @@ import com.ewingelen.chatter.auth.confirmCode.presentation.communication.Confirm
 import javax.inject.Inject
 
 class ConfirmCodeResultMapper @Inject constructor(
-    private val communication: ConfirmCodeResultCommunication,
-) : ConfirmCodeResult.Mapper<Unit> {
+    private val communication: ConfirmCodeResultCommunication
+) : ConfirmCodeResult.Mapper {
 
-    override fun map(newUser: Boolean) {
-        if (newUser) communication.successSignUp() else communication.successLogIn()
+    override fun map(userExists: Boolean) {
+        communication.successAuth(userExists)
     }
 
     override fun map(error: String) {

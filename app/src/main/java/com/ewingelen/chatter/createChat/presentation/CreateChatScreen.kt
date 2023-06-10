@@ -10,6 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.Phone
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,17 +20,21 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import com.ewingelen.chatter.R
-import com.ewingelen.chatter.core.presentation.ButtonHeightLarge
 import com.ewingelen.chatter.core.presentation.ScreenPreview
-import com.ewingelen.chatter.core.presentation.SpacingLarge100
-import com.ewingelen.chatter.core.presentation.SpacingNormal100
-import com.ewingelen.chatter.core.presentation.SpacingNormal150
-import com.ewingelen.chatter.core.presentation.SpacingSmall100
 import com.ewingelen.chatter.core.presentation.components.ChatterOutlinedTextField
 import com.ewingelen.chatter.core.presentation.components.ChatterTopAppBar
 import com.ewingelen.chatter.core.presentation.components.ErrorText
 import com.ewingelen.chatter.core.presentation.components.IconButtonBack
+import com.ewingelen.chatter.core.presentation.theme.ButtonHeightLarge
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
+import com.ewingelen.chatter.core.presentation.theme.SpacingLarge100
+import com.ewingelen.chatter.core.presentation.theme.SpacingNormal100
+import com.ewingelen.chatter.core.presentation.theme.SpacingNormal150
+import com.ewingelen.chatter.core.presentation.theme.SpacingSmall100
+import com.ewingelen.chatter.createChat.presentation.contract.CreateChatAction
+import com.ewingelen.chatter.createChat.presentation.contract.CreateChatEffect
+import com.ewingelen.chatter.createChat.presentation.contract.CreateChatState
+import com.ewingelen.chatter.createChat.presentation.contract.HandleCreateChatEffect
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
@@ -83,7 +88,9 @@ fun CreateChatScreen(
             ChatterOutlinedTextField(
                 value = state.name,
                 onValueChange = { handleAction(CreateChatAction.ChangeName(it)) },
-                leadingIcon = Icons.Rounded.Person,
+                leadingIcon = {
+                    Icon(imageVector = Icons.Rounded.Person, contentDescription = null)
+                },
                 labelResourceId = R.string.label_name,
                 placeholderResourceId = R.string.placeholder_enter_contact_name,
                 singleLine = true,
@@ -98,8 +105,12 @@ fun CreateChatScreen(
 
             ChatterOutlinedTextField(
                 value = state.phoneNumber,
-                onValueChange = { handleAction(CreateChatAction.ChangePhoneNumber(it)) },
-                leadingIcon = Icons.Rounded.Phone,
+                onValueChange = {
+                    handleAction(CreateChatAction.ChangePhoneNumber(it))
+                },
+                leadingIcon = {
+                    Icon(imageVector = Icons.Rounded.Phone, contentDescription = null)
+                },
                 labelResourceId = R.string.label_phone_number,
                 placeholderResourceId = R.string.placeholder_enter_contact_phone_number,
                 isError = state.errorEmptyPhoneNumberShowing,
@@ -109,18 +120,21 @@ fun CreateChatScreen(
                 supportingText = {
                     Text(text = state.errorEmptyPhoneNumber)
                 },
+                singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
                 modifier = Modifier.fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(SpacingNormal100))
 
-            ErrorText(text = state.error)
+            ErrorText(text = state.error, visible = state.errorVisible)
 
             Spacer(modifier = Modifier.weight(1f))
 
             Button(
-                onClick = { handleAction(CreateChatAction.CreateChat()) },
+                onClick = {
+                    handleAction(CreateChatAction.CreateChat())
+                },
                 enabled = !state.errorEmptyNameShowing && !state.errorEmptyPhoneNumberShowing,
                 modifier = Modifier
                     .fillMaxWidth()
