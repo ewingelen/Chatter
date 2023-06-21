@@ -4,6 +4,7 @@ import androidx.compose.ui.unit.dp
 
 
 //TODO: Check
+val SpacingMin = 2.dp
 val SpacingExtraSmall100 = 4.dp
 val SpacingSmall100 = 8.dp
 val SpacingSmall150 = 12.dp
@@ -21,4 +22,5 @@ val ElevationMedium = 8.dp
 
 val ConfirmCodeCellSize = 40.dp
 val ContactPhotoSize = 48.dp
-val CreateProfilePhotoSize = 100.dp
+val ProfilePhotoSize = 100.dp
+val AppSectionTabWidth = 100.dp

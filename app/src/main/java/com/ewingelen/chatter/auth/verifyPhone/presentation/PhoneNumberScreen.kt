@@ -43,7 +43,7 @@ fun PhoneNumberScreen(
     handleAction: (PhoneNumberAction) -> Unit,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit,
     navigateToConfirmCode: (ConfirmCodeArgs) -> Unit,
-    navigateToChats: () -> Unit,
+    navigateToAppSections: () -> Unit
 ) {
     LaunchedEffect(key1 = Unit) {
         val handleEffect = object : HandlePhoneNumberEffect {
@@ -57,7 +57,7 @@ fun PhoneNumberScreen(
             }
 
             override fun completeVerification() {
-                navigateToChats()
+                navigateToAppSections()
             }
         }
         effect.collectLatest { effect ->
@@ -117,7 +117,7 @@ private fun AuthScreenPreview() {
             handleAction = {},
             verifyPhoneNumber = {},
             navigateToConfirmCode = { ConfirmCodeArgs("", "") },
-            navigateToChats = {},
+            navigateToAppSections = {}
         )
     }
 }

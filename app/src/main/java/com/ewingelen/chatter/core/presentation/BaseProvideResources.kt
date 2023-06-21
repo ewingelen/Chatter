@@ -10,4 +10,7 @@ class BaseProvideResources @Inject constructor(
 ) : ProvideResources {
 
     override fun string(id: Int, vararg formatArgs: Any) = context.getString(id, *formatArgs)
+
+    override fun plural(id: Int, quantity: Int, vararg formatArgs: Any) =
+        context.resources.getQuantityString(id, quantity, *formatArgs)
 }

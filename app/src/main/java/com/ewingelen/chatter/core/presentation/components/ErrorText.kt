@@ -23,14 +23,14 @@ fun ErrorText(
     AnimatedVisibility(
         visible = visible,
         enter = fadeIn(),
-        exit = fadeOut()
+        exit = fadeOut(),
+        modifier = modifier
     ) {
         Text(
             text = text,
             textAlign = textAlign,
             style = MaterialTheme.typography.labelMedium,
-            color = MaterialTheme.colorScheme.error,
-            modifier = modifier
+            color = MaterialTheme.colorScheme.error
         )
     }
 }

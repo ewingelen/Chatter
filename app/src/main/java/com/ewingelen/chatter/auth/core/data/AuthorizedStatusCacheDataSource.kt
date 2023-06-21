@@ -10,6 +10,8 @@ interface AuthorizedStatusCacheDataSource {
 
     suspend fun checkUserAuthorized(): Boolean
 
+    suspend fun signOut()
+
     class Base @Inject constructor(private val preferences: AppPreferences) :
         AuthorizedStatusCacheDataSource {
 
@@ -18,6 +20,10 @@ interface AuthorizedStatusCacheDataSource {
         }
 
         override suspend fun checkUserAuthorized() = preferences.read(USER_AUTHORIZED).first()
+
+        override suspend fun signOut() {
+            preferences.save(USER_AUTHORIZED, false)
+        }
 
         private companion object {
             const val USER_AUTHORIZED = "user_authorized"

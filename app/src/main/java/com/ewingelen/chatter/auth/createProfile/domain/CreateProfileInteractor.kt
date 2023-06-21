@@ -3,6 +3,7 @@ package com.ewingelen.chatter.auth.createProfile.domain
 import com.ewingelen.chatter.auth.core.domain.AuthorizedStatusRepository
 import com.ewingelen.chatter.core.domain.HandleDomainError
 import javax.inject.Inject
+import javax.inject.Named
 
 interface CreateProfileInteractor {
 
@@ -10,7 +11,8 @@ interface CreateProfileInteractor {
 
     class Base @Inject constructor(
         private val createProfileRepository: CreateProfileRepository,
-        private val authorizedStatusRepository: AuthorizedStatusRepository.Authorize,
+        private val authorizedStatusRepository: AuthorizedStatusRepository.Save,
+        @Named("CreateChat")
         private val handleError: HandleDomainError<String>
     ) : CreateProfileInteractor {
 

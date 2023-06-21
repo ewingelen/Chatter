@@ -11,7 +11,7 @@ import com.ewingelen.chatter.auth.createProfile.presentation.createProfileScreen
 import com.ewingelen.chatter.auth.createProfile.presentation.navigateToCreateProfile
 import com.ewingelen.chatter.auth.verifyPhone.presentation.navigateToPhoneNumber
 import com.ewingelen.chatter.auth.verifyPhone.presentation.phoneNumberScreen
-import com.ewingelen.chatter.core.presentation.navigation.navigateToChats
+import com.ewingelen.chatter.core.presentation.navigation.navigateToAppSections
 import com.ewingelen.chatter.onBoarding.presentation.OnBoardingScreen
 
 fun NavGraphBuilder.authGraph(
@@ -27,25 +27,25 @@ fun NavGraphBuilder.authGraph(
                 }
             }
         }
-        val navigateToChats = {
-            navController.navigateToChats(navOptions = popUpToTopNavOptions)
+        val navigateToAppSections = {
+            navController.navigateToAppSections(navOptions = popUpToTopNavOptions)
         }
         onBoardingScreen(navigateToPhoneNumber = navController::navigateToPhoneNumber)
         phoneNumberScreen(
             navigateToConfirmCode = { args ->
                 navController.navigateToConfirmCode(args, popUpToTopNavOptions)
             },
-            navigateToChats = navigateToChats,
+            navigateToAppSections = navigateToAppSections,
             verifyPhoneNumber = verifyPhoneNumber
         )
         confirmCodeScreen(
             navigateToCreateProfile = {
                 navController.navigateToCreateProfile(popUpToTopNavOptions)
             },
-            navigateToChats = navigateToChats,
+            navigateToAppSections = navigateToAppSections,
             verifyPhoneNumber = verifyPhoneNumber
         )
-        createProfileScreen(navigateToChats = navigateToChats)
+        createProfileScreen(navigateToChats = navigateToAppSections)
     }
 }
 

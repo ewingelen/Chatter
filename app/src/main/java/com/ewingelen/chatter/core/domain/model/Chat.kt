@@ -1,22 +1,37 @@
 package com.ewingelen.chatter.core.domain.model
 
-
 data class Chat(
-    private val contactId: String = "",
-    private val contactName: String,
-    private val contactPhoneNumber: String,
-    private val messages: List<Message> = emptyList()
+    val id: String = "",
+    val membersId: List<String> = emptyList(),
+    val contactName: String = "",
+    val contactSurname: String = "",
+    val contactPhoneNumber: String = "",
+    val contactPhoto: String = "",
+    val messages: List<Message> = emptyList(),
+    //TODO
+//    val time: String,
+//    val unreadMessagesCount: Int,
 ) {
     interface Mapper<T> {
 
-        fun map(
-            contactId: String,
+        suspend fun map(
+            id: String,
+            membersId: List<String>,
             contactName: String,
+            contactSurname: String,
             contactPhoneNumber: String,
+            contactPhoto: String,
             messages: List<Message>
         ): T
     }
 
-    fun <T> map(mapper: Mapper<T>) =
-        mapper.map(contactId, contactName, contactPhoneNumber, messages)
+    suspend fun <T> map(mapper: Mapper<T>) = mapper.map(
+        id = id,
+        membersId = membersId,
+        contactName = contactName,
+        contactSurname = contactSurname,
+        contactPhoneNumber = contactPhoneNumber,
+        contactPhoto = contactPhoto,
+        messages = messages
+    )
 }

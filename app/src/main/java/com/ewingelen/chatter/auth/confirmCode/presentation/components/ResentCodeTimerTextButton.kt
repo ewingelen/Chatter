@@ -5,6 +5,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
@@ -49,7 +50,7 @@ private fun ResentCodeTimerTextPreview() {
         ResentCodeTimerTextButton(
             onClick = {},
             enabled = false,
-            timeToResentLabel = stringResource(id = R.string.label_format_try_again, 30)
+            timeToResentLabel = pluralStringResource(id = R.plurals.label_format_try_again, 30)
         )
     }
 }

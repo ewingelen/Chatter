@@ -9,12 +9,11 @@ import androidx.navigation.compose.composable
 import com.ewingelen.chatter.auth.confirmCode.presentation.ConfirmCodeArgs
 import com.ewingelen.chatter.auth.core.presentation.VerifyPhoneNumber
 
-
 private const val ROUTE = "phone_number"
 
 fun NavGraphBuilder.phoneNumberScreen(
     navigateToConfirmCode: (ConfirmCodeArgs) -> Unit,
-    navigateToChats: () -> Unit,
+    navigateToAppSections: () -> Unit,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit
 ) {
     composable(ROUTE) {
@@ -26,7 +25,7 @@ fun NavGraphBuilder.phoneNumberScreen(
             handleAction = viewModel::handleAction,
             verifyPhoneNumber = verifyPhoneNumber,
             navigateToConfirmCode = navigateToConfirmCode,
-            navigateToChats = navigateToChats,
+            navigateToAppSections = navigateToAppSections
         )
     }
 }

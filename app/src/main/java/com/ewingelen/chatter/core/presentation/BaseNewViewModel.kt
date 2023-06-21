@@ -9,6 +9,8 @@ abstract class BaseNewViewModel<S : Any, A: Any>(
     abstract fun handleAction(action: A)
 
     override fun state() = communication.state()
+
+    protected fun stateValue() = state().value
 }
 
 interface Action<T : Any> {

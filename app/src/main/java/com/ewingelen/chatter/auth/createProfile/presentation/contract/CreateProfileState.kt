@@ -19,6 +19,6 @@ interface CreateProfileState {
     ) : CreateProfileState {
 
         override fun userInitial() =
-            UserInitial.Base(name = name, surname = surname, photo = photo)
+            UserInitial.Base(name = name.trim(), surname = surname.trim(), photo = photo)
     }
 }

@@ -2,8 +2,10 @@ package com.ewingelen.chatter.core.di
 
 import com.ewingelen.chatter.core.ObserveInternetConnection
 import com.ewingelen.chatter.core.data.HandleDataError
+import com.ewingelen.chatter.core.data.ProvideUserIdByPhoneNumber
 import com.ewingelen.chatter.core.data.cache.AppPreferences
 import com.ewingelen.chatter.core.data.cache.SavePhoto
+import com.ewingelen.chatter.core.data.cloud.CheckInternetConnection
 import com.ewingelen.chatter.core.data.cloud.HandleFirebaseRequestError
 import com.ewingelen.chatter.core.data.cloud.ProvideUserReference
 import com.ewingelen.chatter.core.data.cloud.UploadPhoto
@@ -40,6 +42,11 @@ interface CoreModule {
 
     @Binds
     @ViewModelScoped
+    fun bindProvideUserReference(provideUserReference: ProvideUserReference.Base):
+            ProvideUserReference.All
+
+    @Binds
+    @ViewModelScoped
     fun bindProvideUserId(provideUserId: ProvideUserId.Base): ProvideUserId
 
     @Binds
@@ -59,4 +66,14 @@ interface CoreModule {
     @ViewModelScoped
     fun bindObserveInternetConnection(observeInternetConnection: ObserveInternetConnection.Base):
             ObserveInternetConnection
+
+    @Binds
+    @ViewModelScoped
+    fun bindCheckInternetConnection(checkInternetConnection: CheckInternetConnection.Base):
+            CheckInternetConnection
+
+    @Binds
+    @ViewModelScoped
+    fun bindProvideUserIdByPhoneNumber(provideUserIdByPhoneNumber: ProvideUserIdByPhoneNumber.Base):
+            ProvideUserIdByPhoneNumber
 }

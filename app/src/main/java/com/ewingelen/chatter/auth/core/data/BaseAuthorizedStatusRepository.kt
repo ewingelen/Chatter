@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 class BaseAuthorizedStatusRepository @Inject constructor(
     private val cacheDataSource: AuthorizedStatusCacheDataSource
-) : AuthorizedStatusRepository.Authorize, AuthorizedStatusRepository.Check {
+) : AuthorizedStatusRepository.Save, AuthorizedStatusRepository.Read {
 
     override suspend fun authorize() {
         cacheDataSource.authorize()

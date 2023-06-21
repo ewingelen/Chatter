@@ -1,31 +1,49 @@
 package com.ewingelen.chatter.chat.domain
 
-import com.ewingelen.chatter.chat.presentation.model.ChatInfoUi
-import com.ewingelen.chatter.chat.presentation.model.MessageUi
+import android.net.Uri
+import com.ewingelen.chatter.call.domain.UserPresenceRepository
+import com.ewingelen.chatter.core.domain.model.Chat
+import com.ewingelen.chatter.core.domain.model.Message
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
-
 
 interface ChatInteractor {
 
-    fun chatInfo(contactId: String): ChatInfoUi
+    suspend fun chat(id: String): Flow<Chat>
 
-    fun sendMessage()
+    suspend fun sendMessage(chatId: String, message: Message)
 
-    class Base @Inject constructor() : ChatInteractor {
+    suspend fun sendFiles(chatId: String, files: List<Uri>)
 
-        override fun chatInfo(contactId: String): ChatInfoUi {
-            return ChatInfoUi(
-                contactName = "Rebeca Donelli",
-                messages = listOf(
-                    MessageUi("Hi", false),
-                    MessageUi("Hello", true),
-                    MessageUi("How are you?", false),
-                    MessageUi("I am good. How are you?", true),
-                )
-            )
+    fun checkUserPresenceInCall(): Flow<Boolean>
+
+    fun deleteMessage(chatId: String, message: Message)
+
+    suspend fun editMessage(chatId: String, newText: String, position: Int)
+
+    class Base @Inject constructor(
+        private val repository: ChatRepository,
+        private val userPresenceRepository: UserPresenceRepository
+    ) : ChatInteractor {
+
+        override suspend fun chat(id: String) = repository.chat(id)
+
+        override suspend fun sendMessage(chatId: String, message: Message) {
+            repository.sendMessage(chatId, message)
         }
 
-        override fun sendMessage() {
+        override suspend fun sendFiles(chatId: String, files: List<Uri>) {
+            repository.sendFiles(chatId, files)
+        }
+
+        override fun checkUserPresenceInCall() = userPresenceRepository.checkUserPresence()
+
+        override fun deleteMessage(chatId: String, message: Message) {
+            repository.deleteMessage(chatId, message)
+        }
+
+        override suspend fun editMessage(chatId: String, newText: String, position: Int) {
+            repository.editMessage(chatId, newText, position)
         }
     }
 }

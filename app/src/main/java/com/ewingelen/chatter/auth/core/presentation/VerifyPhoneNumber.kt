@@ -1,13 +1,13 @@
 package com.ewingelen.chatter.auth.core.presentation
 
 import android.app.Activity
-import com.ewingelen.chatter.BuildConfig
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 
@@ -27,6 +27,7 @@ interface VerifyPhoneNumber {
                 }
 
                 override fun onVerificationFailed(e: FirebaseException) {
+                    Timber.d(e.toString())
                     onVerificationStateChanged.onVerificationFailed(e)
                 }
 
@@ -41,7 +42,8 @@ interface VerifyPhoneNumber {
 
             val auth = Firebase.auth.apply {
                 useAppLanguage()
-                firebaseAuthSettings.setAppVerificationDisabledForTesting(BuildConfig.DEBUG)
+                firebaseAuthSettings.setAppVerificationDisabledForTesting(true)
+//                firebaseAuthSettings.forceRecaptchaFlowForTesting(true)
             }
             val phoneAuthOptions = PhoneAuthOptions.newBuilder(auth)
                 .setPhoneNumber(phoneNumber)

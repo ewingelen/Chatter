@@ -13,9 +13,11 @@ class ResentCodeTimer @Inject constructor(
 ) : CountDownTimer(FULL_TIME, TICK_DELAY) {
 
     override fun onTick(millisUntilFinished: Long) {
-        val timeLeftLabel = provideResources.string(
-            R.string.label_format_try_again,
-            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished)
+        val secondsLeft = TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished).toInt()
+        val timeLeftLabel = provideResources.plural(
+            R.plurals.label_format_try_again,
+            secondsLeft,
+            secondsLeft
         )
         communication.onResentCodeTimerTick(timeLeftLabel)
     }

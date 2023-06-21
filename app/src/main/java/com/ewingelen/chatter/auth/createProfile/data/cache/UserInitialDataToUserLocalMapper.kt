@@ -22,7 +22,7 @@ class UserInitialDataToUserLocalMapper @Inject constructor(
         //TODO: check
         val photoFilePath = providePhotoPath.provide(photo) {
             val filePath = "$AVATARS_PATH/$id"
-            savePhoto.save(photo, filePath)
+            savePhoto.save(photo, id)
             filePath
         }
         return UserLocal(

@@ -8,7 +8,6 @@ import androidx.datastore.preferences.core.emptyPreferences
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
-import timber.log.Timber
 import java.io.IOException
 import javax.inject.Inject
 
@@ -22,7 +21,6 @@ interface AppPreferences {
 
         override suspend fun save(key: String, value: Boolean) {
             dataStore.edit { preferences ->
-                Timber.d(value.toString())
                 val preferencesKey = booleanPreferencesKey(key)
                 preferences[preferencesKey] = value
             }

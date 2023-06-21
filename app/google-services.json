@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "965982626715-0ulml659c0v69cj04giep347585pk9f4.apps.googleusercontent.com",
+          "client_id": "965982626715-mko735le28ea90pgssm0887keqkphfb2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ewingelen.chatter",
+            "certificate_hash": "b0d6c9a4c073071c202b845b8de40da78eabc4af"
+          }
+        },
+        {
+          "client_id": "965982626715-sv7c4b20kngfrkuglc5i4htgguo0r7b7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ewingelen.chatter",

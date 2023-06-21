@@ -26,7 +26,7 @@ class ConfirmCodeArgs(val verificationId: String, val phoneNumber: String) {
 
 fun NavGraphBuilder.confirmCodeScreen(
     navigateToCreateProfile: () -> Unit,
-    navigateToChats: () -> Unit,
+    navigateToAppSections: () -> Unit,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit
 ) {
     val route = makeDestinationRouteWithArgs(ROUTE, VERIFICATION_ID_ARG, PHONE_NUMBER_ARG)
@@ -38,7 +38,7 @@ fun NavGraphBuilder.confirmCodeScreen(
             effect = viewModel.effect(),
             handleAction = viewModel::handleAction,
             navigateToCreateProfile = navigateToCreateProfile,
-            navigateToChats = navigateToChats,
+            navigateToAppSections = navigateToAppSections,
             verifyPhoneNumber = verifyPhoneNumber,
         )
     }

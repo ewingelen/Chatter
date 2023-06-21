@@ -13,9 +13,18 @@ android {
     namespace = "com.ewingelen.chatter"
     compileSdk = 33
 
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include("armeabi-v7a", "arm64-v8a", "mips", "x86", "x86_64")
+            isUniversalApk = false
+        }
+    }
+
     defaultConfig {
         applicationId = "com.ewingelen.chatter"
-        minSdk = 21
+        minSdk = 24
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -23,6 +32,10 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+
+        defaultConfig {
+            resourceConfigurations.addAll(listOf("en", "ru", "ua"))
         }
 
         manifestPlaceholders["crashlyticsCollectionEnabled"] = false
@@ -44,7 +57,12 @@ android {
         }
 
         debug {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
     compileOptions {
@@ -61,7 +79,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.7"
     }
-    packaging {
+    packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
@@ -77,13 +95,15 @@ dependencies {
     val composeNavigationVersion = "2.5.3"
     val hiltVersion = "2.45"
     val hiltNavigationComposeVersion = "1.0.0"
-    val firebaseBomVersion = "31.5.0"
+    val firebaseBomVersion = "32.1.1"
     val kspVersion = "1.8.20-1.0.11"
     val roomVersion = "2.5.1"
     val preferencesDataStoreVersion = "1.0.0"
     val splashScreenVersion = "1.0.0"
     val timberVersion = "5.0.1"
     val coilComposeVersion = "2.3.0"
+    val glideVersion = "4.15.1"
+    val glideComposeVersion = "1.0.0-alpha.3"
     val oneSignalVersion = "[4.0.0, 4.99.99]"
 
     val jUnitVersion = "4.13.2"
@@ -154,8 +174,17 @@ dependencies {
     //Coil
     implementation("io.coil-kt:coil-compose:$coilComposeVersion")
 
+    //Glide
+    implementation("com.github.bumptech.glide:glide:$glideVersion")
+    implementation("com.github.bumptech.glide:compose:$glideComposeVersion")
+    kapt("com.github.bumptech.glide:ksp:$glideVersion")
+
     //OneSignal
     implementation("com.onesignal:OneSignal:$oneSignalVersion")
+
+    //Agora
+//    implementation("io.agora.rtc:full-sdk:4.0.1")
+    implementation("io.agora.rtc:full-rtc-basic:3.6.2")
 }
 
 kapt {

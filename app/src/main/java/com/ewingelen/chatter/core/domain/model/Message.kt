@@ -1,14 +1,15 @@
 package com.ewingelen.chatter.core.domain.model
 
-
 data class Message(
-    private val text: String,
-    private val mine: Boolean,
+    val id: String = "",
+    val mine: Boolean,
+    val text: String,
+    val file: AttachedFile? = null
 ) {
     interface Mapper<T> {
 
-        fun map(text: String, mine: Boolean): T
+        fun map(id: String, text: String, mine: Boolean, file: AttachedFile?): T
     }
 
-    fun <T> map(mapper: Mapper<T>) = mapper.map(text, mine)
+    fun <T> map(mapper: Mapper<T>) = mapper.map(id = id, text = text, mine = mine, file = file)
 }

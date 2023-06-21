@@ -2,12 +2,12 @@ package com.ewingelen.chatter.auth.core.domain
 
 interface AuthorizedStatusRepository {
 
-    interface Authorize {
+    interface Save {
 
         suspend fun authorize()
     }
 
-    interface Check {
+    interface Read {
 
         suspend fun checkUserAuthorized(): Boolean
     }

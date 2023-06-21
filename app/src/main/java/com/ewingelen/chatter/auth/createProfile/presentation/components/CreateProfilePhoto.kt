@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.AddCircle
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -26,7 +25,7 @@ import coil.compose.AsyncImage
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.core.presentation.theme.BorderWidthExtraSmall
 import com.ewingelen.chatter.core.presentation.theme.ChatterTheme
-import com.ewingelen.chatter.core.presentation.theme.CreateProfilePhotoSize
+import com.ewingelen.chatter.core.presentation.theme.ProfilePhotoSize
 
 @Composable
 fun CreateProfilePhoto(
@@ -34,7 +33,7 @@ fun CreateProfilePhoto(
     photo: Uri,
     modifier: Modifier = Modifier
 ) {
-    val addPhotoPlaceholderPainter = painterResource(id = R.drawable.img_avatar_example)
+    val addPhotoPlaceholderPainter = painterResource(id = R.drawable.img_add_avatar)
     val photoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri ->
@@ -51,7 +50,7 @@ fun CreateProfilePhoto(
             error = addPhotoPlaceholderPainter,
             contentScale = ContentScale.Crop,
             modifier = modifier
-                .size(CreateProfilePhotoSize)
+                .size(ProfilePhotoSize)
                 .border(
                     width = BorderWidthExtraSmall,
                     color = MaterialTheme.colorScheme.primary,

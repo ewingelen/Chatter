@@ -2,6 +2,7 @@ package com.ewingelen.chatter.auth.createProfile.data.cache
 
 import com.ewingelen.chatter.auth.createProfile.data.UserInitialData
 import com.ewingelen.chatter.core.data.cache.model.UserLocal
+import timber.log.Timber
 import javax.inject.Inject
 
 interface CreateProfileCacheDataSource {

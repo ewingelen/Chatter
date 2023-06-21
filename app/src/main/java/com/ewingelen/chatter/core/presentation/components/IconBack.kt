@@ -12,8 +12,8 @@ import com.ewingelen.chatter.core.presentation.theme.ChatterTheme
 
 
 @Composable
-fun IconButtonBack(navigateUp: () -> Unit) {
-    IconButton(onClick = navigateUp) {
+fun IconButtonBack(onClick: () -> Unit) {
+    IconButton(onClick = onClick) {
         Icon(
             imageVector = Icons.Rounded.ArrowBack,
             contentDescription = stringResource(id = R.string.accessibility_previous_page)
@@ -25,6 +25,6 @@ fun IconButtonBack(navigateUp: () -> Unit) {
 @Composable
 private fun IconBackPreview() {
     ChatterTheme {
-        IconButtonBack(navigateUp = {})
+        IconButtonBack(onClick = {})
     }
 }

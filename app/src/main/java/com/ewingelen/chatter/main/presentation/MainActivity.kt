@@ -1,9 +1,9 @@
 package com.ewingelen.chatter.main.presentation
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.getValue
@@ -11,17 +11,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.ewingelen.chatter.core.presentation.components.ChatterScaffold
 import com.ewingelen.chatter.core.presentation.navigation.AppNavHost
 import com.ewingelen.chatter.core.presentation.theme.ChatterThemeWithSurface
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
@@ -30,13 +27,6 @@ class MainActivity : ComponentActivity() {
         splashScreen.apply {
             setKeepOnScreenCondition {
                 viewModel.state.value.loading
-            }
-            setOnExitAnimationListener { splash ->
-                lifecycleScope.launch {
-                    //TODO: fix and remove delay
-                    delay(500L)
-                    splash.remove()
-                }
             }
         }
         setContent {
@@ -52,14 +42,10 @@ class MainActivity : ComponentActivity() {
                         },
                         showSnackbar = { message ->
                             coroutineScope.launch {
-                                val job = coroutineScope.launch {
-                                    snackbarHostState.showSnackbar(
-                                        message = message,
-                                        duration = SnackbarDuration.Indefinite
-                                    )
-                                }
-                                delay(2000L)
-                                job.cancel()
+                                snackbarHostState.showSnackbar(
+                                    message = message,
+                                    duration = SnackbarDuration.Short
+                                )
                             }
                         }
                     )

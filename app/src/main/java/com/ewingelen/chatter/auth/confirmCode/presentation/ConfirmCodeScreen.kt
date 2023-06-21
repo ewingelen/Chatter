@@ -28,14 +28,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 
-
 @Composable
 fun ConfirmCodeScreen(
     state: ConfirmCodeState,
     effect: Flow<Effect<HandleConfirmCodeEffect>>,
     handleAction: (ConfirmCodeAction) -> Unit,
     navigateToCreateProfile: () -> Unit,
-    navigateToChats: () -> Unit,
+    navigateToAppSections: () -> Unit,
     verifyPhoneNumber: (VerifyPhoneNumber) -> Unit,
 ) {
     LaunchedEffect(key1 = Unit) {
@@ -45,7 +44,7 @@ fun ConfirmCodeScreen(
             }
 
             override fun successLogIn() {
-                navigateToChats()
+                navigateToAppSections()
             }
 
             override fun codeResent(verify: VerifyPhoneNumber) {
@@ -100,7 +99,7 @@ private fun ConfirmCodeScreenPreview() {
             handleAction = {},
             verifyPhoneNumber = {},
             navigateToCreateProfile = {},
-            navigateToChats = {}
+            navigateToAppSections = {}
         )
     }
 }

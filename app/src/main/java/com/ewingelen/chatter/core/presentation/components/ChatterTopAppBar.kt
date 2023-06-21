@@ -1,5 +1,6 @@
 package com.ewingelen.chatter.core.presentation.components
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -12,8 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.ewingelen.chatter.R
 import com.ewingelen.chatter.core.presentation.ComponentPreview
-import com.ewingelen.chatter.core.presentation.theme.ElevationMedium
 import com.ewingelen.chatter.core.presentation.theme.ChatterTheme
+import com.ewingelen.chatter.core.presentation.theme.ElevationMedium
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -21,11 +22,13 @@ import com.ewingelen.chatter.core.presentation.theme.ChatterTheme
 fun ChatterTopAppBar(
     title: @Composable () -> Unit,
     modifier: Modifier = Modifier,
-    navigationIcon: @Composable () -> Unit = {}
+    navigationIcon: @Composable () -> Unit = {},
+    actions: @Composable RowScope.() -> Unit = {}
 ) {
     TopAppBar(
         title = title,
         navigationIcon = navigationIcon,
+        actions = actions,
         modifier = modifier.shadow(
             elevation = ElevationMedium,
             ambientColor = MaterialTheme.colorScheme.primary,
@@ -48,7 +51,8 @@ private fun ChatterTopAppBarPreview() {
                     fontWeight = FontWeight.Bold
                 )
             },
-            navigationIcon = { IconButtonBack(navigateUp = {}) }
+            navigationIcon = { IconButtonBack(onClick = {}) },
+            actions = {}
         )
     }
 }

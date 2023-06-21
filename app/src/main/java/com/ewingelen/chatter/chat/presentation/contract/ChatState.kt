@@ -1,9 +1,10 @@
 package com.ewingelen.chatter.chat.presentation.contract
 
-import com.ewingelen.chatter.chat.presentation.model.ChatInfoUi
-
+import com.ewingelen.chatter.core.domain.model.Chat
 
 data class ChatState(
-    val chatInfo: ChatInfoUi = ChatInfoUi(),
-    val enteredMessage: String = ""
+    val chat: Chat = Chat(),
+    val enteredMessage: String = "",
+    val loading: Boolean = true,
+    val userPresenceInCall: Boolean = false
 )

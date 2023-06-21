@@ -1,5 +1,6 @@
 package com.ewingelen.chatter.core.data.cloud
 
+import android.util.Log
 import com.ewingelen.chatter.core.data.HandleDataError
 import com.ewingelen.chatter.core.domain.NoInternetConnectionException
 import com.ewingelen.chatter.core.domain.ServerNotAvailableException

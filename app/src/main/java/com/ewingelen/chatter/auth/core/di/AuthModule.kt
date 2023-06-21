@@ -37,10 +37,10 @@ interface AuthModule {
     @Binds
     @ViewModelScoped
     fun bindCheckAuthorizedStatusRepository(repository: BaseAuthorizedStatusRepository):
-            AuthorizedStatusRepository.Check
+            AuthorizedStatusRepository.Read
 
     @Binds
     @ViewModelScoped
     fun bindAuthorizeAuthorizedStatusRepository(repository: BaseAuthorizedStatusRepository):
-            AuthorizedStatusRepository.Authorize
+            AuthorizedStatusRepository.Save
 }

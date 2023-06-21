@@ -2,7 +2,6 @@ package com.ewingelen.chatter.core.presentation
 
 import javax.inject.Inject
 
-
 interface NormalizePhoneNumber {
 
     fun normalize(phoneNumber: String): String
