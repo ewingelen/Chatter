@@ -1,5 +1,5 @@
 # Chatter
-Android Месенджер з можливістю відправки та отримання повідомлень у реальному часі та реєстрації по номеру телефону.
+Android Messenger with the ability to send and receive messages in real time and register by phone number.
 - Kotlin
 - Clean Architecture
 - MVI
